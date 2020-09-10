@@ -1,0 +1,123 @@
+\ifx\mainclass\undefined
+\documentclass[cn,11pt,chinese,black,simple]{../elegantbook}
+\input{../needed.tex}
+\begin{document}
+\fi 
+\def\chapname{01discretetimeandsys}
+
+% Start Here
+\chapter{离散时间信号与系统}
+
+\begin{introduction}
+    \item 六大信号
+    \item 九种运算
+    \item 五类系统
+\end{introduction}
+
+\section{离散时间信号}
+
+\subsection{定义}
+
+\begin{definition}
+    仅仅在离散时刻点有定义的信号或不连续的时刻给出函数值的函数，通常用集合表示，记作 
+
+    \[x = {x(n)} \leftarrow {x_a{nT}}, n \in \mathbb{Z}\]
+
+    需要注意第一项这里 \(n\) 没有时间的单位，但是没有物理的单位。第二项是采样产生，则代表时间的单位。
+\end{definition}
+
+\subsection{基本序列}
+
+\begin{enumerate}
+    
+
+
+    \item 单位冲激序列
+
+\[\delta(n = n_0) = \left\{\begin{aligned}
+    0, &{n \neq n_0}\\
+    1, &{n = n_0}
+\end{aligned}\right.\]
+
+
+\item 单位阶跃序列
+
+\[
+u(n-n_0) = \left\{\begin{aligned}
+    0, & n < n_0\\
+    1, & n \leq 0
+\end{aligned}\right\}
+\]
+
+对单位冲激存在累加差分关系:
+
+\[
+    \delta(n) = u(n) - u(n-1) \text{ and } u(n) = \sum_{k=-\infty}^n \delta(k)
+\]
+
+\item \textbf{窗口序列}
+
+\[
+    R_N(n) = G_N(n) = \left\{\begin{aligned}
+    1, & 0 \leq n \leq N-1\\
+    0, & \text{else}
+\end{aligned}\right.
+\]
+
+和单位阶跃存在减法关系
+
+\[R_N(n) = u(n) - u(n-N)\]
+
+\item 正余弦序列
+
+\[
+x(n) = A \cos(\omega_0 \cdot n + \theta_0)    
+\]
+
+注意序列可能不为周期序列，但是仍然称 \(\omega_0\) 为序列的频率。
+
+\item 指数序列
+
+\[x(n) = A \alpha^n\]
+
+\item \textbf{周期序列}
+
+\[x(n) = x(n + N)\]
+
+一般来说，线性的系统还有对应的圆周系统，圆周移位、圆周相关等。
+
+
+\end{enumerate}
+
+\subsection{基本运算}
+
+\begin{enumerate}
+    \item 移位 \[y(n) = x(n-m)\]
+    \item 反褶 \[y(n) = x(-n)\]
+    \item 和差 \[y(n) = x_1(n) \pm x_2(n)\]
+    \item 积商 \[y(n) = x_1(n) \times / \div x_2(n)\]
+    \item 累加 \[S(n) = \sum_{k=-\infty}^n x(k)\]
+    \item 差分 \begin{itemize}
+        \item 前向差分 \[\Delta x(n) = x(n+1) - x(n)\]
+        \item 后向差分 \[\nabla x(n) = x(n) - x(n-1)\]
+    \end{itemize}
+    \item 卷积 \[y(n) = x(n) \otimes h(n) = \sum_{m=-\infty}^{+\infty}x(m)\cdot h(n-m) = \sum_{m=-\infty}^{+\infty}x(n-m)\cdot h(m)\]
+    \item 相关 \[R_{xy}(\tau) = \sum_{n=-\infty}^{+\infty} x(n) \cdot y(n-\tau) = x(n) \otimes y(-n)\]
+    可以用来检索原有信号的识别与锁定。
+    \item 能量 \[E = \sum_{-\infty}^{+\infty} x(n) x^*(n) = \sum_{-\infty}^{+\infty} |x(n)|^2\]
+    \item 功率 \[P = \lim_{N\rightarrow \infty} \frac{1}{2 N + 1} \sum_{-N}^N |x(n)|^2\]
+\end{enumerate}1
+
+
+
+\section{离散时间系统}
+
+\section{线性时不变系统}
+
+\section{线性常系数差分方程}
+% End Here
+
+\let\chapname\undefined
+\ifx\mainclass\undefined
+\end{document}
+\fi 

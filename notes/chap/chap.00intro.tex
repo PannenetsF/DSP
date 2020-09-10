@@ -1,0 +1,56 @@
+\ifx\mainclass\undefined
+\documentclass[cn,11pt,chinese,black,simple]{../elegantbook}
+\input{../needed.tex}
+\begin{document}
+\fi 
+\def\chapname{00intro}
+
+% Start Here
+\chapter{绪论}
+
+本课程采用的主要教材为奥本海默《离散时间信号处理》，程佩清《数字信号处理教程》。第一本是经典教材，深入浅出，繁杂的内容对于初学者不友好，题目也很经典，翻译较差（考试基本就是换参数）。第二本脉络比较清楚，便于理解。
+
+本门课程通过将数学抽象转换为物理概念，从工程角度思考理论问题。
+
+平时考核占 20\% - 30\%，其他是期末考试。教辅是李铮，王8艳萍，在新主楼 F518 。
+
+\section{数字信号理论背景}
+
+什么是数字信号？作用是什么？如何分类？信号处理的核心是什么？
+
+信号的作用是探测、揭示与控制。可以分为随机信号以及确定性信号。由于位宽支持的变大，对精度支持变高了。表示运算与变换，对应工程中的滤波压缩、特征提取。核心运算是傅里叶变换。
+
+已经开过信号与系统之后，为什么学习数字信号处理？
+
+\begin{itemize}
+    \item 精度极高
+    \item 灵活性好
+    \item 可靠性强
+    \item 容易集成
+    \item 时分复用
+    \item 多维处理
+\end{itemize}
+
+在理论分析的基础上，需要有工程实现的能力。库里 \(\cdot\) 图基以及桑德 \(\cdot\) 图基，将 \(O(N^2)\) 的算法降低到了 \(O(N\log_2 N / 2)\) 。
+
+\section{课程内容与脉络}
+
+信号通过前置滤波器以及 A/D 处理进行 DSP 处理，之后进行 D/A 转换最后通过低通滤波器即可。
+
+本课程分为五章，前三部分是基础理论，之后是工程设计：
+
+\begin{itemize}
+    \item 离散信号与系统
+    \item 离散系统变换域分析
+    \item 连续信号的离散处理
+    \item 离散傅里叶变换以及快速算法
+    \item 数字滤波器设计
+\end{itemize}
+
+% \section{数字信号处理应用实例}
+% End Here
+
+\let\chapname\undefined
+\ifx\mainclass\undefined
+\end{document}
+\fi 
