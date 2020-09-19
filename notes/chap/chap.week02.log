@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.9.9)  17 SEP 2020 11:51
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.9.9)  19 SEP 2020 10:13
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1276,23 +1276,23 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 [1
 
 
-] [2] [3] [4]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 159.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 159.
+] [2] [3] [4] [5]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 227.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 227.
  (./chap.week02.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 159.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 159.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 227.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 227.
 Package rerunfilecheck Info: File `chap.week02.out' has not changed.
 (rerunfilecheck)             Checksum: DFF4B814B48356FCB2797D160B0ABAF0;739.
  )
-(\end occurred when \ifx on line 158 was incomplete) 
+(\end occurred when \ifx on line 226 was incomplete) 
 Here is how much of TeX's memory you used:
- 39482 strings out of 479682
- 813886 string characters out of 5891585
- 1442276 words of memory out of 5000000
- 55981 multiletter control sequences out of 15000+600000
+ 39562 strings out of 479682
+ 819969 string characters out of 5891585
+ 1444276 words of memory out of 5000000
+ 56061 multiletter control sequences out of 15000+600000
  567682 words of font info for 88 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  69i,12n,126p,917b,2222s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on chap.week02.pdf (4 pages).
+Output written on chap.week02.pdf (5 pages).

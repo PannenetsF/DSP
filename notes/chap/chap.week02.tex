@@ -175,8 +175,55 @@ Z 变换的充分必要条件是级数绝对可和。
     \item 共轭序列
     \item 序列反褶
     \begin{equation}Z[x(-n)]=X\left(\frac{1}{z}\right) \quad R_{x+}^{-1}<|z|<R_{x-}^{-1}\end{equation}
+    \item 初值定理（因果序列）：
+    \[\text{ for } x(n) = x(n) u(n) \text{ get } \lim_{z \rightarrow \infty} X(z) = x(0)\]
+    \item 终值定理：
+    \[\lim_{z \rightarrow 1} (z-1) X(z) = \lim_{n \rightarrow \infty} x(n)\]
+    \item 时域卷积
+    \[\begin{aligned}
+        y(n) &= x(n) \otimes h(n) \\ 
+        Y(z) &= \zt{y(n)} = X(z) H(z) 
+    \end{aligned}\]
+    \item Z 域复卷积
+    \[
+    \begin{aligned}
+        y(n) &= x(n) h(n) \\ 
+        Y(z) &= \frac{1}{2 \pi j} \oint_c X(\frac{z}{v}) H(v) v^{-1} \dd{v} = \frac{1}{2 \pi j} \oint_c X)v_ H(\frac{z}{v}) v^{-1} \dd{v}\\
+        &\text{where } R_{x-} R_{h-} < |z| < R_{x+} R_{h+}
+    \end{aligned}    
+    \]
+    \item 周期卷积：将复卷积转换为数学形式明显的形式（围线积分半径固定）
+    \[
+    \begin{aligned}
+        & v = \rho e^{j \theta} , z = r e^{j \omega}  \\ 
+    Y(r e^{j \omega}) &= \frac{1}{2 \pi j} \oint_c H(\rho e^{j \theta}) X(\frac{r}{\rho} e^{j (\omega - \theta)}) \frac{\dd{(\rho e^{j\theta})}}{\rho e^{j\theta}}
+    \end{aligned}
+    \]
+    \item  帕塞瓦尔定理
+    \[\sum_{n = -\infty} ^{\infty} |x(n)|^2 = \frac{1}{2 \pi}\int_{-\pi} ^\pi |X(e^{j\omega} )|^2 \dd{\omega}\]
 \end{itemize}
 
+
+\subsection{Z 反变换}
+
+\begin{definition}[Z 反变换]
+    从给定的 Z 变换及其收敛域中还原处原始序列的过程叫做 Z 反变换。
+    \[x(n) = \mathscr{Z}^{-1}[X(z)]\]
+
+    实质是求 \(X(z)\) 的幂级数展开，通常使用长除法，部分分式，留数（危险积分法）。
+\end{definition}
+
+\subsection*{部分分式法}
+
+在实际应用中，一般 \(X(z)\) 是 \(z\) 的有理分式也就是
+
+\[X(z) = \frac{B(z)}{A(z)}, \text{ where A and B are polynomials}\]
+
+那么可以展开为 
+
+\[X(z) = \sum_i X_i(z)\]
+
+\[x(n) = \sum_i \ztr{X_i (z)}\]
 
 \section{系统函数与频率相应}
 
