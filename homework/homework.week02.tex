@@ -11,12 +11,254 @@
 
 \maketitle
 
-作业内容：
+作业内容：作业：
+2.8,
+2.11,
+2.17,
+2.44;
+3.1(b)、(g),
+3.3,
+3.4,
+3.6(c),
+3.9,
+3.28;
 
-\tableofcontents
 
+% \tableofcontents
+
+\homep{2.8}
+
+\[h(n) = 5 (-\frac{1}{2})^n u(n), x(n) = (\frac{1}{3})^n u(n)\]
+
+对应 
+
+\[H(z) = 5 \frac{z}{z + 1/2}, |z| > \frac{1}{2}\]
+
+\[X(z) = \frac{z}{z - 1/3}, |z| > \frac{1}{3}\]
+
+那么 
+
+\[\frac{Y(z)}{z} = 5 \frac{z}{(z+1/2)(z-1/3)}\]
+
+解得
+
+\[Y(z) = 2 \frac{z}{z - 1/3} + 3 \frac{z}{z + 1/2}, |z| > \frac{1}{2}\]
+
+\[y(n) = 3 (- \frac{1}{2})^n u(n) + 2 (\frac{1}{3})^n u(n)\]
+
+\homep{2.11}
+
+由于 LTI 不会改变信号的频率，分解
+
+\[x(n) = \frac{1}{2 j} \left(e^{j \frac{\pi}{4} n} - e^{-j \frac{\pi}{4} n}\right)\]
+
+那么 
+
+\[y(n) = \frac{1}{2 j} \left(H(e^{j \pi/4})e^{j \pi n / 4  } - H(e^{-j \pi/4}) e^{-j \pi n / 4} \right)\]
+
+
+带入公式
+
+\[H(e^{j \pi / 4}) = \frac{1 - (- j)}{1 - 1/2} = 2\sqrt{2}e^{j \pi/4}\]     
+
+\[H(e^{-j \pi / 4}) = \frac{1 - j}{1 - 1/2} = 2\sqrt{2}e^{-j \pi/4}\]     
+
+代回
+
+\[y(n) = 2 \sqrt{2} \sin (\frac{\pi}{4} (n+1))\]
+
+\homep{2.17}
+
+\subhomep{a}
+
+\[r(n) = G_{M+1}(n)\]
+
+那么 
+
+\[R(e^{j \omega}) = \frac{\sin(1/2 \cdot \omega(M+1))}{\sin(1/2 \cdot \omega)} e^{-j \frac{M}{2} \omega}\]
+
+
+\subhomep{b}
+
+如\figref{217}
+
+\qfig[217]{h201m20.png}{\(w(n)\) 在 \(M=20\) 的示意图}
+
+\subhomep{c}
+
+\[
+\begin{aligned}
+    W(e^{j\omega}) &= R(e^{j\omega}) \otimes (\sum_{n=-\infty}^{\infty} \frac{1}{2} (1 - \cos \frac{2 \pi n}{M}) e^{-j\omega n}) \\
+    &= R(e^{j\omega}) \otimes (\sum_{n=-\infty}^{\infty} \frac{1}{2} (1 - \frac{e^{j 2 \pi n / M} + e^{-j 2 \pi n / M}}{4}) e^{-j\omega n}) \\
+    &= R(e^{j \omega}) \otimes (\frac{1}{2} \delta(\omega) -\frac{1}{4} \delta(\omega + \frac{2 \pi }{M}) - \frac{1}{4} \delta(\omega - \frac{2 \pi}{M}))\\
+    &= \frac{R(e^{j\omega})}{2} + (-\frac{1}{4})(R(e^{j(\omega + 2\pi/M)}) + R(e^{j(\omega - 2\pi/M)}))
+\end{aligned}
+\]
+
+如\figref{2171}
+
+\qfig[2171]{h202.png}{\(w(n)\) 在 \(M=20\) 的示意图}
+
+
+\homep{2.44}
+
+\subhomep{a} 
+
+\[\left.\dtft{x(n)}\right|_{\omega=0} = \sum_n x(n)  = 6\]
+
+\subhomep{b}
+
+\[\where{\dtft{x(n)}}{\omega = \pi} = - \sum_n x(n) = -6\]
+
+\subhomep{c} 
+
+序列关于 \(n = 2\) 对称，得到实数
+
+\[\dtft{x(n)} = \sum_{n} x(n) e^{-j\omega(n-2)} e^{-2 j \omega}\]
+
+那么辐角为 \(-2\omega\)
+
+\subhomep{d}
+
+\[\int_{-\pi}^\pi X(e^{j \omega}) \dd{\omega} = 2 \pi \dtftr{X(e^{j\omega})}\where{}{n=0} = 2 \pi\]
+
+\subhomep{e}
+
+\[X(e^{-j\omega}) = \sum_n x(n) e^{j\omega n} = \sum_n e^{-j\omega n} = \dtft{x(-n)}\]
+
+如\figref{d2171}
+
+\qfig[d2171]{h203.png}{(e) 题解}
+
+\subhomep{f}
+
+\[\text{Re}(X(e^{j\omega})) = \frac{1}{2}(X(e^{j\omega}) + X^*{(e^{-j\omega})}) = \dtft{X_e(n)}\]
+
+对于实序列
+
+\[X_e(n) = \frac{1}{2}(x(n) + x(-n))\]
+
+计算得到
+
+\[\text{Re}(X(e^{j \omega})) = -\cos 7 \omega + \cos 5 \omega + 2 \cos 4 \omega + 2 \cos \omega + 2\]
+
+
+
+如\figref{d21712}
+
+\qfig[d21712]{h204.png}{(f) 题解}
+
+\homep{3.1}
+
+\subhomep{b}
+
+\[\zt{-(\frac{1}{2})^nu(-n-1)} = -\frac{z}{z-1/2}, \text{ where } |z| < \frac{1}{2}\]
+
+\subhomep{g}
+
+\[\zt{(\frac{1}{2})^n G_{9}(n)} = \frac{1 - 1/(2z)^{10}}{1-1/2z}, \text{ where } |z| \neq 0\]
+
+
+\homep{3.3}
+
+\subhomep{a} \[X_a(z) = \frac{z}{z-a} + \frac{z}{z - 1/a}, \text{ where } a < |z| < \frac{1}{a}\]
+
+\subhomep{b}
+
+\[X_b(z) = \frac{1-1/z^N}{1-1/z} = \frac{z^N - 1}{z^{N-1}(z-1)}\]
+
+\subhomep{c}
+
+三角形状的函数一般是由门函数卷积而得，由于起点为 0 ，需要移位
+
+\[x_c(n) = x_b(n) \otimes x_b(n-1)\]
+
+\[X_c(z) = X_b(z) \cdot \frac{X_b(z)}{z} = \frac{1}{z^{2 N - 1}} (\frac{z^N - 1}{z-1})^2\]
+
+
+如\figref{d3}
+
+\qfig[d3]{h301.png}{收敛域}
+
+\homep{3.6}
+
+\subhomep{c 部分分式}
+
+\[\frac{X(z)}{z} = \frac{z - 1/2}{z^2 + \frac{3}{4} z + \frac{1}{8}} = \frac{4}{z+1/2}-\frac{3}{z+1/4}, \text{ where } |z| > \frac{1}{2}\]
+
+\[x(n) = 4 (-\frac{1}{2})^n u(n) - 3 (-\frac{1}{4})^n u(n)\]
+
+\subhomep{c 展开法}
+
+\[\frac{1-\frac{1}{2}z^{-1}}{1+\frac{3}{4}z^{-1}+\frac{1}{8}z^{-2}} = 1 - \frac{5}{4}z^{-1} + \frac{13}{16}z^{-2} - \frac{29}{64}z^{-3}\cdots\]
+
+观察可得，存在较大较小的两项使得其在正负之间变化，并且均为 2 的幂次，最终得到
+
+\[x(n) = 4 (-\frac{1}{2})^n u(n) - 3 (-\frac{1}{4})^n u(n)\]
+
+\homep{3.9}
+
+\subhomep{a}
+
+\[H(z) = \frac{2 z}{z - 1/2} - \frac{z}{z+1/4}\]
+
+又因为是因果系统，收敛域为 \(|z| > 1/2\)
+
+\subhomep{b}
+
+稳定，\(|z| = 1\) 在收敛域内
+
+\subhomep{c}
+
+\[y(n) \zta -\frac{1}{3} \frac{z}{z+1/4} + \frac{4}{3} \frac{z}{z-2}\]
+
+那么
+
+\[X(z) = \frac{Y(z)}{H(z)} = \frac{z-1/2}{z-2} = \frac{1}{4} + \frac{3}{4} \frac{z}{z-2}\]
+
+所以
+
+\[x(n) = \frac{1}{4} \delta(n) - \frac{3}{4} 2^nu(-n-1)\]
+
+\homep{3.28}
+
+\subhomep{a}
+
+设 
+\[x_0(n) \zta \frac{3}{(1-\frac{1}{4}z^{-1})^2} = X_0(z)\]
+
+那么 
+\[X_0(z) = \frac{3 z}{z - {1}/{4}} + \frac{3}{4}z \cdot \frac{1}{(z-1/4)^2}\]
+
+设
+\[\frac{\dd{X_1(z)}}{\dd{z}} = -\frac{1}{(z-1/4)^2}\]
+
+那么
+\[X_1(z) = \frac{1}{z-1/4} = 4(-1+\frac{z}{z-1/4})\]
+
+那么
+\[\frac{3}{4}z \cdot \frac{1}{(z-1/4)^2} = \frac{3}{4}(-z)\frac{\dd{X_1(z)}}{\dd{z}} \ztra \frac{3}{4}nx_1(n)\]
+
+
+\[x_0(n) = 3(-1)\frac{1}{4^n}u(-n-1) + \frac{3}{4}n(-4\delta(n)+(-1)\frac{1}{4^n}u(-n-1)) = -3n\delta(n) + (-3-\frac{3}{4}n)\frac{n}{4}u(-n-1)\]
+
+那么
+\[x(n) = x_0(n-3) = -3(n-3)\delta(n-3)+(-3-\frac{3}{4}(n-3))\frac{n-3}{4}u(-n+2)\]
+
+\subhomep{b}
+
+\[X(z) = \sum_{k=0}^{\infty}\frac{(-1)^k}{(2k+1)!}z^{2k+1}\]
+
+\[x(n) = \sum_{k=0}^{\infty}\frac{(-1)^k}{(2k+1)!}\delta(n+2k+1)\]
+
+
+\subhomep{c}
+
+
+\[X(z) = z^7 + \frac{-1}{1-z^{-7}} = z^7 + (-1) \sum_{n=0}^{\infty}(z^{-7})^n\]
+
+\[x(n) = \delta(n+7)-\sum_{k=0}^{\infty}\delta(n-7k)\]
 % Start Here
-
 % End Here
 
 \end{document}

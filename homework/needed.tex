@@ -3,7 +3,8 @@
 \newcommand{\pp}[1]{\partial{}#1}
 
 \newcommand{\homep}[1]{\section*{Problem #1}}
-
+\newcommand{\subhomep}[1]{\subsection*{SubProblem #1}}
+\usepackage{mathrsfs} 
 % FT LT ZT
 \newcommand{\ft}[1]{\mathscr{F}[#1]}
 \newcommand{\fta}{\xrightarrow{\mathscr{F}}}
@@ -11,6 +12,11 @@
 \newcommand{\lta}{\xrightarrow{\mathscr{L}}}
 \newcommand{\zt}[1]{\mathscr{Z}[#1]}
 \newcommand{\zta}{\xrightarrow{\mathscr{Z}}}
+\newcommand{\ztra}{\xrightarrow{\mathscr{Z}^{-1}}}
+\newcommand{\dtft}[1]{\text{DTFT}[#1]}
+\newcommand{\dtftr}[1]{\text{DTFT}^{-1}[#1]}
+\newcommand{\dtfta}{\xrightarrow{\text{DTFT}}}
+\newcommand{\where}[2]{\left.#1\right|_{#2}}
 
 \newcommand{\trans}[1]{{T}[#1]}
 
@@ -25,7 +31,7 @@
       \centering
       \includegraphics[width=0.6\textwidth]{#2}
       \caption{#3}
-      \label{\chapname :#1}
+      \label{#1}
   \end{figure}
 }
 
