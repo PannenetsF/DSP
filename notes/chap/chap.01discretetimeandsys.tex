@@ -112,9 +112,50 @@ x(n) = A \cos(\omega_0 \cdot n + \theta_0)
 
 \section{离散时间系统}
 
+
+
+\begin{itemize}
+    \item {有无记忆系统}
+
+    \begin{definition}
+        \(y[n]\) 只决定于同一时刻的输入 \(x[n]\) 称为无记忆系统；
+    
+        \(y[n]\) 还与其他时刻的输入有关，那就是有记忆系统。
+    \end{definition}
+    \item 线性系统    
+    \item 时不变系统
+    \item 因果系统/逆因果系统
+    \item BIBO 意义下的稳定系统
+\end{itemize}
+
+
 \section{线性时不变系统}
 
+线性时不变系统又称为 LTI 系统，设单位冲激相应为 \(h(n) = T[\delta(n)]\)
+
+那么 \[
+\begin{aligned}
+    y(n) &= T[x(n)] = T[\sum_{-\infty}^\infty x(k) \delta(n-k) ] \\ 
+    &= \sum_{-\infty}^\infty x(k) T[\delta(n-k)] \text{Linear} \\ 
+    &= \sum_{-\infty}^{\infty} x(k) h(n-k) \text{Invariant} \\ 
+    &= x(n) \otimes h(n)
+\end{aligned}    
+\]
+
+这两个特性是卷积存在的\textbf{充分必要条件}。
+
+
 \section{线性常系数差分方程}
+
+\begin{definition}[线性常系数差分方程]
+    \[\sum_{i=0}^{N} a_{i} y(n-i)=\sum_{j=0}^{M} b_{j} x(n-j)\]
+
+    定义 \(y\) 的最高阶与最低阶的差值为差分方程的阶数 \(N\) 。通常可以使用时域和变换域（Z）方法求解。
+\end{definition}
+
+LCCDE 不一定是线性系统也不一定是时不变系统。
+
+
 % End Here
 
 \let\chapname\undefined
