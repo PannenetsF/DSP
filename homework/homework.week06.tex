@@ -1,0 +1,175 @@
+\documentclass[lang=cn,11pt,a4paper,cite=authoryear,twocolumn]{elegantpaper}
+
+\input{needed.tex}
+
+\title{数字信号处理\quad 第六周作业}
+\author{范云潜 18373486}
+\institute{微电子学院 184111 班}
+\date{\zhtoday}
+
+\begin{document}
+
+\maketitle
+
+作业内容：2.32,
+2.33,
+2.42,
+3.40,
+3.41,
+5.1,
+5.4, 
+5.12;
+
+\homep{2.32}
+
+\[\begin{aligned}
+    x[n] &= \cos \frac{\pi}{2} n = \frac{1}{2}(e^{j \frac{n \pi}{2}} + e^{-j \frac{n \pi}{2}}) \\
+    H(e^{j\frac{\pi}{2}}) &= e^{-j\frac{\pi}{4}} \frac{1+e^{-j\pi}+4e^{-2j\pi}}{1+\frac{1}{2}e^{-j\pi}} = e^{-j\frac{\pi}{4}} 8 \\ 
+    H(e^{-j\frac{\pi}{2}}) &= e^{j\frac{3\pi}{4}} \frac{1+e^{j\pi}+4e^{2j\pi}}{1+\frac{1}{2}e^{j\pi}} = - e^{-j\frac{\pi}{4}} 8 \\ 
+    y[n] &= 4 (e^{j\frac{\pi}{2} n - j \frac{\pi}{4}} - e^{-j \frac{\pi}{2}n - j \frac{\pi}{4}}) 
+\end{aligned}\]
+
+\homep{2.33}
+
+\[\begin{aligned}
+    x[n] &= \cos (\frac{3\pi n}{2} + \frac{\pi}{4}) \\
+    & = \frac{1}{2}(e^{j(\frac{3\pi}{2}n + \frac{\pi}{4})} + e^{-j(\frac{3 \pi n}{2} + \frac{\pi}{4})})
+\end{aligned}\]
+
+幅度响应恒为 \(1\) ，仅考虑相位响应：
+
+\[\arg H(e^{j \frac{3\pi}{2}}) = \frac{2 \pi}{3} = - \arg H(e^{-j \frac{3\pi}{2}})\] 
+
+\[\begin{aligned}
+    y[n] &= \frac{1}{2}(e^{j(\frac{3\pi}{2}n + \frac{11}{12}n)} + e^{-j(\frac{3 \pi n }{2} + \frac{11 \pi }{12})})\\
+     &=\cos (\frac{3\pi n }{2} + \frac{11 \pi}{12})
+\end{aligned}\]
+
+\homep{2.42}
+
+\subhomep{a}
+
+
+\[\begin{aligned}
+    y[n] &= x[n] \otimes (h_2[n] + h_1[n] \otimes h_2[n])\\
+    h[n] &= h_2[n] + h_1[n] \otimes h_2[n] \\ 
+    &= \alpha ^n u[n] + \beta \alpha^{n-1} u[n-1]
+\end{aligned}\] 
+
+\subhomep{b}
+
+转换到变换域：
+
+\[\begin{aligned}
+    H(z) &= H_1(z) H_2(z) +H_2(z)\\ 
+    H_1(z) &= \beta \frac{1}{z} \\ 
+    H_2(z) &= \frac{z}{z-\alpha} \\
+    \therefore \: H(z) &= \frac{z + \beta}{z - \alpha}
+\end{aligned}\]
+
+\subhomep{c}
+
+展开得到：
+
+\[(1-\alpha / z)Y(z) = (1 + \beta / z) X(z)\]
+
+进行逆变换
+
+\[y[n] - \alpha y[n-1] = x[n] + \beta x[n-1]\]
+
+\subhomep{d} 
+
+因果；在 \(|\alpha| < 1\) 时稳定，此时极点在单位圆内。
+
+\homep{3.40}
+
+\subhomep{a}
+
+变换域：  \[H(z)(X(z)-W(z)) + E(z) = W(z)\]
+
+\[W(z) = X(z) \frac{H(z)}{1+H(z)} + E(z) \frac{1}{1+H(z)}\]
+
+\subhomep{b}
+
+\[H_1(z) = \frac{1/(z-1)}{1 + 1/(z-1)} = \frac{1}{z}\]
+
+\[H_2(z) = \frac{1}{1 + 1 / (z-1)} = \frac{z-1}{z}\]
+
+\subhomep{c}
+
+由于是因果系统，\(z\) 向外扩展。\(H(z)\) 在单位圆上存在极点，因此不稳定；\(H_1(z), H_2(z)\) 极点在单位圆内部，因此稳定。
+
+\homep{3.41} 
+
+\subhomep{a} 稳定， \(r_{min} < 1 < r_{max}\)
+
+\subhomep{b} 
+\(v[n] = a^{-n} x[n], w[n] = y[n] a^{-n}\)
+
+变换域：
+
+\(V(z) = X(az), W(z) = Y(az)\)
+
+\(\therefore\: G(az) = H(z), G(z) = H(z/a)\)
+
+\(\therefore\: g[n] = a^n h[n]\)
+
+\subhomep{c}
+
+收敛域带入： \(0<r_{min}< |z/a| < r_{max} < \infty\) ， 即： \(0 < |a r_{min}| < |z| < |a r_{max}| < \infty\) 。
+
+\homep{5.1}
+
+\[Y(e^{j \omega}) = \sum_{n=0}^{10} e^{-j\omega n } = \frac{\sin (11\omega/2)}{\omega/2} e^{-5\omega}\]
+
+对于 \(X(e^{j\omega})\) 的每一频率取值，
+都有 \(X(e^{j\omega}) H(e^{j\omega}) = Y(e^{j\omega})\) ，由于 \(\omega\) 在此区间连续，因此需要满足 \(y[n] = x[n]\) 且截止频率覆盖整个频段，\(\omega_c = \pi\) 。
+
+\homep{5.4}
+
+\subhomep{a}
+
+\(\begin{aligned}
+    X(z) &= \frac{z}{z-1/2}-\frac{z}{z-2}, 1/2 < |z| < 2\\
+    Y(z) &= 6 \frac{z}{z-1/2} , |z| > \frac{3}{4}\\
+    H(z) &= \frac{Y(z)}{X(z)} \\
+    &= \frac{z-2}{z-3/4}, |z| > \frac{3}{4}
+\end{aligned}\)
+
+零极点如 \figref{01}
+
+\qfig[01]{hw06p1.png}{零极点图}
+
+\subhomep{b}
+
+\(H(z) = \frac{z}{z-3/4} - \frac{2}{z}\frac{z}{z-3/4}\)
+
+\(h[n] = (\frac{3}{4})^n u[n] - 2 (\frac{3}{4})^{n-1} u[n-1]\)
+
+\subhomep{c}
+
+\[\frac{Y(z)}{X(z)} = \frac{1-2/z}{1-3/(4z)}\]
+
+\[y[n] - \frac{3}{4}y[n-1] = x[n] - 2 x[n-1]\]
+
+\homep{5.12}
+
+\subhomep{a}
+
+极点：\(z=\pm 0.9 j\) 在单位圆内，因此稳定。
+
+\subhomep{b}
+
+单位圆外的因子：\(z=\pm 3\)，那么
+
+\[H_{ap} = \frac{1-9z^{-2}}{1-z^{-2}/9}\]
+
+\[H_1(z) = \frac{1+0.2z^{-1}}{1+0.8z^{-2}} (1-\frac{1}{9}z^{-2})\]z
+
+
+
+% Start Here
+
+% End Here
+
+\end{document}

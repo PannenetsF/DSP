@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.9.9)  22 SEP 2020 13:32
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.9.9)  17 OCT 2020 20:25
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/pannenetsf/Documents/Subjects/dsp/homework/homework.week02
-(/home/pannenetsf/Documents/Subjects/dsp/homework/homework.week02.tex
+**/home/pannenetsf/Documents/Subjects/dsp/homework/homework.week06
+(/home/pannenetsf/Documents/Subjects/dsp/homework/homework.week06.tex
 LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-09-06> (/opt/texlive2020/texmf-dist/tex/latex/elegantpaper/elegantpaper.cls
 Document Class: elegantpaper 2020/04/12 v0.09 ElegantLaTeX Paper class
@@ -260,6 +260,10 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 ) (/opt/texlive2020/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
 \c@tracingmulticols=\count273
+
+
+Package multicol Warning: May not work with the twocolumn option on input line 141.
+
 \mult@box=\box48
 \multicol@leftmargin=\dimen171
 \c@unbalance=\count274
@@ -681,8 +685,8 @@ File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 )) (./needed.tex (/opt/texlive2020/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
 Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
 \symrsfs=\mathgroup6
-)) (./homework.week02.aux)
-\openout1 = `homework.week02.aux'.
+)) (./homework.week06.aux)
+\openout1 = `homework.week06.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
@@ -718,9 +722,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 10.
 LaTeX Info: Redefining \pageref on input line 10.
 LaTeX Info: Redefining \nameref on input line 10.
- (./homework.week02.out) (./homework.week02.out)
+ (./homework.week06.out) (./homework.week06.out)
 \@outlinefile=\write4
-\openout4 = `homework.week02.out'.
+\openout4 = `homework.week06.out'.
 
 
 *geometry* driver: auto-detecting
@@ -744,14 +748,14 @@ LaTeX Info: Redefining \nameref on input line 10.
 * \headsep=5.0pt
 * \topskip=11.0pt
 * \footskip=30.0pt
-* \marginparwidth=50.0pt
+* \marginparwidth=4.0pt
 * \marginparsep=10.0pt
 * \columnsep=10.0pt
 * \skip\footins=10.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
-* \@twocolumnfalse
+* \@twocolumntrue
 * \@twosidefalse
 * \@mparswitchfalse
 * \@reversemarginfalse
@@ -814,52 +818,47 @@ Package fontspec Info: Font family 'FandolKai-Regular(0)' created for font
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 14.4pt on input line 29.
+(Font)              scaled to size 14.4pt on input line 23.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 29.
-[1
+(Font)              scaled to size 14.4pt on input line 23.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 12.0pt on input line 50.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1
+
 
 ]
+Underfull \hbox (badness 1817) in paragraph at lines 125--127
+[]\TU/FandolSong-Regular(0)/m/n/10.95 对 于 $\OML/cmm/m/it/10.95 X\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 e[]\OT1/cmr/m/n/10.95 )$ \TU/FandolSong-Regular(0)/m/n/10.95 的 每 一 频 率 取 值，|  都 有
+ []
+
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 12.0pt on input line 72.
+(Font)              scaled to size 10.95pt on input line 139.
+File: figure/hw06p1.png Graphic file (type bmp)
+<figure/hw06p1.png>
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 83.
-File: figure/h201m20.png Graphic file (type bmp)
-<figure/h201m20.png>
-LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.0pt on input line 85.
- [2]
-File: figure/h202.png Graphic file (type bmp)
-<figure/h202.png>
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 107.
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.0pt on input line 107.
- [3]
-File: figure/h203.png Graphic file (type bmp)
-<figure/h203.png>
-File: figure/h204.png Graphic file (type bmp)
-<figure/h204.png>
- [4] [5]
-File: figure/h301.png Graphic file (type bmp)
-<figure/h301.png>
- [6] [7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 264.
- [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 264.
- (./homework.week02.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 264.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 264.
-Package rerunfilecheck Info: File `homework.week02.out' has not changed.
+(Font)              scaled to size 10.0pt on input line 141.
+[2]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 175.
+ [3
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 175.
+ (./homework.week06.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 175.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 175.
+Package rerunfilecheck Info: File `homework.week06.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 21159 strings out of 479682
- 404692 string characters out of 5891585
- 954420 words of memory out of 5000000
- 38047 multiletter control sequences out of 15000+600000
- 577698 words of font info for 93 fonts, out of 8000000 for 9000
+ 21137 strings out of 479682
+ 405008 string characters out of 5891585
+ 960539 words of memory out of 5000000
+ 38030 multiletter control sequences out of 15000+600000
+ 572072 words of font info for 90 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 69i,11n,126p,847b,553s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,8n,126p,847b,545s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on homework.week02.pdf (8 pages).
+Output written on homework.week06.pdf (3 pages).
