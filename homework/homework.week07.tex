@@ -1,0 +1,190 @@
+\documentclass[lang=cn,11pt,a4paper,cite=authoryear,twocolumn]{elegantpaper}
+
+\input{needed.tex}
+
+\title{数字信号处理\quad 第七周作业}
+\author{范云潜 18373486}
+\institute{微电子学院 184111 班}
+\date{\zhtoday}
+
+\begin{document}
+
+\maketitle
+
+作业内容：5.12，5.14，5.18，5.22，5.15，5.33，5.59；
+
+% \tableofcontents
+
+\homep{5.12}
+
+\subhomep{a}
+
+极点：\(z=\pm 0.9 j\) 在单位圆内，因此稳定。
+
+\subhomep{b}
+
+单位圆外的因子：\(z=\pm 3\)，那么
+
+\[H_{ap} = \frac{1-9z^{-2}}{1-z^{-2}/9}\]
+
+\[H_1(z) = \frac{1+0.2z^{-1}}{1+0.81z^{-2}} (1-\frac{1}{9}z^{-2})\]
+
+
+\homep{5.14}
+
+\subhomep{a} \(M=10\) 且偶对称，\(\alpha = 5\) 。
+
+\subhomep{b} 偶对称，关于 \(1/2\) 对称，\(\alpha = 1/2\)
+
+\homep{5.18}
+
+需要对反射的零点的 \(z^{-1}\) 系数进行补偿。
+
+\subhomep{a} 
+
+\(H_{min}(z) = \dfrac{2(1-z^{-1}/2)}{1 + z^{-1}/3}\)
+
+\subhomep{b} 
+
+\(H_{min}(z) = \dfrac{3(1+z^{-1}/3)(1-z^{-1}/2)}{z^{-1}(1+z^{-1}/2)}\)
+
+\subhomep{c} 
+
+\(H_{min}(z) = \dfrac{3(1-z^{-1}/3)}{(1-3z^{-1}/4)}\dfrac{(1-z^{-1}/4)}{(1-4z^{-1}/3)}\)
+
+\homep{5.22}
+
+\subhomep{a} 
+
+\(\begin{aligned}
+    \frac{Y(z)}{X(z)} &= \frac{1-a^{-1}z^{-1}}{1-az^{-1}} \\
+    y[n] - ay[n-1] &= x[n] - \frac{1}{a} x[n-1]
+\end{aligned}\)
+
+\subhomep{b} 
+
+
+极点为 \(z = a\) ，极点需要在单位圆内，即 \(-1 < a < 1\) 。
+
+\subhomep{c}
+
+如\figref{1}。
+
+\qfig[1]{h7p1.png}{收敛域与零极点}
+
+\subhomep{d}
+
+\[\frac{z-a^{-1}}{z-a} \ztra a^nu[n] - a^{-1}a^{n-1}u[n-1]\]
+
+\subhomep{e} 
+
+\[\begin{aligned}
+    (\left.H(z)\right|_{z=e^{j\omega}})^2 &= |H(e^{j\omega})|^2 \\
+    &= \left| \frac{1-a^{-1}e^{-j\omega}}{1-ae^{-j\omega}} \frac{1-a^{-1}e^{j\omega}}{1-ae^{j\omega}} \right| \\
+    &= \frac{1}{|a|^2} \\
+\end{aligned}\]
+
+那么 \(|H(z)| = 1/|a|\)
+
+\homep{5.15}
+
+\subhomep{a} 
+
+是，由分类，\(\alpha = 1\) ，\(H(e^{j\omega}) = 2 + e^{j\omega} + 2 e^{-j2\omega} = e^{j\omega} (2e^{j\omega} + 1 + 2e^{-j\omega}) = e^{-j\omega} (1 + 4 \cos \omega )\) 那么，\(\beta = 0\) ，\(A(e^{j\omega}) =  (1 + 4 \cos \omega )\)。
+
+\subhomep{b} 
+
+不是
+
+\subhomep{c}
+
+是，\(\alpha = 1\) ，\(H(e^{j\omega}) = e^{-j\omega}(e^{j\omega} + 3 + e^{-j\omega}) = e^{-j\omega} (3 + 2 \cos \omega)\) ，那么 \(\beta = 0\) ， \(A(e^{j\omega}) = 3 + 2 \cos \omega\) 
+
+\subhomep{d}
+
+是，\(\alpha = 1/2\) ，\(H(e^{j\omega}) = e^{j\omega/2} 2 \cos (\omega/2)\) ，那么 \(\beta = 0\) ，\(A(e^{j\omega}) = 2 \cos (\omega/2)\) 。
+
+\subhomep{e}
+
+是，\(\alpha = 1\) ，\(H^{e^{j\omega}} = e^{-j\omega} (e^{j\omega} - e^{-j\omega}) = e^{-j\omega} j 2 \sin \omega\) ，那么，\(\beta = \frac{\pi}{2}\) ，\(A({e^{j\omega}}) = 2 \sin \omega\) 。
+
+
+\homep{5.33}
+
+\subhomep{a} 
+
+\(X(z) = S(z) - e^{-8a} S(z) / z^8\) ，\(\therefore \: H_1(z) = 1 - \dfrac{e^{-8a}}{z^8}\)
+
+如\figref{2} ，有八重极点与八重根构成的零点。
+
+\qfig[2]{h7p2.png}{收敛域与零极点}
+
+\subhomep{b}
+
+\(H_2(z) = \dfrac{1}{H_1(z)} = \dfrac{1}{1/(ze^a)^8}\) 
+
+\textcircled{1} \(|z| < e^{-a}\) ，非因果，不稳定。
+
+\textcircled{2} \(|z| > e^{-a}\) ，因果，稳定。 
+
+\subhomep{c} 
+
+需要选择因果信号
+
+\(h_2(n) = \left\{\begin{aligned}
+    e^{-an},& n = 8 k, k > 0 \\
+    0, & \text{else}
+\end{aligned}\right.\)
+
+\subhomep{d}
+
+\(\begin{aligned}
+    s[n] &= \delta[n] \\
+    x[n] &= \delta[n] - e^{-8n} \delta[n-8] \\
+    y[n] &= h_2[n] \otimes x[n] \\ 
+    &= h_2[n] - e^{-8a}h_2[n-8] \\
+    &= \delta[n]
+\end{aligned}\)
+
+\homep{5.59}
+
+\subhomep{a} 
+
+窗函数： \(H(e^{j\omega} = \dfrac{1-e^{-jM\omega}}{1-e^{-j\omega}})\) ，那么 \(H_i(e^{j\omega}) = \frac{1-e^{-j\omega}}{1-e^{-jM\omega}}\) 。
+
+利用幂函数展开
+
+\(H_i(e^{j\omega}) = (\sum_{n=0}^\infty (e^{-jM\omega})^n)(1-e^{-j\omega})\) 
+
+那么 
+
+\(h_i[n] = \sum_{k=0}^\infty (\delta[n-kM] + \delta[n-1-kM])\)
+
+\subhomep{b}
+
+\(h_1[n] \dtfta \dfrac{1-e^{-jM\omega q}}{1-e^{-jM\omega}}\)
+
+\(h_2[n] \dtfta 1 - e^{-j\omega}\)
+
+那么 \(H_{all} = h[n] \otimes h_1[n] \otimes h_2[n]\) 
+
+\(H_{all} (e^{j\omega}) = (1 - e^{-jM\omega q})\)
+
+那么 \(h_{all} = \delta[n] - \delta[n-Mq]\) 
+
+那么 \(0 \leq n < Mq\) 
+
+\subhomep{c}
+
+\[\begin{aligned}
+    H_2(e^{j\omega}) &= \dfrac{1}{H(e^{j\omega}) H_1(e^{j\omega})}\\
+    &= \dfrac{1}{H(e^{j\omega})} \frac{1-e^{-jM\omega}}{1-e^{-jM\omega q}}
+\end{aligned}\]
+
+为了收敛，那么无穷处无极点，设 \(H(e^{j\omega})\) 有 \(P\) 个极点， \(Z\) 个极点，又可知 \(H_2(e^{j\omega})\) 有 \(M\) 零点，\(Mq\) 极点，因此 \(M + P < Mq + Z\)
+
+% Start Here
+
+% End Here
+
+\end{document}
