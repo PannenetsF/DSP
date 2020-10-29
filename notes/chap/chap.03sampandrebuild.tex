@@ -1,0 +1,55 @@
+\ifx\mainclass\undefined
+\documentclass[cn,11pt,chinese,black,simple]{../elegantbook}
+\input{../needed.tex}
+\begin{document}
+\fi 
+\def\chapname{03sampandrebuild}
+
+% Start Here
+\chapter{信号采样与重构}
+% End Here
+
+\begin{introduction}
+    \item 数模频率的对应关系，时域采样对频域的影响
+    \item 采样信号如何包含连续信号所有信息？如何无失真恢复信号？是否有冗余信息？是否可以进行速率变化？
+    \item 离散处理如何等效模拟 LTI 系统？如何提高处理性能？
+\end{introduction}
+
+\section{理想周期采样重构}
+
+一般采样都是不可逆的，为了不丢失信息，需要进行约束。
+
+理想采样： \[x_{s}(t)=x_{c}(t) * s(t)=\sum_{-\infty}^{+\infty} x_{c}(n T) \delta(\mathrm{t}-n T)\]
+
+AD 是 CD 的工程近似。
+
+时域 \(s(t) = \dsum_{-\infty}^\infty \delta(t-nT)\) 。数字采样 \(S(\Omega) = \dfrac{2 \pi}{T} \dsum_{-\infty}^\infty \delta(\Omega - n \Omega_0)\) 。
+
+\subsection{整体流程}
+
+采样信号 \[s(t)=\sum_{n=-\infty}^{\infty} \delta(t-n T)\]
+
+调制采样 \[\begin{aligned}
+    x_{s}(t) &=x_{c}(t) s(t) \\
+    &=x_{c}(t) \sum_{n=-\infty}^{\infty} \delta(t-n T) \\
+    &= \sum_{n=-\infty}^{\infty} x_c(nT) \delta(t-n T) 
+    \end{aligned}\]
+
+根据 \(\Omega_s = 2\pi  T\) 采样频率 ，其傅立叶变换
+
+\[S(\mathrm{j} \Omega)=\frac{2 \pi}{T} \sum_{k=-\infty}^{\infty} \delta\left(\Omega-k \Omega_{s}\right)\]
+
+那么 \[X_s(j\Omega) = \frac{1}{2\pi} X_c(j\Omega) \otimes S(j\Omega) = \frac{1}{T} \sum_{k=-\infty}^\infty X_c(j\Omega - kj\Omega_s)\] 
+
+数字信号的频谱是模拟频谱的映射，数字的频谱是中心频谱的镜像。
+
+\subsection{采样定理}
+
+平移频谱不交叠。
+
+
+
+\let\chapname\undefined
+\ifx\mainclass\undefined
+\end{document}
+\fi 
