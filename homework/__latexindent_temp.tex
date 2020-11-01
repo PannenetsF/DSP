@@ -1,0 +1,72 @@
+\documentclass[lang=cn,11pt,a4paper,cite=authoryear,twocolumn]{elegantpaper}
+
+\input{needed.tex}
+
+\title{数字信号处理\quad 第八周作业}
+\author{范云潜 18373486}
+\institute{微电子学院 184111 班}
+\date{\zhtoday}
+
+\begin{document}
+
+\maketitle
+
+作业内容：4.2，4.3，4.4，4.5
+
+
+\homep{4.2}
+
+此处 \(\omega = 0.25 \pi \) ，那么 \(\Omega = \omega / T = 250 \pi\) ；类似的 \(\omega = 0.25 \pi + 2 \pi \) 时， \(\Omega = 2250 \pi \) 。
+
+\homep{4.3} 
+
+\subhomep{a} 
+
+\[\omega = \frac{\pi}{3} = 4000\pi \frac{1}{T} , T = 12000\]
+
+\subhomep{b} 
+
+\[\omega = \frac{\pi}{3} + 2 \pi = 4000\pi \frac{1}{T} , T = \frac{12000}{7}\]
+
+\homep{4.4} 
+
+\subhomep{a} 
+
+\[\left\{\begin{aligned}
+    \omega_1 &= \frac{\pi}{5} = 20 \pi / T \\
+    \omega_2 &= \frac{2 \pi }{5} = 40 \pi / T
+\end{aligned}\right., \therefore\: T = 100\]
+
+\subhomep{b} 
+
+\[\left\{\begin{aligned}
+    \omega_1 &= \frac{\pi}{5} + 2k_1 \pi = 20 \pi / T \\
+    \omega_2 &= \frac{2 \pi }{5} + 2 k_2 \pi = 40 \pi / T
+\end{aligned}\right., \therefore\: T = \frac{100}{10k_1 + 1} = \frac{100}{10k_2 + 2}\]
+
+而 \(k_i\) 为整数，因此不存在其他解。
+
+\homep{4.5}
+
+\subhomep{a}
+
+\[\Omega_S = 2\pi / T = 2.5 k \cdot 2 \pi, T = 10^{-5} s\]
+
+\subhomep{b}
+
+\[\omega = \Omega T,\: \Omega_S = \frac{\omega}{T}, \: f_s = \Omega_S/2\pi = 625Hz\]
+
+\subhomep{c}
+
+同上，\[f_S = 2 f_{S,(b)} = 1250 Hz\]
+
+
+
+
+% \tableofcontents
+
+% Start Here
+
+% End Here
+
+\end{document}
