@@ -81,7 +81,9 @@ AD 是 CD 的工程近似。
 
 采样周期变化为原有的 \(D\) 倍：
 
-\[x_{D}(n) \Leftrightarrow X_{D S}(\Omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty} X c\left(\Omega-k \frac{\Omega_{0}}{D}\right) \Leftrightarrow X_{D}(\omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty} X c\left(\frac{\omega}{D T}-k \frac{2 \pi}{D T}\right)\] 
+\[x_{D}(n) \Leftrightarrow X_{D S}(\Omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty} X c\left(\Omega-k \frac{\Omega_{0}}{D}\right) \] 
+
+\[\Leftrightarrow X_{D}(\omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty} X c\left(\frac{\omega}{D T}-k \frac{2 \pi}{D T}\right)\] 
 
 其对应的模拟滤波器可以这样对待：转换成一个新的频谱平移 
 
@@ -90,6 +92,62 @@ AD 是 CD 的工程近似。
     &= \frac{1}{D} \sum_{i = 0}^{D-1} \frac{1}{T} \sum_{m=-\infty}^\infty X_C (\frac{\omega}{DT} - m \frac{2\pi}{T} - i \frac{2 \pi}{DT}) \\ 
     &= \frac{1}{D} \sum_{i = 0}^{D-1} \frac{1}{T} \sum_{m=-\infty}^\infty X_C (\frac{\omega - 2 \pi i}{DT} - m \frac{2\pi}{T}) \\ 
 \end{aligned}\]
+
+为了防止混叠失真，进行二次的采样，进行 \(\pi/D\) 滤波之后，进行 \(D\) 倍抽取，保证频谱一一对应，信息保证不会丢失。
+
+如何理解波形的等价（不失真）：可以通过形状的可恢复性进行理解。
+
+\textbf{为什么}抽取信号之后，能量没有减少？时间延长了。
+
+时域变化：  \[X_D)n) = v (D n) = \sum_{k=-\infty}^\infty h(k) x(Dn = k) = \sum_{k=-\infty}^\infty x(k) h(Dn = k)\]
+
+\subsection{整倍内插}
+
+\[x_{I}(m)=\left\{\begin{array}{cc}
+    x\left(\frac{m}{I}\right) & (m=0, \pm I, \pm 2 I, \cdots) \\
+    0 & \text { else }
+\end{array}\right.\]
+
+补 0 在电路实现较为简单。
+
+内插增加了高频分量，在时域可以看作是迅速变化的波形。
+
+内插在频域的损失是 \(I\) 倍，需要补偿能量。
+
+\subsection{非整数倍抽取和内插}
+
+先内插可以收集更多频段的信号。
+
+整体流程：进行 \(I\) 内插后进行 \(D\) 抽取。
+
+\subsection{多相结构}
+
+希望将数据转换到频率较低的位置进行计算，来降低功耗。
+
+多相滤波器：将 \(Z\) 变化转化为多相形式，以特定频率倍数为周期：
+
+\[\begin{array}{l}
+    H(z)=\sum_{n=0}^{\infty} h(n) z^{-n} \\
+    =h_{0}+h_{4} z^{-4}+h_{8} z^{-8}+h_{12} z^{-12}+\cdots \\
+    +h_{1} z^{-1}+h_{5} z^{-5}+h_{9} z^{-9}+h_{13} z^{-13}+\cdots \\
+    +h_{2} z^{-2}+h_{6} z^{-6}+h_{10} z^{-10}+h_{14} z^{-14}+\cdots \\
+    +h_{3} z^{-3}+h_{7} z^{-7}+h_{11} z^{-11}+h_{15} z^{-15}+\cdots \\
+    =z^{0}\left[h_{0}+h_{4} z^{-4}+h_{8} z^{-8}+h_{12} z^{-12}+\cdots\right] \\
+    +z^{-1}\left[h_{1}+h_{5} z^{-4}+h_{9} z^{-8}+h_{13} z^{-12}+\cdots\right] \\
+    +z^{-2}\left[h_{2}+h_{6} z^{-4}+h_{10} z^{-8}+h_{14} z^{-12}+\cdots\right] \\
+    +z^{-3}\left[h_{3}+h_{7} z^{-4}+h_{11} z^{-8}+h_{15} z^{-12}+\cdots\right]
+\end{array}\]
+
+\(M\) 相分解：
+
+\[\begin{aligned}
+    H(z) &=\sum_{l=0}^{M-1} z^{-l} \sum_{n=0}^{\infty} h(M n+l) z^{-M n} \\
+    E_{I}(z) &=\sum_{n=0}^{\infty} h(M n+l) z^{-n} \\
+    H(z) &=\sum_{l=0}^{M-1} z^{-l} E_{l}\left(z^{M}\right)
+\end{aligned}\]
+
+
+\section{工程问题}
 
 
 
