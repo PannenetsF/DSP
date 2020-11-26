@@ -1,0 +1,89 @@
+\documentclass[lang=cn,11pt,a4paper,cite=authoryear,twocolumn]{elegantpaper}
+
+\input{needed.tex}
+
+\title{数字信号处理\quad 第十一周作业}
+\author{范云潜 18373486}
+\institute{微电子学院 184111 班}
+\date{\zhtoday}
+
+\begin{document}
+
+\maketitle
+
+作业内容：4.34，4.43，4.49 
+
+% \tableofcontents
+
+\homep{4.34}
+
+\subhomep{a}
+
+易得， \(H(j\Omega) = e^{-j\Omega T / 2}\) ，而这个连续时间的系统函数在不同的 \(T\) 下不唯一。 \(h_c(t) = \delta(t-T/2)\) 。
+
+\subhomep{b} 
+
+系统函数造成的效果是 \(y[n] = x[n+1/2]\) ，那么 \(y[n] = \cos (2.5 \pi n - 0.5 \pi )\) 。
+
+如 \figref{01}。
+
+\qfig[01]{hw11p1.png}{4.34-b}
+
+
+
+\homep{4.43}
+
+\subhomep{a}
+
+对 \(f_c(t) \) 进行追踪： \(Y_c(j\Omega) = F_c(j\Omega) H_{aa}(j \Omega) H(j\Omega) \) ，在 \(F_c\) 所在的频段，幅度特性为 \(1\) ，相位需要为 \(\Omega^3 \) ，那么 \((\omega T)^3 = (800 \omega)^3\) ， \(H(e^{j\omega}) = e^{j(800 \omega)^3}, \text{ if } |\omega| <= \pi / 2; 0, \text{ else}\) 。
+
+\subhomep{b}
+
+交叠产生的临界： \(400 \pi = 2\pi / T - 800 \pi \) ， \(T = 1/600 \) ，那么  \(H(e^{j\omega}) = e^{j(600 \omega)^3}, \text{ if } |\omega| <= \pi / 2; 0, \text{ else}\) 。
+
+
+\homep{4.49}
+
+\subhomep{a}
+
+分析系统2 ，\(W_c(j\Omega)\) 是三角形函数的卷积。观察 \(w[n]\) 和 \(y[n]\) 实际无区别，之后的转换也是对应的，因此 \(y_1 = y_2\) 。
+
+但是不能恢复，因为信号 \(y_2\) 的处理中截断了。
+
+如\figref{02},\figref{03} 。
+
+\qfig[02]{hw11p2.png}{4.49-1}
+
+\qfig[03]{hw11p3.png}{4.49-2} 
+
+\subhomep{b}
+
+原始信号采样（连续）： \(30 \pi\) ，周期为 \(2\pi / T = 80 \pi\)
+
+搬移： \(30 \pi, 50 \pi\) 
+
+离散： \(0.75 \pi, 0.5\pi\)
+
+平方： \(0.5 \pi, 1.5\pi, 2\pi\) 产生了交叠
+
+\subhomep{c} 
+
+此时 \(\Omega_c = 30 \pi\) ， \(\Omega_N = 80 \pi\) ，
+
+原始信号： \(30 \pi\)  
+
+立方： \(30\pi, 90\pi\)
+
+离散： \(0.75 \pi, 0.25\pi\) 虽然频带交叠但是没有混叠
+
+不混叠就有可能恢复。
+
+\subhomep{d} 
+
+可知进行降次的操作可以将信号的频谱进行压缩，采样要求降低。
+
+% Start Here
+
+% End Here
+
+\end{document}

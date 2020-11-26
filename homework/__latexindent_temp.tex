@@ -2,7 +2,7 @@
 
 \input{needed.tex}
 
-\title{数字信号处理\quad 第十周作业}
+\title{数字信号处理\quad 第十一周作业}
 \author{范云潜 18373486}
 \institute{微电子学院 184111 班}
 \date{\zhtoday}
@@ -11,135 +11,30 @@
 
 \maketitle
 
-作业内容：4.36， 4.40， 4.53，4.6，4.7，4.24，4.25
+作业内容：4.34，4.43，4.49 
 
 % \tableofcontents
 
-\homep{4.36}
+\homep{4.34}
 
 \subhomep{a}
 
-\(\omega_C = \Omega_C / T = 0.5 \pi\) 
-
-解得 \(T \leq 1/400 s\) 
+易得， \(H(j\Omega) = e^{-j\Omega T / 2}\) ，而这个连续时间的系统函数在不同的 \(T\) 下不唯一。 \(h_c(t) = \delta(t-T/2)\) 。
 
 \subhomep{b} 
 
-由于降采样而无重叠，频域被拉伸到原来二倍，因此需要将其压缩， \(T' = 2 T = 1 / 200 s\) 
+系统函数造成的效果是 \(y[n] = x[n+1/2]\) ，那么 \(y[n] = \cos (2.5 \pi n - 0.5 \pi )\) 。
 
-\homep{4.40} 
+如 \figref{01}。
 
-容易得到，最后的频谱为 \(H(e^{j \omega / L}) X(e^{j\omega})\) ，那么其时域为 \(x[n - 1 / L]\) 
-
-\homep{4.53}
-
-\subhomep{a}
-
-如 \figref{01} ， \figref{02} 。
-
-\qfig[01]{h10p1.png}{}
-\qfig[02]{h10p2.png}{}
-
-\subhomep{b}
-
-\[\begin{aligned}
-    Y_0(e^{j\omega}) &= X(e^{j\omega}) H_0(e^{j\omega}) \\
-    &+ X(e^{j(\omega + \pi )}) H_0 (e^{j(\omega + \pi)})
-\end{aligned}\]
-
-\subhomep{c} 
-
-\[\begin{aligned}
-    Y(e^{j\omega}) &=  H_0(e^{j\omega})[X(e^{j\omega}) H_0(e^{j\omega}) \\
-    &+ X(e^{j(\omega + \pi )}) H_0 (e^{j(\omega + \pi)})] \\ 
-    &+  H_0(e^{j(\omega+\pi)})[X(e^{j\omega}) H_0(e^{j(\omega+\pi)}) \\
-    &+ X(e^{j(\omega + \pi )}) H_0 (e^{j\omega})] \\ 
-\end{aligned}\]
+\qfig[01]{hw11p1.png}{4.34-b}
 
 
-% TODO: Why 1/2 and why minus rather than plus
 
-\homep{4.6} 
+\homep{4.43}
 
-\subhomep{a}
+\homep{4.49}
 
-\[\begin{aligned}
-    H_c(\Omega) &= \int_\mathbb{R} h_c(t) e^{-j\Omega t} \dd{t} \\ 
-    &= \frac{1}{\alpha + j \Omega}
-\end{aligned}\]
-
-其幅度特性如 \figref{03} 。
-
-\qfig[03]{h10p3.png}{}
-
-
-\subhomep{b}
-
-\[\begin{aligned}
-    h_d[n] &= T e^{-a n T} u[n] \\ 
-    H_d(e^{j\omega}) &= T \frac{1}{1 - e^{-\alpha T - j \omega}} \\
-    |H_d(e^{j\omega})| &= T \frac{1}{(1-k\cos \omega)^2 + k^2 \sin^2 \omega}\\
-    & \text{ where } k = e^{-\alpha T} \\ 
-\end{aligned}\]
-
-那么最小值是在 \( -\cos \omega \) 最大处，即 \(\omega = \pi \) ，此时幅度为 \(T/(e^{-a T} + 1)^2\) ，当 \(T \rightarrow \infty\) ，最小值为 \(T\) 。
-
-\homep{4.7} 
-
-\subhomep{a} 
-
-\(x_c(t) = s_c(t) + \alpha s_c(t-\tau_\alpha)\) 
-
-\(X_c(j\Omega) =(1 + \alpha e^{-j\Omega \tau_\alpha}) S_c(j\Omega) \)
-
-\subhomep{b}
-
-\[H(e^{j\omega}) = (1 + \alpha e^{-j\Omega \tau_\alpha / T}) \]
-
-\subhomep{c}
-
-\[\begin{aligned}
-    h[n] &= \frac{1}{2\pi} \int_{-\pi}^\pi H(e^{j\omega}) e^{j\omega n} \dd{\omega} \\
-    &= \frac{1}{2\pi} (\frac{2 j \sin n \pi}{j n} + \alpha\frac{2 j \sin (n - \tau_\alpha/T)}{j (n -\tau_\alpha/T)}) \\ 
-    &= \delta(n) + \alpha delta(n - \tau_\alpha/T)
-\end{aligned}\]
-
-\homep{4.24}
-
-\[\Omega_c = 2\pi 5 \times 10^3, \Omega_c = \omega_c/T\] 
-
-a) \(\omega_{c1} = \pi, \omega_{c2} = \pi\) 
-
-b) \(\omega_{c1} = 0.5\pi, \omega_{c2} = 0.5\pi\) 
-
-c) \(\omega_{c1} = 0.5\pi, \omega_{c2} = \pi\) 
-
-d) \(\omega_{c1} = \pi, \omega_{c2} = 0.5\pi\) 
-
-如 \figref{04} 。
-
-\qfig[04]{h10p4.png}{}
-
-
-\homep{4.25}
-
-\subhomep{a}
-
-如 \figref{05} 
-
-\qfig[05]{h10p5.png}{}
-
-
-\subhomep{b}
-
-要保证出现低通以及相邻波形不重叠的临界：
-
-\[\begin{aligned}
-    \Omega_c &\leq \omega_c / T         \\
-    2 \pi / T - \Omega_c &\ge \omega_c / T
-\end{aligned}\]
-
-解得 \(0.125 10^{-4} s \leq T \leq 0.875 10^{-4} s\)
 % Start Here
 
 % End Here
