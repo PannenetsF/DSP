@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.9.9)  25 NOV 2020 23:58
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.9.9)  29 NOV 2020 15:47
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/pannenetsf/Documents/Subjects/dsp/homework/homework.week11
-(/home/pannenetsf/Documents/Subjects/dsp/homework/homework.week11.tex
+**/home/pannenetsf/Documents/Subjects/dsp/homework/homework.week12
+(/home/pannenetsf/Documents/Subjects/dsp/homework/homework.week12.tex
 LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-09-06> (/opt/texlive2020/texmf-dist/tex/latex/elegantpaper/elegantpaper.cls
 Document Class: elegantpaper 2020/04/12 v0.09 ElegantLaTeX Paper class
@@ -260,10 +260,6 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 ) (/opt/texlive2020/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
 \c@tracingmulticols=\count273
-
-
-Package multicol Warning: May not work with the twocolumn option on input line 141.
-
 \mult@box=\box48
 \multicol@leftmargin=\dimen171
 \c@unbalance=\count274
@@ -685,8 +681,8 @@ File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 )) (./needed.tex (/opt/texlive2020/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
 Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
 \symrsfs=\mathgroup6
-)) (./homework.week11.aux)
-\openout1 = `homework.week11.aux'.
+)) (./homework.week12.aux)
+\openout1 = `homework.week12.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
@@ -722,9 +718,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 10.
 LaTeX Info: Redefining \pageref on input line 10.
 LaTeX Info: Redefining \nameref on input line 10.
- (./homework.week11.out) (./homework.week11.out)
+ (./homework.week12.out) (./homework.week12.out)
 \@outlinefile=\write4
-\openout4 = `homework.week11.out'.
+\openout4 = `homework.week12.out'.
 
 
 *geometry* driver: auto-detecting
@@ -748,14 +744,14 @@ LaTeX Info: Redefining \nameref on input line 10.
 * \headsep=5.0pt
 * \topskip=11.0pt
 * \footskip=30.0pt
-* \marginparwidth=4.0pt
+* \marginparwidth=50.0pt
 * \marginparsep=10.0pt
 * \columnsep=10.0pt
 * \skip\footins=10.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
-* \@twocolumntrue
+* \@twocolumnfalse
 * \@twosidefalse
 * \@mparswitchfalse
 * \@reversemarginfalse
@@ -823,72 +819,29 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 (Font)              scaled to size 14.4pt on input line 18.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 (Font)              scaled to size 12.0pt on input line 20.
-LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 28.
-File: figure/hw11p1.png Graphic file (type bmp)
-<figure/hw11p1.png>
-LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.0pt on input line 30.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 38.
+(Font)              scaled to size 8.0pt on input line 30.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.0pt on input line 38.
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--39
-[]\TU/FandolSong-Regular(0)/m/n/10.95 对 $\OML/cmm/m/it/10.95 f[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 t\OT1/cmr/m/n/10.95 )$ \TU/FandolSong-Regular(0)/m/n/10.95 进 行 追 踪：| $\OML/cmm/m/it/10.95 Y[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 j\OT1/cmr/m/n/10.95 
-) =
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--39
-\OML/cmm/m/it/10.95 F[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 j\OT1/cmr/m/n/10.95 
-)\OML/cmm/m/it/10.95 H[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 j\OT1/cmr/m/n/10.95 
-)\OML/cmm/m/it/10.95 H\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 j\OT1/cmr/m/n/10.95 
-)$ \TU/FandolSong-Regular(0)/m/n/10.95 ，|  在 $\OML/cmm/m/it/10.95 F[]$ \TU/FandolSong-Regular(0)/m/n/10.95 所 在
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--39
-\TU/FandolSong-Regular(0)/m/n/10.95 的 频 段，|  幅 度 特 性 为 $\OT1/cmr/m/n/10.95 1$ \TU/FandolSong-Regular(0)/m/n/10.95 ，|  相 位 需 要
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--39
-\TU/FandolSong-Regular(0)/m/n/10.95 为 $\OT1/cmr/m/n/10.95 
-[]$ \TU/FandolSong-Regular(0)/m/n/10.95 ，|  那 么 $\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 !T\OT1/cmr/m/n/10.95 )[] = (800\OML/cmm/m/it/10.95 !\OT1/cmr/m/n/10.95 )[]$ \TU/FandolSong-Regular(0)/m/n/10.95 ，|
- []
-
-
-Underfull \hbox (badness 1308) in paragraph at lines 38--39
-\OML/cmm/m/it/10.95 H\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 e[]\OT1/cmr/m/n/10.95 ) = \OML/cmm/m/it/10.95 e[]; []\OMS/cmsy/m/n/10.95 j\OML/cmm/m/it/10.95 !\OMS/cmsy/m/n/10.95 j \OML/cmm/m/it/10.95 <\OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 ^^Y=\OT1/cmr/m/n/10.95 2; 0\OML/cmm/m/it/10.95 ; []$
- []
-
-File: figure/hw11p2.png Graphic file (type bmp)
-<figure/hw11p2.png>
-File: figure/hw11p3.png Graphic file (type bmp)
-<figure/hw11p3.png>
+(Font)              scaled to size 6.0pt on input line 30.
 [1
 
-
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 89.
- [2
-
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 89.
- (./homework.week11.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 89.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 89.
-Package rerunfilecheck Info: File `homework.week11.out' has not changed.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 106.
+ [2]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 106.
+ (./homework.week12.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 106.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 106.
+Package rerunfilecheck Info: File `homework.week12.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 21173 strings out of 479682
- 406771 string characters out of 5891585
- 955539 words of memory out of 5000000
- 38064 multiletter control sequences out of 15000+600000
- 577690 words of font info for 92 fonts, out of 8000000 for 9000
+ 21110 strings out of 479682
+ 404499 string characters out of 5891585
+ 954420 words of memory out of 5000000
+ 38014 multiletter control sequences out of 15000+600000
+ 572068 words of font info for 88 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 69i,8n,126p,847b,544s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,16n,126p,847b,419s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on homework.week11.pdf (2 pages).
+Output written on homework.week12.pdf (2 pages).
