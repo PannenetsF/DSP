@@ -3,107 +3,79 @@
 \input{../needed.tex}
 \begin{document}
 \fi 
-\def\chapname{03sampandrebuild}
+\def\chapname{04dft}
 
 % Start Here
-\chapter{信号采样与重构}
+\chapter{离散傅里叶变化}
+
+数字处理需要对时域进行采样与截断，频域离散化。
+
+从离散傅里叶级数（DFS）开始，逐步介绍离散傅里叶变换（DFT），以及快速算法。
+
+\section{离散傅立叶级数}
+
+周期序列等价于有限长序列，可以引出抽样定理。
+
+连续信号可以进行连续傅里叶变换，而周期信号需要进行傅里叶级数，时域的周期性造成了频域的离散。时域的离散造成频域的周期性。
+
+CTFS 是主值区间的信号，CTFT 是频域的采样。
+
+$$
+\begin{array}{l}
+X\left(e^{j \Omega T}\right)=\sum_{n=-\infty}^{\infty} x(n) e^{-j \omega n} \\
+x(n)=\frac{1}{2 \pi} \int_{-\pi}^{\pi} X\left(e^{j \omega}\right) e^{j \omega n} d \omega
+\end{array}
+$$
+
+
+\section{离散傅立叶变换}
+
+
+若是一个周期序列，那么不是绝对可和的，不能使用 DTFT 。
+
+若是周期为 \(N\) 那么：$$
+\tilde{x}(n)=\tilde{x}(n+r N)
+$$
+
+希望展开成离散的傅里叶级数：
+
+$$
+\tilde{x}(n)=\frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}(k) e^{j \frac{2 \pi}{N} k n}
+$$
+
+$$
+\begin{aligned}
+\sum_{n=0}^{N-1} \tilde{x}(n) e^{-j \frac{2 \pi}{N} r n} &=\frac{1}{N} \sum_{n=0}^{N-1} \sum_{k=0}^{N-1} \tilde{X}(k) e^{j \frac{2 \pi}{N}(k-r) n} \\
+&=\sum_{k=0}^{N-1} \tilde{X}(k)\left[\frac{1}{N} \sum_{n=0}^{N-1} e^{j \frac{2 \pi}{N}(k-r) n}\right]
+\end{aligned}
+$$
+
+$$
+\frac{1}{N} \sum_{n=0}^{N-1} e^{j \frac{2 \pi}{N} r n}=\frac{1}{N} \frac{1-e^{j \frac{2 \pi}{N} r N}}{1-e_{}^{j \frac{2 \pi}{N}}}= 1, \text{ when } r = mN , 0 , \text{ else} 
+$$
+
+定义变换因子的符号： \(W_N = e^{-j \frac{2\pi}{N}}\) 。那么变换对为：
+
+$$
+\begin{array}{l}
+\qquad \tilde{X}(k)=D F S[\tilde{x}(n)]=\sum_{n=0}^{N-1} \tilde{x}(n) e^{-j \frac{2 \pi}{N} n k}=\sum_{n=0}^{N-1} \tilde{x}(n) W_{N}^{n k} \\
+\tilde{x}(n)=I D F S[\tilde{X}(k)]=\frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}(k) e^{j \frac{2 \pi}{N} n k}=\frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}(k) W_{N}^{-n k}
+\end{array}
+$$
+
+DFS 可以看作是主值区间的 Z 变换在单位圆的等间隔抽样。
+
+\[\tilde{X}(k) = X(e^{j\omega}) | _{\omega = w\pi k / N}\]
+
+\section{频域采样}
+
+频域采样 \(N\) 点，得到的是抽样点为 \(N\) 的周期延拓。可以用来设计滤波器，若是可以无失真回复原序列，那么可以完整表达 \(X(z)\) 和 \(X(e^{j\omega})\) 。
+
+\section{内插器公式}
+
+\[\frac{1-\exp{-j\omega N}}{1-\exp{-j\omega}} = \exp{-j\omega\frac{N-1}{2}} \frac{\sin {\omega N / 2}}{\sin {\omega / 2}}\]
+
 % End Here
-
-\begin{introduction}
-    \item 数模频率的对应关系，时域采样对频域的影响
-    \item 采样信号如何包含连续信号所有信息？如何无失真恢复信号？是否有冗余信息？是否可以进行速率变化？
-    \item 离散处理如何等效模拟 LTI 系统？如何提高处理性能？
-\end{introduction}
-
-\section{理想周期采样重构}
-
-一般采样都是不可逆的，为了不丢失信息，需要进行约束。
-
-理想采样： \[x_{s}(t)=x_{c}(t) * s(t)=\sum_{-\infty}^{+\infty} x_{c}(n T) \delta(\mathrm{t}-n T)\]
-
-AD 是 CD 的工程近似。
-
-时域 \(s(t) = \dsum_{-\infty}^\infty \delta(t-nT)\) 。数字采样 \(S(\Omega) = \dfrac{2 \pi}{T} \dsum_{-\infty}^\infty \delta(\Omega - n \Omega_0)\) 。
-
-\subsection{整体流程}
-
-采样信号 \[s(t)=\sum_{n=-\infty}^{\infty} \delta(t-n T)\]
-
-调制采样 \[\begin{aligned}
-    x_{s}(t) &=x_{c}(t) s(t) \\
-    &=x_{c}(t) \sum_{n=-\infty}^{\infty} \delta(t-n T) \\
-    &= \sum_{n=-\infty}^{\infty} x_c(nT) \delta(t-n T) 
-    \end{aligned}\]
-
-根据 \(\Omega_s = 2\pi / T\) 采样频率 ，其傅立叶变换
-
-\[S(\mathrm{j} \Omega)=\frac{2 \pi}{T} \sum_{k=-\infty}^{\infty} \delta\left(\Omega-k \Omega_{s}\right)\]
-
-那么 \[X_s(j\Omega) = \frac{1}{2\pi} X_c(j\Omega) \otimes S(j\Omega) = \frac{1}{T} \sum_{k=-\infty}^\infty X_c(j\Omega - kj\Omega_s)\] 
-
-数字信号的频谱是模拟频谱的映射，数字的频谱是中心频谱的镜像。
-
-\subsection{采样定理}
-
-平移频谱不交叠。
-
-\subsection{离散和连续 LTI 系统的等效性}
-
-\[Y_{r}(j \Omega)=H_{r}(j \Omega) Y_{s}(j \Omega)=\left.H_{r}(j \Omega) Y\left(e^{j \omega}\right)\right|_{\omega=\Omega T}\]
-
-触底带宽：采样的范围。
-
-\section{抽取和内插}
-
-多速率处理要保证信号的信息不会丢失。抽取是数字域上的采样，内插是数字域上的重构。
-
-\subsection{信号的整倍数采样}
-
-又称降采样，如 \figref{c301} ： \[x_D(m) = x(mD)\]  
-
-\qfig[c301]{c301.png}{抽取器或采样压缩器}
-
-存在间隔的冲激： \[\delta_{D}(n)=\frac{1}{D} \sum_{i=0}^{D-1} e^{j \frac{2 \pi}{D} n i}=\left\{\begin{array}{ll}
-    1 & n=0, \pm D, \pm 2 D, \ldots \ldots \\
-    0 & \text { 其他 }
-    \end{array}\right.\]
-
-那么 \(x'(n) = x(n) \delta_D(n)\)  ， \(x_D(n) = x(nD) = x'(nD)\) 
-
-其 \(Z\) 变换， \[\begin{aligned}
-    X_D(z) &= \sum_{n=-\infty}^\infty x_D(n) z^{-n} \\ 
-    &=\sum_{m=-\infty}^{+\infty} x(m) \delta_{D}(m) z^{-m / D} \\
-    &=\sum_{m=-\infty}^{+\infty}\left(x(m) \frac{1}{D} \sum_{i=0}^{D-1} e^{j \frac{2 \pi}{D} m i}\right) z^{-m / D} \\
-    &=\frac{1}{D} \sum_{i=0}^{D-1} \sum_{m=-\infty}^{+\infty} x(m) e^{j \frac{2 \pi}{D} m i} z^{-m / D} \\
-    &=\frac{1}{D} \sum_{i=0}^{D-1} \sum_{m=-\infty}^{+\infty} x(m)\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right)^{-m} \\
-    &=\frac{1}{D} \sum_{i=0}^{D-1} X\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right)
-\end{aligned}\]
-
-采样周期变化为原有的 \(D\) 倍：
-
-\[x_{D}(n) \Leftrightarrow X_{D S}(\Omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty} X c\left(\Omega-k \frac{\Omega_{0}}{D}\right) \] 
-
-\[\Leftrightarrow X_{D}(\omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty} X c\left(\frac{\omega}{D T}-k \frac{2 \pi}{D T}\right)\] 
-
-其对应的模拟滤波器可以这样对待：转换成一个新的频谱平移 
-
-\[\begin{aligned}
-    X_D(\omega) &= \frac{1}{DT} \sum_{k = -\infty}^\infty X_c(\frac{\omega}{DT} - k \frac{2\pi}{DT}) \\ 
-    &= \frac{1}{D} \sum_{i = 0}^{D-1} \frac{1}{T} \sum_{m=-\infty}^\infty X_C (\frac{\omega}{DT} - m \frac{2\pi}{T} - i \frac{2 \pi}{DT}) \\ 
-    &= \frac{1}{D} \sum_{i = 0}^{D-1} \frac{1}{T} \sum_{m=-\infty}^\infty X_C (\frac{\omega - 2 \pi i}{DT} - m \frac{2\pi}{T}) \\ 
-\end{aligned}\]
-
-为了防止混叠失真，进行二次的采样，进行 \(\pi/D\) 滤波之后，进行 \(D\) 倍抽取，保证频谱一一对应，信息保证不会丢失。
-
-如何理解波形的等价（不失真）：可以通过形状的可恢复性进行理解。
-
-\textbf{为什么}抽取信号之后，能量没有减少？时间延长了。
-
-时域变化：  \[X_D)n) = v (D n) = \sum_{k=-\infty}^\infty h(k) x(Dn = k) = \sum_{k=-\infty}^\infty x(k) h(Dn = k)\]
-
-\subsection{整倍内插}
-
-
 
 \let\chapname\undefined
 \ifx\mainclass\undefined
