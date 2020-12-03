@@ -67,13 +67,52 @@ DFS 可以看作是主值区间的 Z 变换在单位圆的等间隔抽样。
 
 \[\tilde{X}(k) = X(e^{j\omega}) | _{\omega = w\pi k / N}\]
 
-\section{频域采样}
+\subsection{频域采样}
 
 频域采样 \(N\) 点，得到的是抽样点为 \(N\) 的周期延拓。可以用来设计滤波器，若是可以无失真回复原序列，那么可以完整表达 \(X(z)\) 和 \(X(e^{j\omega})\) 。
 
-\section{内插器公式}
+\subsection{内插器公式}
 
 \[\frac{1-\exp{-j\omega N}}{1-\exp{-j\omega}} = \exp{-j\omega\frac{N-1}{2}} \frac{\sin {\omega N / 2}}{\sin {\omega / 2}}\]
+
+\subsection*{DFS}
+
+是对 DTFT 在主值区间的 N 点采样。周期性和离散性是等价的。
+
+\section{离散傅里叶变换}
+
+当只取主值区间时，就可以得到 DFT 。
+
+$$
+\begin{array}{l}
+\qquad \tilde{X}(k)=D F T[\tilde{x}(n)]=\sum_{n=0}^{N-1} \tilde{x}(n) e^{-j \frac{2 \pi}{N} n k}=\sum_{n=0}^{N-1} \tilde{x}(n) W_{N}^{n k} \\
+\tilde{x}(n)=I D F T[\tilde{X}(k)]=\frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}(k) e^{j \frac{2 \pi}{N} n k}=\frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}(k) W_{N}^{-n k}
+\end{array}
+$$
+
+规定周期信号和主值区间转换的标记方式： \(x[n] = \tilde{x}[n] R_N[n]\) ， \(\tilde{x}[n] = x [n \:\mathrm{ mod }\: N] =x[[n]]_N\) 。
+
+\subsection{对偶性}
+
+
+注意：\[DFT[X(n)] = N \tilde{x((-k))_N R_N(k)}\]
+
+得到：
+
+$$
+I D F T [X(k)]=\frac{1}{N} \overline{D F T\left[X^{*}(k)\right]}
+$$
+
+
+\subsection{性质}
+
+\begin{itemize}
+    \item 线性
+    \item 循环移位 $x_{m}(n)=x((n+m))_{N} R_{N}(n) = W_N^{-mk} \tilde{X}[k]2$
+    \item 圆周共轭对称：实序列对应频域圆周共轭对称，虚序列对应频域圆周共轭反对称
+    \item 圆周卷积和：点数有关
+    \item 相关不满足交换律
+\end{itemize}
 
 % End Here
 
