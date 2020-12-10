@@ -114,6 +114,37 @@ $$
     \item 相关不满足交换律
 \end{itemize}
 
+
+\section{DFT 快速算法}
+
+几个特点： 
+
+\begin{itemize}
+    \item 对称性： \(W_{N}^{nk} * = W_{N}^{-nk}\) 
+    \item 周期性： \(W_{N}^{nk} = W_N^{(n + N) k} = W_N^{n (k + N)}\) 
+    \item 可约性： \(W_N^{nk} = W_{m N}^{m n k} \)
+\end{itemize}
+
+\subsection{戈泽尔算法}
+
+最典型：利用周期性与对称性。
+
+\[X(k)=\sum_{r=0}^{N-1} x(r) W_{N}=W_{N}^{-k N} \sum_{r=0}^{N-1} x(r) W_{N}=\sum_{r=0}^{N-1} x(r) W_{N}^{-k(N-r)}\]
+
+\[y_{k}(n)=x(n) * W_{N}{ }^{-k n} u(n) = \sum_{r=0}^{N-1} x(r) W_{N}^{-k(n-r)} u(n-r)\]
+
+\[\left.y_{k}(n)\right|_{n=N}=\sum_{r=0}^{N-1} x(r) W_{N}^{-k(N-r)} u(N-r)=\sum_{r=0}^{N-1} x(r) W_{N}^{-k(N-r)}=X(k)\]
+
+避免了乘积项 \(W\) 的反复计算。
+
+\subsection{基2-FFT}
+
+适合递归分解，需要分解成特殊基，并且最小子序列无复数运算。
+
+\subsection{线性调频 Z 变换}
+
+新的变换
+
 % End Here
 
 \let\chapname\undefined
