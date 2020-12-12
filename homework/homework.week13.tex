@@ -1,0 +1,86 @@
+\documentclass[lang=cn,11pt,a4paper,cite=authoryear]{elegantpaper}
+
+\input{needed.tex}
+
+\title{数字信号处理\quad 第十三周作业}
+\author{范云潜 18373486}
+\institute{微电子学院 184111 班}
+\date{\zhtoday}
+
+\begin{document}
+
+\maketitle
+
+作业内容：8.9, 8.14, 8.15, 8.16, 8.23, 8.27
+
+\homep{8.9} 
+
+\subhomep{a} 
+
+\[X(k) = \sum_{n=0}^{N-1} x[n] e^{-j\frac{2\pi}{N} k n }\]
+
+\(N=5, k=2\) 即可。对于任一有理频点 \(\omega = \frac{P}{Q}\pi\) ，若是 \(P\) 为奇数， \(N = 2Q\) ，\(P\) 为偶数， \(N=Q\) 。
+
+\subhomep{b}
+
+\(L=27\)。
+
+\homep{8.14}
+
+\[x_3[2] = 3 \time 1 + 1 \times 2 + 2 \times 2 = 9\]
+
+\homep{8.15}
+
+卷积得到 \(\{1, 1 + 2 a, a, a + 2\}\) ，得到 \(a = -1\) 。
+
+\homep{8.16}
+
+以 \(4\) 为周期拓延，考虑交叠后 \(1 + b = 4\) ， \(b = 3\) 。
+
+\homep{8.23} 
+
+\subhomep{a}
+
+可以直接进行 DFT ，只需在不满的部分补 \(0\) 。
+
+\subhomep{b}
+
+存在交叠：
+
+\[\begin{aligned}
+    x'[n] &= \frac{1}{N} \sum_{k=0}^{N-1} X(k) W_N^{-k n} \\
+    &= \frac{1}{N} \sum_{k=0}^{N-1} \left(\sum_{m=-\infty}^{+\infty}x[m] e^{j\frac{2\pi}{N} k m}\right) W_N^{-k n} \\ 
+    &= \sum_{m=-\infty}^{+\infty} x[m] \sum_{k=-\infty}^{+\infty} \delta[k-n+rN] \\
+    &= \sum_{m=-\infty}^{+\infty} x[m - r N]
+\end{aligned}\]
+
+将 \(x[n]\) 按照以上方法进行交叠，再进行 DFT 。
+
+\homep{8.27}
+
+\subhomep{a} 
+
+\(y_{a} = \{1,2,\cdots 10,10,\cdots 10,9,\cdots,2,1\}\), 长度为 \(110\) 。如 \figref{01} 。
+
+\qfig[01]{hw1401.png}{}
+
+\subhomep{b} 
+
+\(y_{b} = \{10, 10, \cdots 10\}\), 长度为 \(100\) 。
+如 \figref{02} 。
+
+\qfig[02]{hw1402.png}{}
+
+
+\subhomep{c} 
+
+\(y_{c} = y_{a}\), 长度为 \(110\) 。如 \figref{01} 。
+
+
+% \tableofcontents
+
+% Start Here
+
+% End Here
+
+\end{document}

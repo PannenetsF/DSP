@@ -1,4 +1,4 @@
-\documentclass[lang=cn,11pt,a4paper,cite=authoryear]{elegantpaper}
+\documentclass[lang=cn,11pt,a4paper,cite=authoryear,twocolumn]{elegantpaper}
 
 \input{needed.tex}
 
@@ -11,75 +11,54 @@
 
 \maketitle
 
-作业内容：8.9, 8.14, 8.15, 8.16, 8.23, 8.27
-
-\homep{8.9} 
-
-\subhomep{a} 
-
-\[X(k) = \sum_{n=0}^{N-1} x[n] e^{-j\frac{2\pi}{N} k n }\]
-
-\(N=5, k=2\) 即可。对于任一有理频点 \(\omega = \frac{P}{Q}\pi\) ，若是 \(P\) 为奇数， \(N = 2Q\) ，\(P\) 为偶数， \(N=Q\) 。
-
-\subhomep{b}
-
-\(L=27\)。
-
-\homep{8.14}
-
-\[x_3[2] = 3 \time 1 + 1 \times 2 + 2 \times 2 = 9\]
-
-\homep{8.15}
-
-卷积得到 \(\{1, 1 + 2 a, a, a + 2\}\) ，得到 \(a = -1\) 。
-
-\homep{8.16}
-
-以 \(4\) 为周期拓延，考虑交叠后 \(1 + b = 4\) ， \(b = 3\) 。
-
-\homep{8.23} 
-
-\subhomep{a}
-
-可以直接进行 DFT ，只需在不满的部分补 \(0\) 。
-
-\subhomep{b}
-
-存在交叠：
-
-\[\begin{aligned}
-    x'[n] &= \frac{1}{N} \sum_{k=0}^{N-1} X(k) W_N^{-k n} \\
-    &= \frac{1}{N} \sum_{k=0}^{N-1} \left(\sum_{m=-\infty}^{+\infty}x[m] e^{j\frac{2\pi}{N} k m}\right) W_N^{-k n} \\ 
-    &= \sum_{m=-\infty}^{+\infty} x[m] \sum_{k=-\infty}^{+\infty} \delta[k-n+rN] \\
-    &= \sum_{m=-\infty}^{+\infty} x[m - r N]
-\end{aligned}\]
-
-将 \(x[n]\) 按照以上方法进行交叠，再进行 DFT 。
-
-\homep{8.27}
-
-\subhomep{a} 
-
-\(y_{a} = \{1,2,\cdots 10,10,\cdots 10,9,\cdots,2,1\}\), 长度为 \(110\) 。如 \figref{01} 。
-
-\qfig[01]{hw1401.png}{}
-
-\subhomep{b} 
-
-\(y_{b} = \{10, 10, \cdots 10\}\), 长度为 \(100\) 。
-如 \figref{02} 。
-
-\qfig[02]{hw1402.png}{}
-
-
-\subhomep{c} 
-
-\(y_{c} = y_{a}\), 长度为 \(110\) 。如 \figref{01} 。
-
+作业内容：9.6，9.7，9.14，9.17，9.26，9.27
 
 % \tableofcontents
 
 % Start Here
+
+\homep{9.6}
+
+无法判断， DIF 和 DIT 都有含有 \(W_N^2\) 的层，分别在倒数第二层和第二层。
+
+\homep{9.7}
+
+易知， \(2 \pi k / N = 2 \pi 7 / 32\) 那么 \(k = 7\) ，对应的 \(\omega_k = 7\pi / 16\) 。
+
+\homep{9.14}
+
+对 DIT 来说，需要先计算子序列进而推出原始序列；而 DIF 是先分割子序列，设置合适的频点后逐个计算子序列。
+
+对于 DIT ：
+
+\[
+\begin{aligned}
+    m = 1 &\rightarrow r = 0\\
+    m = 2 &\rightarrow r = 0/4\\
+    m = 3 &\rightarrow r = 0/2/4/6\\
+    m = 4 &\rightarrow r = 0/1/2/3/4/5/6/7
+\end{aligned}
+\]
+
+\homep{9.17}
+
+根据上一小题中的总结，应该为 DIT 。
+
+\homep{9.26}
+
+由于是输入的扩展，需要应用 DIF：
+
+\[\begin{aligned}
+    Y[k] &= \sum_{n = 0}^{2N-1} y[n] W_{2N}^{k n}\\
+    &= \sum_{n=0}^{N-1}y[n] W_{2N}^{k n} + (-1)^k \sum_{n=0}^{N-1}y[n] W_{2N}^{k n} \\
+    &= (1+(-1)^k)\sum_{n=0}^{N-1}y[n] W_{2N}^{k n} \\
+    &= \left\{
+        \begin{aligned}
+            & 2 X[k/2] , k = 0, 2, 4 \cdots\\
+            & 0, k = 1, 3, 5 \cdots \\
+        \end{aligned}    
+    \right.
+\end{aligned}\]
 
 % End Here
 
