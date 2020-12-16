@@ -7,7 +7,7 @@ x_inv = x(length(x):-1:1);
 if (n <= length(x))
   new_x = x_inv(length(x_inv)-(n-1):length(x_inv));
 else
-  new_x = [zeros(1,n-length(x_inv)), x_inv];
+  new_x = [zeros(n-length(x_inv),1);x_inv];
 endif
 leng_min = min(length(new_x),b_len);
 ret = sum(new_x(1:leng_min) .* bm(1:leng_min));

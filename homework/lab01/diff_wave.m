@@ -33,7 +33,7 @@ size_n = size(n, 2);
 ret = zeros(1,size_n);
 
 for i = 1:size_n
-  ret(i) = wdiff_wav(x, bm, i);
+  ret(i) = diff_wav(x, bm, i);
 end
 
 endfunction

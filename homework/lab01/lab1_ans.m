@@ -1,10 +1,11 @@
 [in_t, fs] = audioread ('./Example_music_seg.wav');
 b_m= [-0.0024, -0.0042, 0.0095, 0.02, -0.038, -0.0696, 0.1374, 0.4472, 0.4472, 0.1374, -0.0696, -0.038, 0.02, 0.0095, -0.0042, -0.0024];
-
+in_t = in_t(:);
+b_m = b_m(:);
 prt = 1
 
-% t=input("please input mode: 1) diff 2)conv 3)DFT\n");
-t = 3
+t=input("please input mode: 1) diff 2)conv 3)DFT\n");
+% t = 3
 N = length(in_t) + length(b_m) - 1;
 
 if (t==1)
@@ -13,15 +14,23 @@ elseif (t==2)
   func_comp = @(x, h) conv(x, h);
 endif
 
+if (t == 2)
+    figure(6);
+    stem(b_m);
+    title("The time zone waveform of h");
+    saveas(6, './6.png');    
+endif
+
 if (t == 3)
   [H, W] = freqz(b_m, 1, [0:2*pi/400:2*pi]);
   H_abs=abs(H);
   H_ang=angle(H);
   in_fft = fft(in_t, N);
   h_fft = fft(b_m, N);
-  out_fft = in_fft' .* h_fft;
+  out_fft = in_fft .* h_fft;
   out_t = ifft(out_fft);
   if (prt == 1) 
+
     figure(3);
     subplot(2,1,1)
     stem(H_abs)
@@ -35,9 +44,9 @@ if (t == 3)
     figure(5);
     stem(out_fft);
     title('The frequency domain waveform of OUTPUT');
-    saveas(3,'./3.jpeg');
-    saveas(4,'./4.jpeg');
-    saveas(5,'./5.jpeg');
+    saveas(3,'./3.png');
+    saveas(4,'./4.png');
+    saveas(5,'./5.png');
   endif
 else
   out_t = func_comp(in_t, b_m);
@@ -50,12 +59,14 @@ if (prt == 1)
   figure(2);
   stem(out_t);
   title('The time domain waveform of OUTPUT');
-  saveas(1,'./1.jpeg');
-  saveas(2,'./2.jpeg');
+  saveas(1,'./1.png');
+  saveas(2,'./2.png');
 endif
 
 
 input("Enter to Play origin wave...\n")
+
+close all force;
 
 player_ori = audioplayer(in_t, fs);
 play(player_ori)
