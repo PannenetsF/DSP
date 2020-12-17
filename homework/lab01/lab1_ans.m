@@ -5,7 +5,6 @@ b_m = b_m(:);
 prt = 1
 
 t=input("please input mode: 1) diff 2)conv 3)DFT\n");
-% t = 3
 N = length(in_t) + length(b_m) - 1;
 
 if (t==1)
@@ -14,7 +13,7 @@ elseif (t==2)
   func_comp = @(x, h) conv(x, h);
 endif
 
-if (t == 2)
+if (t == 2 && prt == 1)
     figure(6);
     stem(b_m);
     title("The time zone waveform of h");
@@ -30,7 +29,6 @@ if (t == 3)
   out_fft = in_fft .* h_fft;
   out_t = ifft(out_fft);
   if (prt == 1) 
-
     figure(3);
     subplot(2,1,1)
     stem(H_abs)
@@ -39,10 +37,10 @@ if (t == 3)
     stem(H_ang)
     title("The frequency response of angle(H)");
     figure(4);
-    stem(in_fft);
+    stem(abs(in_fft));
     title("The frequency domain waveform of INPUT");
     figure(5);
-    stem(out_fft);
+    stem(abs(out_fft));
     title('The frequency domain waveform of OUTPUT');
     saveas(3,'./3.png');
     saveas(4,'./4.png');
@@ -65,17 +63,15 @@ endif
 
 
 input("Enter to Play origin wave...\n")
-
-close all force;
+if (prt == 1) 
+  close all force;
+endif
 
 player_ori = audioplayer(in_t, fs);
 play(player_ori)
 
 input("Enter to Play processed wave...\n")
-
 player_prc = audioplayer(out_t, fs);
 play(player_prc)
-
-
 
 input("Enter to Continue...")

@@ -16,34 +16,69 @@
 
 \listoffigures
 
-\section{定义法时域卷积计算}
+\section{实验目的}
+
+通过使用差分方程、卷积、快速傅里叶变换等方式实现线性卷积，认识到不同方式实现的效率差异。
+
+\section{实验原理}
+
+
+\subsection{定义法时域卷积计算}
 
 对于离散时间的卷积，其定义为 \(y[n] = \sum_{k = -\infty}^\infty b[k] x[n - k]\) 。因此可以借助此种方法进行实现。另一方面，由于需要处理的序列为因果序列，冲激信号序列以及需要处理序列的时间从 \(0\) 开始，因此可以进行适当简化。
 
 对于单个计算点 \(m\) 来说，将需要处理的序列 \(x[n]\) 进行翻折，根据冲激序列长度 \(l\) 和 \(n\) 的关系，决定对序列的截断与 \(0\) 补充。完成后，对处理后的序列与冲激序列进行内积计算即可。
 
-实现如 \lstinline{diff_wav.m} 。
+\subsection{内置函数法卷积计算}
 
-\subsection{实验结果}
+直接调用内部函数实现卷积的计算，因此无需考虑其内部实现。
+
+\subsection{快速傅里叶变化法卷积计算}
+
+时域的卷积对应频域的乘法，将原始序列进行快速傅立叶变换后进行乘积后进行傅里叶反变换即可得到原始序列的卷积。
+
+\section{实验步骤}
+
+首先，输入需要进行计算的模式：
+
+\begin{enumerate}
+    \item 差分法
+    \item 卷积法
+    \item 快速傅里叶变换法
+\end{enumerate}
+
+之后根据对应的模式选择计算方式。
+
+若是方式 1 或者 2 ，根据编写的差分法计算函数或者内建的 \lstinline{conv} 函数创建一个计算 \(N\) 点序列的函数句柄， \(N\) 为两个序列长度的和减一，利用此句柄计算输出序列；若是方式 3 ，对冲激序列与输入序列进行同样点数的快速傅里叶变换，进行逐点乘积后反变换回时域即可。
+
+\section{实验代码}
+
+\lstinputlisting[caption={单点卷积计算 \lstinline{diff_wav.m}}]{\string"./lab01/diff_wav.m\string"}
+
+\lstinputlisting[caption={多点卷积计算 \lstinline{diff_wave.m}}]{\string"./lab01/diff_wave.m\string"}
+
+\lstinputlisting[caption={整体计算模块 \lstinline{lab1_ans.m}}]{\string"./lab01/lab1_ans.m\string"}
+
+\section{实验结果}
+
+\subsection{定义法时域卷积计算}
 
 运行 \lstinline{lab01_ans.m} 选择模式 1 。
 
-如 \figref{s1p1}，\figref{s1p2} 。
+结果如 \figref{s1p1}，\figref{s1p2} 。
 
 \qfig[s1p1]{l1s1p1.png}{输入音频信号的时域显示}
 
 \qfig[s1p2]{l1s1p2.png}{输出音频信号的时域显示}
 
-\section{内置函数法时域卷积计算}
+
+\subsection{内置函数法时域卷积计算}
 
 将上一步的 \lstinline{diff_wave} 函数转换为 \lstinline{conv} 函数即可。
 
-
-\subsection{实验结果}
-
 运行 \lstinline{lab01_ans.m} 选择模式 2 。
 
-如 \figref{s1p5}，\figref{s1p3}，\figref{s1p4} 。
+结果如 \figref{s1p5}，\figref{s1p3}，\figref{s1p4} 。
 
 \qfig[s1p5]{l1s1p5.png}{系统函数的时域显示}
 
@@ -51,16 +86,12 @@
 
 \qfig[s1p4]{l1s1p4.png}{输出音频信号的时域显示}
 
-\section{快速傅里叶变化法卷积计算}
+\subsection{快速傅里叶变换实现线性卷积计算}
 
-时域的卷积对应频域的乘法，将原始序列进行快速傅立叶变换后进行乘积后进行傅里叶反变换即可得到原始序列的卷积。
-
-
-\subsection{实验结果}
 
 运行 \lstinline{lab01_ans.m} 选择模式 3 。
 
-如 \figref{s1p6}，\figref{s1p8} ， \figref{s1p9} 。
+结果如 \figref{s1p6}，\figref{s1p8} ， \figref{s1p9} 。
 
 \qfig[s1p6]{l1s1p6.png}{系统函数频域显示}
 
@@ -69,7 +100,15 @@
 \qfig[s1p9]{l1s1p9.png}{输出波形幅频显示}
 
 
+\section{结果分析}
+
+\subsection{声音处理}
+
 用到了 \lstinline{fft} 和 \lstinline{ifft} 函数，播放时发现只有尖锐或者厚重的声音较为明显，符合低通滤波特性。
+
+为了更明显的表现出这几种处理方式的效果进行频谱的比较，如 \figref{10} 。可以看出，这几种方式是等价的。
+
+\qfig[10]{l1s1p10.png}{处理方式的比对}
 
 \subsection{思考题目：FFT 的点数选择}
 
