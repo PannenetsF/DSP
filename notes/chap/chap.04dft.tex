@@ -145,6 +145,67 @@ $$
 
 新的变换
 
+\section{DFT 的工程应用}
+
+连续时间信号进行分段与分割后才可以用过 DFT 进行 CTFT 的逼近，那么有：
+
+\[
+\left.x(t)\right|_{t=n T}=x(n T)=x(n)
+\]
+
+CTFT 近似为：
+
+\[
+X(j \Omega) \approx \sum_{n=-\infty}^{\infty} x(n T) e^{-j \Omega n T} \cdot T
+\]
+
+通过截断，得到含有 N 个采样的序列 ：
+
+\[
+X(j \Omega) \approx T \sum_{n=0}^{N-1} x(n T) e^{-j \Omega n T}
+\]
+
+进一步的，频谱也是需要进行分段离散化的：
+
+\[
+X\left(j k \Omega_{0}\right) \approx T \sum_{n=0}^{N-1} x(n T) e^{-j k \Omega_{0} n T}
+\]
+
+\[
+=T \sum_{n=0}^{N-1} x(n T) e^{-j n k \frac{2 \pi F_{0}}{f_{s}}}=T \sum_{n=0}^{N-1} x(n T) e^{-j n k \frac{2 \pi}{N}}=T\left\{\left.D F T[x(n)]\right|_{x(n)=x(n T)}\right\}
+\]
+
+若是逼近 CTFS ，将将周期切割为 \(N\) 点，傅里叶计数近似为：
+
+\[
+x(t)=\sum_{k=-\infty}^{\infty} X\left(j k \Omega_{0}\right) e^{j k \Omega_{0} t}
+\]
+
+将 \(T_0 = NT\) ，
+
+\[
+X\left(j k \Omega_{0}\right) \approx \frac{T}{T_{0}} \sum_{n=0}^{N-1} x(n T) e^{-j k \Omega_{0} n T}=\frac{1}{N} \sum_{n=0}^{N-1} x(n) e^{-j \frac{2 \pi}{N} n k}=\frac{1}{N} D F T[x(n)]
+\]
+
+
+\subsection{频谱泄漏}
+
+时域上的截断（相乘），在频域上表现为周期卷积，这将会对信号的频谱平滑和能量的分散，即频谱泄漏。
+
+窗函数的主瓣宽度为 \(2\pi / N\) ，其对应的模拟带宽为：
+
+\[
+\Delta \Omega=\frac{2 \pi}{\mathrm{N} T}=\frac{2 \pi}{\mathrm{L}}
+\]
+
+模拟频率分辨率为 HZ 定义为 
+
+\[\Delta = \frac{1}{L}\] 
+
+\section{FFT 实现 FIR}
+
+对于无限长的信号来说，使用块卷积方式，如重叠相加法与重叠保留法。
+
 % End Here
 
 \let\chapname\undefined
