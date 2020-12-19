@@ -11,196 +11,107 @@
 
 \maketitle
 
-作业内容：
-
 \tableofcontents
 
-% Start Here
-
-% End Here
+\listoffigures
 
 
 \section{实验目的}
 
-本次实验希望通过 MATLAB 提供的几种滤波器及其估计函数设计 IIR 滤波器，以及几种窗函数及其估计函数设计 FIR 滤波器。认识这几种滤波器关注的核心参数，以及这些核心参数对应着以怎样的方式趋近设计指标。
+通过本实验，加深对 DFT 的连续时域样本长度、样本采样数目等参数，加窗等处理对 DFT 效果影响的认识，并通过语音信号的处理，了解如何针对特定应用设计需要的滤波器的方法。
 
 \section{实验原理}
 
-\subsection{IIR 滤波器设计}
+DFT 的连续时域样本越大，对应的分辨率会降低；DFT 的连续时域样本的采样长度固定时，需要一定量的采样点完成整体的频谱分析，但是当采样点过多后之后只会造成计算量的上升，而不会有精度的益处。
 
-这几类经典滤波器设计方法基本流程是一致的：
+FFT 的频谱和模拟频谱是对应的，可以通过下式计算：
 
-\begin{enumerate}
-    \item 根据设计指标使用滤波器估计函数进行估计，得到本类估计器的核心参数
-    \item 根据上一步得到的设计参数，计算响应的滤波器的频域响应参数：零点系数、极点系数
-    \item 根据频域响应参数得到其 Z 变换，计算其频响即可
-\end{enumerate}
-
-
-\subsection{FIR 滤波器设计}
-
-FIR 滤波器是基于窗函数的，也就是这个滤波器系统的时域单位冲激响应，得到窗函数后，由于 FIR 不存在极点，因此窗函数直接对应了 Z 变换的各个系数。
-
-本次实验主要通过 Kaiser 窗进行计算，类似 IIR ，同样基于估计函数与对应滤波器函数进行计算。
+\[\Omega = \frac{\omega}{T} = \frac{2\pi k}{N T}\]]
 
 \section{实验步骤}
 
-\subsection{IIR 滤波器设计}
+\subsection{窗函数长度对信号 DFT 的影响}
 
-根据设计指标，填写相应的 \lstinline{fs} 、\lstinline{Wp} 、 \lstinline{Ws} 、 \lstinline{Rp} 、 \lstinline{Rs} ，以上分别对应着采样频率\footnote{实际上，采样频率并未使用到。}、通带频率、阻带频率、通带纹波衰减分贝数、阻带衰减分贝数。
+首先，由于采样的总长度在变化，不妨设总采样点为一个特定值，此值需要大于 \(L_{max}\) 即可，因为后续用到了该长度的窗函数。
 
-根据以上数据与 \lstinline{buttord} 、\lstinline{cheb1ord} 、 \lstinline{cheb2ord} 、 \lstinline{ellipord} 所需要的不同的参数进行计算，由于估计器得到的参数可能会和所设参数不同，因此需要注意滤波器函数需要传入的函数\footnote{相关函数传入参数以及返回值尽可以通过 \lstinline{help funct} 得到。}。
+接下来对长度 \(L\) 和窗函数类型进行依次遍历，在不同长度的窗函数下需要对窗函数的序列进行补零，来保证可以进行时域的加窗。之后进行 \(L\) 点的 FFT 进行 DFT 分析，画图。
 
-之后通过 \lstinline{freqz} 等函数观察其频率响应，通过自定义的 \lstinline{co2exp} 函数将涉及到的频率响应的系统响应系数转换为表达式打印出来以及转换成响应的 \LaTeX 代码用于报告书写。
+\subsection{频域采样对信号 DFT 的影响}
 
-\subsection{FIR 滤波器设计}
+此时，采样的总长度是固定的，但是采样的点数不同，因此进行加窗时，需要补零到最多点数仍可进行正常加窗。之后进行不同点数的 FFT 进行 DFT 分析，画图。
 
-基本步骤与 IIR 设计一致，但是 \lstinline{fir1} 和 \lstinline{fir2} 函数要求窗函数的长度比实际响应的长度多一。此外 \lstinline{kaiserord} 进行估计时，是对不同频率区间的目标幅值进行设计，并且会在计算完成后说明计算出的响应实际的阻通类型。
+\subsection{语音信号频谱分析及滤波处理}
+
+将音频读取，得到其序列与相应的采样率，对输入序列进行 FFT 得到其频谱表示，观察其干扰分量位置，并且找到对应的采样点数，计算得到对应的模拟频率。根据模拟频率设计一个带阻滤波器，将其去除。
 
 \section{实验代码}
 
 
-\lstinputlisting[caption={参数转表达式 \lstinline{diff_wav.m}}]{\string"./lab02/co2exp.m\string"}
+\subsection{窗函数长度对信号 DFT 的影响}
 
-\lstinputlisting[caption={IIR 设计 \lstinline{diff_wave.m}}]{\string"./lab02/iir.m\string"}
 
-\lstinputlisting[caption={FIR 设计 \lstinline{lab1_ans.m}}]{\string"./lab02/fir.m\string"}
+\lstinputlisting[caption={窗函数长度与形状对 DFT 频谱的影响 \lstinline{task1.m}}]{\string"./lab03/task1.m\string"}
+
+\subsection{频域采样对信号 DFT 的影响}
+
+
+\lstinputlisting[caption={频域采样点数对 DFT 频谱的影响 \lstinline{task2.m}}]{\string"./lab03/task2.m\string"}
+
+
+\subsection{语音信号频谱分析及滤波处理}
+
+\lstinputlisting[caption={语音信号频谱分析及滤波器设计与处理 \lstinline{task3.m}}]{\string"./lab03/task3.m\string"}
 
 \section{实验结果}
 
-\subsection{IIR 设计}
+\subsection{窗函数长度对信号 DFT 的影响}
 
-运行 \lstinline{iir.m} 文件即可。
+运行 \lstinline{task1.m} ，不同点数与形状对 DFT 的影响如 \figref{l3p1}，\figref{l3p2}，\figref{l3p3}。
 
-\begin{lstlisting}[caption={IIR 实验输出}]
-n =  8
-Wn_get =  0.57413
-ans = n = 8 order Butterworth Highpass Filter: 
- (0.003) * z^0 + (-0.027) * z^-1 + (0.095) * z^-2 + (-0.189) * z^-3 + (0.236) * z^-4 + (-0.189) * z^-5 + (0.095) * z^-6 + (-0.027) * z^-7 + (0.003) * z^-8 
-----------------------------------------------------------------
-(1.000) * z^{0} + (1.179) * z^{-1} + (1.622) * z^{-2} + (1.019) * z^{-3} + (0.591) * z^{-4} + (0.196) * z^{-5} + (0.051) * z^{-6} + (0.007) * z^{-7} + (0.001) * z^{-8} 
-ans = n = 5 order Chebyshev I Highpass Filter: 
- (0.008) * z^0 + (-0.040) * z^-1 + (0.079) * z^-2 + (-0.079) * z^-3 + (0.040) * z^-4 + (-0.008) * z^-5 
-----------------------------------------------------------------
-(1.000) * z^{0} + (2.219) * z^{-1} + (3.002) * z^{-2} + (2.451) * z^{-3} + (1.233) * z^{-4} + (0.311) * z^{-5} 
-ans = n = 5 order Chebyshev II Highpass Filter: 
- (0.061) * z^0 + (-0.213) * z^-1 + (0.363) * z^-2 + (-0.363) * z^-3 + (0.213) * z^-4 + (-0.061) * z^-5 
-----------------------------------------------------------------
-(1.000) * z^{0} + (0.441) * z^{-1} + (0.765) * z^{-2} + (0.130) * z^{-3} + (0.082) * z^{-4} + (0.002) * z^{-5} 
-ans = n = 4 order Elliptic Highpass Filter: 
- (0.044) * z^0 + (-0.107) * z^-1 + (0.144) * z^-2 + (-0.107) * z^-3 + (0.044) * z^-4 
-----------------------------------------------------------------
-(1.000) * z^{0} + (1.544) * z^{-1} + (1.738) * z^{-2} + (1.002) * z^{-3} + (0.311) * z^{-4} 
-Press Enter to Save Figures and Continue...
-latex_exp = \dfrac{(0.003) \times z^{0} + (-0.027) \times z^{-1} + (0.095) \times z^{-2} + (-0.189) \times z^{-3} + (0.236) \times z^{-4} + (-0.189) \times z^{-5} + (0.095) \times z^{-6} + (-0.027) \times z^{-7} + (0.003) \times z^{-8} }{(1.000) * z^{0} + (1.179) * z^{-1} + (1.622) * z^{-2} + (1.019) * z^{-3} + (0.591) * z^{-4} + (0.196) * z^{-5} + (0.051) * z^{-6} + (0.007) * z^{-7} + (0.001) * z^{-8} }
+\qfig[l3p1]{l3p1.png}{32 点窗函数对应的 DFT 频谱}
 
-\dfrac{(0.008) \times z^{0} + (-0.040) \times z^{-1} + (0.079) \times z^{-2} + (-0.079) \times z^{-3} + (0.040) \times z^{-4} + (-0.008) \times z^{-5} }{(1.000) * z^{0} + (2.219) * z^{-1} + (3.002) * z^{-2} + (2.451) * z^{-3} + (1.233) * z^{-4} + (0.311) * z^{-5} }
+\qfig[l3p2]{l3p2.png}{64 点窗函数对应的 DFT 频谱}
 
-\dfrac{(0.061) \times z^{0} + (-0.213) \times z^{-1} + (0.363) \times z^{-2} + (-0.363) \times z^{-3} + (0.213) \times z^{-4} + (-0.061) \times z^{-5} }{(1.000) * z^{0} + (0.441) * z^{-1} + (0.765) * z^{-2} + (0.130) * z^{-3} + (0.082) * z^{-4} + (0.002) * z^{-5} }
+\qfig[l3p3]{l3p3.png}{128 点窗函数对应的 DFT 频谱}
 
-\dfrac{(0.044) \times z^{0} + (-0.107) \times z^{-1} + (0.144) \times z^{-2} + (-0.107) \times z^{-3} + (0.044) \times z^{-4} }{(1.000) * z^{0} + (1.544) * z^{-1} + (1.738) * z^{-2} + (1.002) * z^{-3} + (0.311) * z^{-4} }
-\end{lstlisting}
+\subsection{频域采样对信号 DFT 的影响}
 
-\subsubsection{Butterworth}
+运行 \lstinline{task2.m} ，相同长度、形状窗函数下，不同采样点数对 DFT 的影响如 \figref{l3p4} 。
 
-频率响应如 \figref{l2p1} ，阶数为 8 ，系统函数表达式为如 \eqref{eq1} 。
+\qfig[l3p4]{l3p4.png}{相同窗函数不同采样点数对应的 DFT 频谱}
 
-\begin{equation}\label{eq1}
-    \dfrac{\begin{aligned}
-        & (0.003) \times z^{0} + (-0.027) \times z^{-1} + (0.095) \times z^{-2} + (-0.189) \times z^{-3} + (0.236) \times z^{-4} \\
-        & + (-0.189) \times z^{-5} + (0.095) \times z^{-6} + (-0.027) \times z^{-7} + (0.003) \times z^{-8}
-    \end{aligned}}{\begin{aligned}
-        &(1.000) * z^0 + (1.179) * z^-1 + (1.622) * z^-2 + (1.019) * z^-3 + (0.591) * z^-4 \\
-        & + (0.196) * z^{-5} + (0.051) * z^{-6} + (0.007) * z^{-7} + (0.001) * z^{-8} 
-    \end{aligned}}
-\end{equation}
+\subsection{语音信号频谱分析及滤波处理}
 
+运行 \lstinline{task3.m} ，原始音频在序列长度的 FFT 下的频谱如 \figref{l3p5} ，计算其单频噪声在序列中的位置，推导出其模拟频率，计算输出为 \lstinline{the original frequency of the audio's white noise: 7350.200000 Hz} 。由于其幅频难以观察，降采样 FFT 后的频谱更易观察， 如 \figref{l3p6} 。通过设计带阻滤波器滤除此分量，本基于 Kaiser 窗的带阻滤波器的单位冲激响应如 \figref{l3p7} ，其频率响应如 \figref{l3p8} ，阶数为 80 阶。处理后的信号如 \figref{l3p9} ，经过同样的降采样后，如 \figref{l3p10} ，便于观察相位。在降采样中，计算得到该频点的幅度下降约 \(46.986 = 33.4 \text{ db}\) 。
 
+\qfig[l3p5]{l3p5.png}{原始音频 FFT 频谱}
 
-\qfig[l2p1]{l2p1.png}{Butterworth 滤波器频率响应}
+\qfig[l3p6]{l3p6.png}{原始音频降采样 FFT 频谱}
 
-\subsubsection{Chebyshev I}
+\qfig[l3p7]{l3p7.png}{带阻滤波器的单位冲激响应}
 
-频率响应如 \figref{l2p2} ，阶数为 5 ，系统函数表达式为如 \eqref{eq2} 。
+\qfig[l3p8]{l3p8.png}{带阻滤波器的频率响应}
 
-\begin{equation}\label{eq2}
-    \dfrac{\begin{aligned}
-        &(0.061) \times z^{0} + (-0.213) \times z^{-1} + (0.363) \times z^{-2} + \\
-        &(-0.363) \times z^{-3} + (0.213) \times z^{-4} + (-0.061) \times z^{-5} 
-    \end{aligned}}{\begin{aligned}
-        &(1.000) * z^{0} + (0.441) * z^{-1} + (0.765) * z^{-2} + (0.130) * z^{-3} \\
-        &+ (0.082) * z^{-4} + (0.002) * z^{-5} 
-    \end{aligned}}
-\end{equation}
+\qfig[l3p9]{l3p9.png}{处理后音频 FFT 频谱}
 
-\qfig[l2p2]{l2p2.png}{Chebyshev I 滤波器频率响应}
-
-
-\subsubsection{Chebyshev II}
-
-频率响应如 \figref{l2p3} ，阶数为 5 ，系统函数表达式为如 \eqref{eq3} 。
-
-
-\begin{equation}\label{eq3}
-    \dfrac{\begin{aligned}
-        &(0.061) \times z^{0} + (-0.213) \times z^{-1} + (0.363) \times z^{-2} + \\
-        &(-0.363) \times z^{-3} + (0.213) \times z^{-4} + (-0.061) \times z^{-5} 
-    \end{aligned}}{\begin{aligned}
-        &(1.000) * z^{0} + (0.441) * z^{-1} + (0.765) * z^{-2} + (0.130) * z^{-3} \\
-        &+ (0.082) * z^{-4} + (0.002) * z^{-5}
-    \end{aligned} }
-\end{equation}
-
-\qfig[l2p3]{l2p3.png}{Chebyshev II 滤波器频率响应}
-
-\subsubsection{Elliptic}
-
-频率响应如 \figref{l2p4} ，阶数为 4 ，系统函数表达式为如 \eqref{eq4} 。
-
-
-\begin{equation}\label{eq4}
-\dfrac{\begin{aligned}
-    &(0.008) \times z^{0} + (-0.040) \times z^{-1} + (0.079) \times z^{-2} \\
-    &+ (-0.079) \times z^{-3} + (0.040) \times z^{-4} + (-0.008) \times z^{-5} 
-\end{aligned}}{\begin{aligned}
-    & (1.000) * z^{0} + (2.219) * z^{-1} + (3.002) * z^{-2} + \\
-    &  (2.451) * z^{-3} + (1.233) * z^{-4} + (0.311) * z^{-5} 
-\end{aligned}}
-\end{equation}
-
-\qfig[l2p4]{l2p4.png}{Elliptic 滤波器频率响应}
-
-\subsection{FIR 设计}
-
-运行 \lstinline{fir.m} 文件即可。
-
-单位冲激响应如\figref{l2p5}， 频率响应如\figref{l2p6} ，阶数为 37。
-
-
-\qfig[l2p5]{l2p5.png}{FIR 带通滤波器单位冲激响应}
-
-\qfig[l2p6]{l2p6.png}{FIR 带通滤波器频率响应}
+\qfig[l3p10]{l3p10.png}{处理后音频降采样 FFT 频谱}
 
 \section{结果分析}
 
-\subsection{IIR 设计}
 
-经过查询相关资料，对于经典 IIR 滤波器来说，有以下相应特征：
+\subsection{窗函数长度对信号 DFT 的影响}
 
-\begin{itemize}
-    \item Butterworth 滤波器提供在 \(\Omega = 0 \text{ or } \infty\) 时的最佳逼近，因此在低频与高频下有着最平坦的特征，并且整体呈现出单调下降的特点，因此不会出现其他形式的滤波器的波动特性，低通高阻特性在极限频点体现较好。
-    \item Chebyshev I 类滤波器通过在通带中引入 \lstinline{Rp} 的波纹，将低通特性与理想特性的误差降低，也就是将低通到高阻的过渡变得更加陡峭，此时阻带仍是最平坦的。
-    \item Chebyshev II 类滤波器通过在阻带中加入 \lstinline{Rs} 的波纹，将高阻特性与理想特性的误差降低，同样使得低通到高阻的过渡变得更加陡峭，但是此时通带是最平坦的。通带中没有波纹通常是重要优势。
-    \item 椭圆滤波器在通带和阻带中均采引入波纹，这样在直观认识上，低通到高阻的过渡陡峭程度会超过前两类滤波器。此外，往往椭圆滤波器有着同样要求下最低的阶数。
-\end{itemize}
+经过对比 \figref{l3p1} 、 \figref{l3p2} 、\figref{l3p3} ，可以看到随着采样点的增加，频谱的包络越来越明显，也就是越来越趋近其模拟频谱；而各张图片内部不同窗函数相互对比，可以看出不同窗函数对与次瓣频谱的泄漏程度不同， Hamming 比较明显优于矩形窗。
 
-而将以上已知性质对比得到的滤波器的阶数可以看到 \(8 > 5 = 5 > 4\) ，满足以上性质。
+\subsection{频域采样对信号 DFT 的影响}
 
-\subsection{FIR 设计}
+如 \figref{l3p4} ，更密集的频域采样完全没有改变频谱的形状，对于分析模拟谱的特性没有更大的帮助，仅仅增大了数字频谱的步进精度。其中 \(256\) 点乃至 \(128\) 点采样的对于分析应当已经足够。
 
-经过查询相关资料，对于标准频带\footnote{低通、带通、高通和带阻四类滤波器}的 FIR 设计，基于 \lstinline{fir1} 是最经典的方法，可以实现加窗的线性相位 FIR 数字滤波器。参考 \figref{l2p6} 满足条件。
+\subsection{语音信号频谱分析及滤波处理}
 
-% https://ww2.mathworks.cn/help/signal/ug/iir-filter-design.html
-% https://ww2.mathworks.cn/help/signal/ug/fir-filter-design.html
+
+% Start Here
+
+% End Here
 
 \end{document}

@@ -11,9 +11,105 @@
 
 \maketitle
 
-作业内容：
-
 \tableofcontents
+
+\listoffigures
+
+
+\section{实验目的}
+
+通过本实验，加深对 DFT 的连续时域样本长度、样本采样数目等参数，加窗等处理对 DFT 效果影响的认识，并通过语音信号的处理，了解如何针对特定应用设计需要的滤波器的方法。
+
+\section{实验原理}
+
+DFT 的连续时域样本越大，对应的分辨率会降低；DFT 的连续时域样本的采样长度固定时，需要一定量的采样点完成整体的频谱分析，但是当采样点过多后之后只会造成计算量的上升，而不会有精度的益处。
+
+FFT 的频谱和模拟频谱是对应的，可以通过下式计算：
+
+\[\Omega = \frac{\omega}{T} = \frac{2\pi k}{N T}\]]
+
+\section{实验步骤}
+
+\subsection{窗函数长度对信号 DFT 的影响}
+
+首先，由于采样的总长度在变化，不妨设总采样点为一个特定值，此值需要大于 \(L_{max}\) 即可，因为后续用到了该长度的窗函数。
+
+接下来对长度 \(L\) 和窗函数类型进行依次遍历，在不同长度的窗函数下需要对窗函数的序列进行补零，来保证可以进行时域的加窗。之后进行 \(L\) 点的 FFT 进行 DFT 分析，画图。
+
+\subsection{频域采样对信号 DFT 的影响}
+
+此时，采样的总长度是固定的，但是采样的点数不同，因此进行加窗时，需要补零到最多点数仍可进行正常加窗。之后进行不同点数的 FFT 进行 DFT 分析，画图。
+
+\subsection{语音信号频谱分析及滤波处理}
+
+将音频读取，得到其序列与相应的采样率，对输入序列进行 FFT 得到其频谱表示，观察其干扰分量位置，并且找到对应的采样点数，计算得到对应的模拟频率。根据模拟频率设计一个带阻滤波器，将其去除。
+
+\section{实验代码}
+
+
+\subsection{窗函数长度对信号 DFT 的影响}
+
+
+\lstinputlisting[caption={窗函数长度与形状对 DFT 频谱的影响 \lstinline{task1.m}}]{\string"./lab03/task1.m\string"}
+
+\subsection{频域采样对信号 DFT 的影响}
+
+
+\lstinputlisting[caption={频域采样点数对 DFT 频谱的影响 \lstinline{task2.m}}]{\string"./lab03/task2.m\string"}
+
+
+\subsection{语音信号频谱分析及滤波处理}
+
+\lstinputlisting[caption={语音信号频谱分析及滤波器设计与处理 \lstinline{task3.m}}]{\string"./lab03/task3.m\string"}
+
+\section{实验结果}
+
+\subsection{窗函数长度对信号 DFT 的影响}
+
+运行 \lstinline{task1.m} ，不同点数与形状对 DFT 的影响如 \figref{l3p1}，\figref{l3p2}，\figref{l3p3}。
+
+\qfig[l3p1]{l3p1.png}{32 点窗函数对应的 DFT 频谱}
+
+\qfig[l3p2]{l3p2.png}{64 点窗函数对应的 DFT 频谱}
+
+\qfig[l3p3]{l3p3.png}{128 点窗函数对应的 DFT 频谱}
+
+\subsection{频域采样对信号 DFT 的影响}
+
+运行 \lstinline{task2.m} ，相同长度、形状窗函数下，不同采样点数对 DFT 的影响如 \figref{l3p4} 。
+
+\qfig[l3p4]{l3p4.png}{相同窗函数不同采样点数对应的 DFT 频谱}
+
+\subsection{语音信号频谱分析及滤波处理}
+
+运行 \lstinline{task3.m} ，原始音频在序列长度的 FFT 下的频谱如 \figref{l3p5} ，计算其单频噪声在序列中的位置，推导出其模拟频率，计算输出为 \lstinline{the original frequency of the audio's white noise: 7350.200000 Hz} 。由于其幅频难以观察，降采样 FFT 后的频谱更易观察， 如 \figref{l3p6} 。通过设计带阻滤波器滤除此分量，本基于 Kaiser 窗的带阻滤波器的单位冲激响应如 \figref{l3p7} ，其频率响应如 \figref{l3p8} ，阶数为 80 阶。处理后的信号如 \figref{l3p9} ，经过同样的降采样后，如 \figref{l3p10} ，便于观察相位。在降采样中，计算得到该频点的幅度下降约 \(46.986 = 33.4 \text{ db}\) 。
+
+\qfig[l3p5]{l3p5.png}{原始音频 FFT 频谱}
+
+\qfig[l3p6]{l3p6.png}{原始音频降采样 FFT 频谱}
+
+\qfig[l3p7]{l3p7.png}{带阻滤波器的单位冲激响应}
+
+\qfig[l3p8]{l3p8.png}{带阻滤波器的频率响应}
+
+\qfig[l3p9]{l3p9.png}{处理后音频 FFT 频谱}
+
+\qfig[l3p10]{l3p10.png}{处理后音频降采样 FFT 频谱}
+
+\section{结果分析}
+
+
+\subsection{窗函数长度对信号 DFT 的影响}
+
+经过对比 \figref{l3p1} 、 \figref{l3p2} 、\figref{l3p3} ，可以看到随着采样点的增加，频谱的包络越来越明显，也就是越来越趋近其模拟频谱；而各张图片内部不同窗函数相互对比，可以看出不同窗函数对与次瓣频谱的泄漏程度不同， Hamming 比较明显优于矩形窗。
+
+\subsection{频域采样对信号 DFT 的影响}
+
+如 \figref{l3p4} ，更密集的频域采样完全没有改变频谱的形状，对于分析模拟谱的特性没有更大的帮助，仅仅增大了数字频谱的步进精度。其中 \(256\) 点乃至 \(128\) 点采样的对于分析应当已经足够。
+
+\subsection{语音信号频谱分析及滤波处理}
+
+对于特定频率的噪音，可以通过设计滤波器的方式进行消除，同样地，我们也可以对特定频率的信号进行增强，但是滤波器设计中不可避免的出现在需要的频段出现增益或衰减的不精确，这种不精确可以达到几十个分贝，因此在一定程度上会影响整个系统的精度。
 
 % Start Here
 

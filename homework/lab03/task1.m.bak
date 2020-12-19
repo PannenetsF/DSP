@@ -2,7 +2,6 @@ L = [32 64 128];
 rec = 1;
 ham = 2;
 win_type = [rec, ham];
-N = 256;
 
 for len = 1:length(L)
   l_now = L(len);
@@ -11,7 +10,7 @@ for len = 1:length(L)
     w_now = win_type(wt);
     
     % build the series
-    n = 0:(l_now/N):l_now;
+    n = 0:(5/l_now):5;
     n = n(1:length(n)-1);
     x = sin(3 * pi * n / 10) + 0.5 * sin(2 * pi * n / 5);
     
@@ -23,14 +22,14 @@ for len = 1:length(L)
       win = hamming(l_now);
       win_name = sprintf('hamming window of %d', l_now);
     endif
-    win = [win', zeros(1, length(n) - length(win))];
+    
     % add the window to the signal 
     y = x .* win;
     
     % do fft and show it
     Y = fft(y, l_now);
     subplot(2,1,wt);
-    stem(abs(Y), '.');
+    plot(abs(Y), 'x');
     title(win_name);
   endfor
 endfor
