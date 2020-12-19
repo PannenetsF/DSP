@@ -35,7 +35,7 @@ b_l_str = "";
 
 z_c = 0;
 for i = a
-  s_str = sprintf("(%.3f) * z^%d + ", i, z_c);
+  s_str = sprintf("(%.3f) * z^{%d} + ", i, z_c);
   l_str = sprintf("(%.3f) \\times z^{%d} + ", i, z_c);
   a_s_str = [a_s_str, s_str];
   a_l_str = [a_l_str, l_str];

@@ -21,7 +21,7 @@ subplot(2,1,2)
 title(sprintf('n = %d order Butterworth Highpass Filter: phase-frequency response',n))
 
 [s_exp, l_exp] = co2exp(a, b);
-sprintf("n = %d order Butterworth Highpass Filter: \n %s", n,  s_exp);
+sprintf("n = %d order Butterworth Highpass Filter: \n %s", n,  s_exp)
 
 latex_exp = [latex_exp, l_exp];
 
@@ -37,7 +37,7 @@ subplot(2,1,2)
 title(sprintf('n = %d order Chebyshev I Highpass Filter: phase-frequency response',n))
 
 [s_exp, l_exp] = co2exp(a, b);
-sprintf("n = %d order Chebyshev I Highpass Filter: \n %s", n,  s_exp);
+sprintf("n = %d order Chebyshev I Highpass Filter: \n %s", n,  s_exp)
 latex_exp = [latex_exp, l_exp];
 
 [n, Ws_get] = cheb2ord(Wp, Ws, Rp, Rs);
@@ -53,11 +53,11 @@ title(sprintf('n = %d order Chebyshev II Highpass Filter: phase-frequency respon
 
 
 [s_exp, l_exp] = co2exp(a, b);
-sprintf("n = %d order Chebyshev II Highpass Filter: \n %s", n,  s_exp);
+sprintf("n = %d order Chebyshev II Highpass Filter: \n %s", n,  s_exp)
 latex_exp = [latex_exp, l_exp];
 
 [n, Wp_get] = ellipord(Wp, Ws, Rp, Rs);
-[b, a] = ellip(n, Rp, Rs, Wp, "high");
+[b, a] = ellip(n, Rp, Rs, Wp_get, "high");
 
 figure(4);
 freqz(b, a)
@@ -67,7 +67,7 @@ subplot(2,1,2)
 title(sprintf('n = %d order Elliptic Highpass Filter: phase-frequency response',n))
 
 [s_exp, l_exp] = co2exp(a, b);
-sprintf("n = %d order Elliptic Highpass Filter: \n %s", n,  s_exp);
+sprintf("n = %d order Elliptic Highpass Filter: \n %s", n,  s_exp)
 latex_exp = [latex_exp, l_exp];
 
 input('Press Enter to Save Figures and Continue...');
