@@ -1,11 +1,11 @@
 L = 32;
 N = [32 64 128 256 512];
 
-figure(1);
+figure(4);
 for i = 1:length(N)
   subplot(length(N), 1, i);
   % figure(i);
-  win_name = sprintf('hamming window and DFT with %d points', l_now);
+  win_name = sprintf('hamming window and DFT with %d points', L);
 
   % build the series
   n = 0:(5/L):5;
@@ -24,4 +24,5 @@ for i = 1:length(N)
 endfor
 
 input('Press Enter to Continue...');
+saveas(4,'./l3p4.png');
 close all;

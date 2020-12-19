@@ -35,4 +35,7 @@ for len = 1:length(L)
 endfor
 
 input('Press Enter to Continue...');
+saveas(1,'./l3p1.png');
+saveas(2,'./l3p2.png');
+saveas(3,'./l3p3.png');
 close all;
