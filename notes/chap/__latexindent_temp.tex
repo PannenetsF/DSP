@@ -1,214 +1,68 @@
 \ifx\mainclass\undefined
-\documentclass[cn,11pt,chinese,black,simple]{../elegantbook}
+\documentclass[cn,11pt,chinese,black,simple]{elegantbook}
 \input{../needed.tex}
 \begin{document}
 \fi 
-\def\chapname{04dft}
+\def\chapname{review}
 
 % Start Here
-\chapter{离散傅里叶变化}
 
-数字处理需要对时域进行采样与截断，频域离散化。
+\chapter{离散信号与系统}
 
-从离散傅里叶级数（DFS）开始，逐步介绍离散傅里叶变换（DFT），以及快速算法。
+\section{因果性、记忆性}
 
-\section{离散傅立叶级数}
+是否用到了 \(x[n]\) 的未来值/过去值，而不是其他可计算的值。
 
-周期序列等价于有限长序列，可以引出抽样定理。
+\section{LTI 系统}
 
-连续信号可以进行连续傅里叶变换，而周期信号需要进行傅里叶级数，时域的周期性造成了频域的离散。时域的离散造成频域的周期性。
+既是线性系统，又是时不变系统，称为LTI系统。其\textbf{充要条件}是 \(y[n] = x[n] \otimes h[n]\) 。
 
-CTFS 是主值区间的信号，CTFT 是频域的采样。
+\subsection{因果系统}
 
-$$
-\begin{array}{l}
-X\left(e^{j \Omega T}\right)=\sum_{n=-\infty}^{\infty} x(n) e^{-j \omega n} \\
-x(n)=\frac{1}{2 \pi} \int_{-\pi}^{\pi} X\left(e^{j \omega}\right) e^{j \omega n} d \omega
+\(h[n] = h[n] u[n]\) 
+
+\subsection{稳定系统}
+
+\[
+\sum_{-\infty}^{+\infty} |h(n)| =M<+\infty
+\]
+
+\subsection{特征频率与 LTI 系统}
+
+若是有一个无限长的指数信号，那么有一个单频信号：
+
+\[
+    \left[e^{j \omega_{0} n}\right]\rightarrow \sum_{k=-\infty}^{+\infty} 2 \pi \delta\left(\omega-\omega_{0}+2 k \pi\right)
+\]
+
+但是若是有限长，那么就有引入除去 \(\omega_0\) 的分量，因此对于一个 LTI 系统来说，放大 \(e^{j \omega_0 n}\) 和 \(e^{j \omega_0 n} u[n]\) 需要的系统函数是不一样的。
+
+\section{差分方程的阶数}
+
+输出 \(y[n-i]\) 最高值和最低值 \(i\) 的差值。
+
+LCCDE = linear constant-coefficient difference equation .
+
+
+
+\chapter{DTFT 等变换}
+
+\section{变换共轭性质}
+
+具有普适性。
+
+\[
+\begin{array}{c}
+\mathcal{Z}\left[x^{*}[n]\right]=\sum_{n=-\infty}^{\infty} X^{*}[n] z^{-n}=\left(\sum_{n=-\infty}^{\infty} x[n]\left(z^{*}\right)^{-n}\right)^{*}=X^{*}\left(z^{*}\right) \\
+\mathcal{Z}[x[-n]]=\sum_{n=-\infty}^{\infty} x[-n] z^{-n}=\sum_{n=-\infty}^{\infty} x[n]\left(z^{-1}\right)^{-n}=X\left(z^{-1}\right) \\
+\mathcal{Z}[\operatorname{Re}\{x[n]\}]=\mathcal{Z}\left[\frac{x[n]+x^{*}[n]}{2}\right]=\frac{1}{2}\left[X(z)+X^{*}\left(z^{*}\right)\right] \\
+\mathcal{Z}[\operatorname{Im}\{x[n]\}]=\mathcal{Z}\left[\frac{z[n]-x^{*}[n]}{2 j}\right]=\frac{1}{2 j}\left[X(z)-X^{*}\left(z^{*}\right)\right]
 \end{array}
-$$
-
-
-\section{离散傅立叶变换}
-
-
-若是一个周期序列，那么不是绝对可和的，不能使用 DTFT 。
-
-若是周期为 \(N\) 那么：$$
-\tilde{x}(n)=\tilde{x}(n+r N)
-$$
-
-希望展开成离散的傅里叶级数：
-
-$$
-\tilde{x}(n)=\frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}(k) e^{j \frac{2 \pi}{N} k n}
-$$
-
-$$
-\begin{aligned}
-\sum_{n=0}^{N-1} \tilde{x}(n) e^{-j \frac{2 \pi}{N} r n} &=\frac{1}{N} \sum_{n=0}^{N-1} \sum_{k=0}^{N-1} \tilde{X}(k) e^{j \frac{2 \pi}{N}(k-r) n} \\
-&=\sum_{k=0}^{N-1} \tilde{X}(k)\left[\frac{1}{N} \sum_{n=0}^{N-1} e^{j \frac{2 \pi}{N}(k-r) n}\right]
-\end{aligned}
-$$
-
-$$
-\frac{1}{N} \sum_{n=0}^{N-1} e^{j \frac{2 \pi}{N} r n}=\frac{1}{N} \frac{1-e^{j \frac{2 \pi}{N} r N}}{1-e_{}^{j \frac{2 \pi}{N}}}= 1, \text{ when } r = mN , 0 , \text{ else} 
-$$
-
-定义变换因子的符号： \(W_N = e^{-j \frac{2\pi}{N}}\) 。那么变换对为：
-
-$$
-\begin{array}{l}
-\qquad \tilde{X}(k)=D F S[\tilde{x}(n)]=\sum_{n=0}^{N-1} \tilde{x}(n) e^{-j \frac{2 \pi}{N} n k}=\sum_{n=0}^{N-1} \tilde{x}(n) W_{N}^{n k} \\
-\tilde{x}(n)=I D F S[\tilde{X}(k)]=\frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}(k) e^{j \frac{2 \pi}{N} n k}=\frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}(k) W_{N}^{-n k}
-\end{array}
-$$
-
-DFS 可以看作是主值区间的 Z 变换在单位圆的等间隔抽样。
-
-\[\tilde{X}(k) = X(e^{j\omega}) | _{\omega = w\pi k / N}\]
-
-\subsection{频域采样}
-
-频域采样 \(N\) 点，得到的是抽样点为 \(N\) 的周期延拓。可以用来设计滤波器，若是可以无失真回复原序列，那么可以完整表达 \(X(z)\) 和 \(X(e^{j\omega})\) 。
-
-\subsection{内插器公式}
-
-\[\frac{1-\exp{-j\omega N}}{1-\exp{-j\omega}} = \exp{-j\omega\frac{N-1}{2}} \frac{\sin {\omega N / 2}}{\sin {\omega / 2}}\]
-
-\subsection*{DFS}
-
-是对 DTFT 在主值区间的 N 点采样。周期性和离散性是等价的。
-
-\section{离散傅里叶变换}
-
-当只取主值区间时，就可以得到 DFT 。
-
-$$
-\begin{array}{l}
-\qquad \tilde{X}(k)=D F T[\tilde{x}(n)]=\sum_{n=0}^{N-1} \tilde{x}(n) e^{-j \frac{2 \pi}{N} n k}=\sum_{n=0}^{N-1} \tilde{x}(n) W_{N}^{n k} \\
-\tilde{x}(n)=I D F T[\tilde{X}(k)]=\frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}(k) e^{j \frac{2 \pi}{N} n k}=\frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}(k) W_{N}^{-n k}
-\end{array}
-$$
-
-规定周期信号和主值区间转换的标记方式： \(x[n] = \tilde{x}[n] R_N[n]\) ， \(\tilde{x}[n] = x [n \:\mathrm{ mod }\: N] =x[[n]]_N\) 。
-
-\subsection{对偶性}
-
-
-注意：\[DFT[X(n)] = N \tilde{x((-k))_N R_N(k)}\]
-
-得到：
-
-$$
-I D F T [X(k)]=\frac{1}{N} \overline{D F T\left[X^{*}(k)\right]}
-$$
-
-
-\subsection{性质}
-
-\begin{itemize}
-    \item 线性
-    \item 循环移位 $x_{m}(n)=x((n+m))_{N} R_{N}(n) = W_N^{-mk} \tilde{X}[k]2$
-    \item 圆周共轭对称：实序列对应频域圆周共轭对称，虚序列对应频域圆周共轭反对称
-    \item 圆周卷积和：点数有关
-    \item 相关不满足交换律
-\end{itemize}
-
-
-\section{DFT 快速算法}
-
-几个特点： 
-
-\begin{itemize}
-    \item 对称性： \(W_{N}^{nk} * = W_{N}^{-nk}\) 
-    \item 周期性： \(W_{N}^{nk} = W_N^{(n + N) k} = W_N^{n (k + N)}\) 
-    \item 可约性： \(W_N^{nk} = W_{m N}^{m n k} \)
-\end{itemize}
-
-\subsection{戈泽尔算法}
-
-最典型：利用周期性与对称性。
-
-\[X(k)=\sum_{r=0}^{N-1} x(r) W_{N}=W_{N}^{-k N} \sum_{r=0}^{N-1} x(r) W_{N}=\sum_{r=0}^{N-1} x(r) W_{N}^{-k(N-r)}\]
-
-\[y_{k}(n)=x(n) * W_{N}{ }^{-k n} u(n) = \sum_{r=0}^{N-1} x(r) W_{N}^{-k(n-r)} u(n-r)\]
-
-\[\left.y_{k}(n)\right|_{n=N}=\sum_{r=0}^{N-1} x(r) W_{N}^{-k(N-r)} u(N-r)=\sum_{r=0}^{N-1} x(r) W_{N}^{-k(N-r)}=X(k)\]
-
-避免了乘积项 \(W\) 的反复计算。
-
-\subsection{基2-FFT}
-
-适合递归分解，需要分解成特殊基，并且最小子序列无复数运算。
-
-\subsection{线性调频 Z 变换}
-
-新的变换
-
-\section{DFT 的工程应用}
-
-时域加窗：时域乘法
-
-频域加窗：时域卷积
-
-连续时间信号进行分段与分割后才可以用过 DFT 进行 CTFT 的逼近，那么有：
-
-\[
-\left.x(t)\right|_{t=n T}=x(n T)=x(n)
 \]
 
-CTFT 近似为：
+\section{频域阶数}
 
-\[
-X(j \Omega) \approx \sum_{n=-\infty}^{\infty} x(n T) e^{-j \Omega n T} \cdot T
-\]
-
-通过截断，得到含有 N 个采样的序列 ：
-
-\[
-X(j \Omega) \approx T \sum_{n=0}^{N-1} x(n T) e^{-j \Omega n T}
-\]
-
-进一步的，频谱也是需要进行分段离散化的：
-
-\[
-X\left(j k \Omega_{0}\right) \approx T \sum_{n=0}^{N-1} x(n T) e^{-j k \Omega_{0} n T}
-\]
-
-\[
-=T \sum_{n=0}^{N-1} x(n T) e^{-j n k \frac{2 \pi F_{0}}{f_{s}}}=T \sum_{n=0}^{N-1} x(n T) e^{-j n k \frac{2 \pi}{N}}=T\left\{\left.D F T[x(n)]\right|_{x(n)=x(n T)}\right\}
-\]
-
-若是逼近 CTFS ，将将周期切割为 \(N\) 点，傅里叶计数近似为：
-
-\[
-x(t)=\sum_{k=-\infty}^{\infty} X\left(j k \Omega_{0}\right) e^{j k \Omega_{0} t}
-\]
-
-将 \(T_0 = NT\) ，
-
-\[
-X\left(j k \Omega_{0}\right) \approx \frac{T}{T_{0}} \sum_{n=0}^{N-1} x(n T) e^{-j k \Omega_{0} n T}=\frac{1}{N} \sum_{n=0}^{N-1} x(n) e^{-j \frac{2 \pi}{N} n k}=\frac{1}{N} D F T[x(n)]
-\]
-
-
-\subsection{频谱泄漏}
-
-时域上的截断（相乘），在频域上表现为周期卷积，这将会对信号的频谱平滑和能量的分散，即频谱泄漏。
-
-窗函数的主瓣宽度为 \(2\pi / N\) ，其对应的模拟带宽为：
-
-\[
-\Delta \Omega=\frac{2 \pi}{\mathrm{N} T}=\frac{2 \pi}{\mathrm{L}}
-\]
-
-模拟频率分辨率为 HZ 定义为 
-
-\[\Delta = \frac{1}{L}\] 
-
-\section{FFT 实现 FIR}
-
-对于无限长的信号来说，使用块卷积方式，如重叠相加法与重叠保留法。
+若是在原有的系统函数多一个 \(z\) ，说明原来 \(a_0 z^0\) 的位置变成了 \(a_0 z^1\) ，也就是 \(a_n\) 变成了 \(a_{n+1}\) 。 同理 \(z^{-1}\) 对应 \(a_{n-1}\) 。由于使用因果信号， \(z^{-1}\) 的形式更合适。
 
 % End Here
 

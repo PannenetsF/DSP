@@ -1,0 +1,84 @@
+\ifx\mainclass\undefined
+\documentclass[cn,11pt,chinese,black,simple]{elegantbook}
+\input{../needed.tex}
+\begin{document}
+\fi 
+\def\chapname{review}
+
+
+
+% Start Here
+
+\chapter{离散信号与系统}
+
+\section{因果性、记忆性}
+
+是否用到了 \(x[n]\) 的未来值/过去值，而不是其他可计算的值。
+
+\section{LTI 系统}
+
+既是线性系统，又是时不变系统，称为LTI系统。其\textbf{充要条件}是 \(y[n] = x[n] \otimes h[n]\) 。
+
+\subsection{因果系统}
+
+\(h[n] = h[n] u[n]\) 
+
+\subsection{稳定系统}
+
+\[
+\sum_{-\infty}^{+\infty} |h(n)| =M<+\infty
+\]
+
+\subsection{特征频率与 LTI 系统}
+
+若是有一个无限长的指数信号，那么有一个单频信号：
+
+2.27
+
+\[
+    \left[e^{j \omega_{0} n}\right]\rightarrow \sum_{k=-\infty}^{+\infty} 2 \pi \delta\left(\omega-\omega_{0}+2 k \pi\right)
+\]
+
+但是若是有限长，那么就有引入除去 \(\omega_0\) 的分量，因此对于一个 LTI 系统来说，放大 \(e^{j \omega_0 n}\) 和 \(e^{j \omega_0 n} u[n]\) 需要的系统函数是不一样的。
+
+\section{差分方程的阶数}
+
+输出 \(y[n-i]\) 最高值和最低值 \(i\) 的差值。
+
+LCCDE = linear constant-coefficient difference equation .
+
+
+
+\chapter{DTFT 等变换}
+
+\section{变换共轭性质}
+
+具有普适性。
+
+\[
+\begin{array}{c}
+\mathcal{Z}\left[x^{*}[n]\right]=\sum_{n=-\infty}^{\infty} X^{*}[n] z^{-n}=\left(\sum_{n=-\infty}^{\infty} x[n]\left(z^{*}\right)^{-n}\right)^{*}=X^{*}\left(z^{*}\right) \\
+\mathcal{Z}[x[-n]]=\sum_{n=-\infty}^{\infty} x[-n] z^{-n}=\sum_{n=-\infty}^{\infty} x[n]\left(z^{-1}\right)^{-n}=X\left(z^{-1}\right) \\
+\mathcal{Z}[\operatorname{Re}\{x[n]\}]=\mathcal{Z}\left[\frac{x[n]+x^{*}[n]}{2}\right]=\frac{1}{2}\left[X(z)+X^{*}\left(z^{*}\right)\right] \\
+\mathcal{Z}[\operatorname{Im}\{x[n]\}]=\mathcal{Z}\left[\frac{z[n]-x^{*}[n]}{2 j}\right]=\frac{1}{2 j}\left[X(z)-X^{*}\left(z^{*}\right)\right]
+\end{array}
+\]
+
+\section{频域阶数}
+
+2.42
+
+若是在原有的系统函数多一个 \(z\) ，说明原来 \(a_0 z^0\) 的位置变成了 \(a_0 z^1\) ，也就是 \(a_n\) 变成了 \(a_{n+1}\) 。 同理 \(z^{-1}\) 对应 \(a_{n-1}\) 。由于使用因果信号， \(z^{-1}\) 的形式更合适。
+
+\section{系统设计}
+
+2.56 
+
+需要一个系统时，可以通过其定义入手，配凑式子。 
+
+% End Here
+
+\let\chapname\undefined
+\ifx\mainclass\undefined
+\end{document}
+\fi 
