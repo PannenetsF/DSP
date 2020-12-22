@@ -3,85 +3,155 @@
 \input{../needed.tex}
 \begin{document}
 \fi 
-\def\chapname{05filter}
+\def\chapname{review}
+
+
 
 % Start Here
-\chapter{滤波器设计基础}
 
-\section{滤波器是什么}
+\chapter{离散信号与系统}
 
-\subsection{滤波器基础概念}
+\section{因果性、记忆性}
 
-LTI 系统的时域卷积和特性造成了频域的滤波效应，主要是指的幅度特性，并且滤波器不会造成新的频率分量。
+是否用到了 \(x[n]\) 的未来值/过去值，而不是其他可计算的值。
 
-根据频段内的幅度特性分为四类基本滤波器：低通、高通、带通、带阻。
+\section{LTI 系统}
 
-根据实现方式，也就是冲激的形式：分为 IIR （无限长冲激响应系统）与 FIR （有限长 单位冲激响应）。
+既是线性系统，又是时不变系统，称为LTI系统。其\textbf{充要条件}是 \(y[n] = x[n] \otimes h[n]\) 。
 
-\subsection{滤波器设计步骤}
+\subsection{因果系统}
 
+\(h[n] = h[n] u[n]\) 
 
-\begin{enumerate}
-    \item 按照任务要求，确定滤波器的性能指标
-    \item 用一个因果稳定的离散线性时不变系统按照某一准则去逼近所要得到的性能指标可以选用IIR滤波器也可选用FIR滤波器
-    \item 利用有限精度，选择合适的系统结构来实现
-    \begin{itemize}
-        \item 软件实现
-        \item 硬件实现
-    \end{itemize}
-\end{enumerate}
-
-\subsection{性能指标}
-
-增益、衰减都使用分贝来描述。
-
-通带指标：在通带中幅度响应以误差 \(\pm \alpha\) 逼近 \(1\) ，这称作通带容限，或者表示为通带波纹 \(R_p\) ，通道最大衰减。其中 \(\omega_c\) 指通带边缘，其幅度特性为 \(1 - \alpha_1\) 。波纹一般是最大衰减的两倍。
+\subsection{稳定系统}
 
 \[
-\begin{array}{l}
-1-\alpha_{1} \leq\left|H\left(e^{j w}\right)\right| \leq 1+\alpha_{1} \\
-R_{P}=-20 \lg \left(\frac{1-\alpha_{1}}{1+\alpha_{1}}\right) \\
-\delta_{1}=20 \lg \left|\frac{1}{H\left(e^{j \omega_{c}}\right)}\right|=-20 \lg \left(1-\alpha_{1}\right)=20 \lg \left|\frac{H_{\max }\left(e^{j w}\right)}{H\left(e^{j \omega_{c}}\right)}\right|
+\sum_{-\infty}^{+\infty} |h(n)| =M<+\infty
+\]
+
+\subsection{特征频率与 LTI 系统}
+
+若是有一个无限长的指数信号，那么有一个单频信号：
+
+2.27
+
+\[
+    \left[e^{j \omega_{0} n}\right]\rightarrow \sum_{k=-\infty}^{+\infty} 2 \pi \delta\left(\omega-\omega_{0}+2 k \pi\right)
+\]
+
+但是若是有限长，那么就有引入除去 \(\omega_0\) 的分量，因此对于一个 LTI 系统来说，放大 \(e^{j \omega_0 n}\) 和 \(e^{j \omega_0 n} u[n]\) 需要的系统函数是不一样的。
+
+\section{差分方程的阶数}
+
+输出 \(y[n-i]\) 最高值和最低值 \(i\) 的差值。
+
+LCCDE = linear constant-coefficient difference equation .
+
+
+
+\chapter{DTFT 等变换}
+
+\section{变换共轭性质}
+
+具有普适性。
+
+\[
+\begin{array}{c}
+\mathcal{Z}\left[x^{*}[n]\right]=\sum_{n=-\infty}^{\infty} X^{*}[n] z^{-n}=\left(\sum_{n=-\infty}^{\infty} x[n]\left(z^{*}\right)^{-n}\right)^{*}=X^{*}\left(z^{*}\right) \\
+\mathcal{Z}[x[-n]]=\sum_{n=-\infty}^{\infty} x[-n] z^{-n}=\sum_{n=-\infty}^{\infty} x[n]\left(z^{-1}\right)^{-n}=X\left(z^{-1}\right) \\
+\mathcal{Z}[\operatorname{Re}\{x[n]\}]=\mathcal{Z}\left[\frac{x[n]+x^{*}[n]}{2}\right]=\frac{1}{2}\left[X(z)+X^{*}\left(z^{*}\right)\right] \\
+\mathcal{Z}[\operatorname{Im}\{x[n]\}]=\mathcal{Z}\left[\frac{z[n]-x^{*}[n]}{2 j}\right]=\frac{1}{2 j}\left[X(z)-X^{*}\left(z^{*}\right)\right]
 \end{array}
 \]
 
-阻带指标：阻带中幅度响应以误差 \(\alpha_2\) 逼近 \(0\) ，这叫做阻带容限，阻带波纹为 \(\delta_2\) ，最小衰减为 \(A_s\) 。在 \(\omega_{st}\) 的位置，幅值为 \(\alpha_2\) 。
+\section{频域阶数}
+
+2.42
+
+若是在原有的系统函数多一个 \(z\) ，说明原来 \(a_0 z^0\) 的位置变成了 \(a_0 z^1\) ，也就是 \(a_n\) 变成了 \(a_{n+1}\) 。 同理 \(z^{-1}\) 对应 \(a_{n-1}\) 。由于使用因果信号， \(z^{-1}\) 的形式更合适。
+
+\section{系统设计}
+
+2.56 
+
+需要一个系统时，可以通过其定义入手，配凑式子。 
+
+\section{DTFT 推导细节}
 
 \[
-\begin{array}{l}
-0 \leq\left|H\left(e^{j w}\right)\right| \leq \alpha_{2} \\
-\delta_{2}=A_{s}=-20 \lg \left(\alpha_{2}\right)
-\end{array}
+\begin{aligned}
+D T F T^{-1}\left[X\left(e^{j \omega}\right)\right]&=\frac{1}{2 \pi} \int_{-\pi}^{\pi} X\left(e^{j \omega}\right) e^{j \omega n} d \omega \\
+&=\frac{1}{2 \pi} \int_{-\pi}^{\pi}\left(\sum_{k=-\infty}^{+\infty} x(k) e^{-j \omega k}\right) e^{j \omega n} d \omega \\
+&=\sum_{k=-\infty}^{+\infty} x(k) \frac{1}{2 \pi} \int_{-\pi}^{\pi} e^{-j \omega(k-n)} d \omega\\
+&=\sum_{k=-\infty}^{+\infty} x(k) \delta(k-n)=x(n)
+\end{aligned}
 \]
 
-过渡带一般指一段带宽 \(|\omega_{st} - \omega_c|\) 一般对其宽度有要求，其幅度特性一般不要求。
+注意  \(2\pi\) 与 \(\delta(n)\) 的由来：单位虚数的积分。
+
+将 IDTFT 展开成累加的形式，实际上是将不同频率的分量逐个恢复：
+
+\begin{align*}
+    \begin{array}{l}
+    X(n)=\frac{1}{2 \pi} \int_{-\pi}^{\pi} X\left(e^{j \omega}\right) e^{j \omega n} d \omega \\
+    =\frac{1}{2 \pi} \sum_{-\infty}^{+\infty} X\left(e^{j k \Delta \omega}\right) e^{j k \Delta \omega n} \Delta \omega=\sum_{-\infty}^{+\infty} \frac{\left[X\left(e^{j k \Delta \omega}\right) \Delta \omega\right]}{2 \pi} e^{j k \Delta \omega n}
+    \end{array}
+\end{align*}
+
+\begin{longtable}{ll} 
+    \caption{DTFT 变换对} \\ 
+    \toprule
+    时域函数 & DTFT  \\
+    \midrule
+    \endfirsthead
+    
+    \toprule
+    时域函数 & DTFT  \\
+    \midrule
+    \endhead 
+  
+    \hline
+    \multicolumn{2}{c}{见下页}\\   \bottomrule
+    \endfoot
+  
+    \bottomrule
+    \endlastfoot
+    \(\delta(n)\) & 1\\
+    \(1\) & \(\sum_{k=-\infty}^{+\infty} 2 \pi \delta(\omega+2 k \pi)\) \\ 
+    \(u(n)\) & \(\frac{1}{1-e^{-j \omega}}+\sum_{k=-\infty}^{+\infty} \pi \delta(\omega+2 k \pi)\)  \\
+    \(e^{j\omega_0 n}\) & \(\frac{1}{1-e^{-j \omega}}+\sum_{k=-\infty}^{+\infty} \pi \delta(\omega+2 k \pi)\) \\
+    \(W_N(n)\) & \(\frac{\sin \left(\frac{\omega N}{2}\right)}{\sin \left(\frac{\omega}{2}\right)} e^{-j \frac{(N-1) \omega}{2}}\) \\
+    \(\frac{w_{c}}{\pi} \frac{\sin \left[w_{c}(n-\alpha)\right]}{w_{c}(n-\alpha)}\)  & \(e^{-j\omega\alpha} (u(\omega+\omega_c) - u(\omega-\omega_c))\)\\ 
+\end{longtable}
 
 
-\section{滤波器结构}
-
-根据数据流进行系统的搭建。
-
-转置定理，输入输出及其支路方向逆转可以，再将输入输出交换，结论仍成立。
-
-\subsection{IIR 基本结构}
-
-{直接 I 型} ： 输入移位 + 输出移位。
-
-直接 II 型 ： 交换次序，合并支路。
-
-直接I型和II型共同缺点是结构系数与系统函数的零、极点关系不明显，对滤波器性能控制不直接。
-
-系统的极点在某些临界条件下对系数的变化过于灵敏，从而使系统频率响应对系数的变化过于灵敏，对有限精度（有限字长）运算容易出现不稳定或较大误差。
-
-级联型 ： 便于准确实现滤波器零、极点，调整滤波器频率响应性能与直接II型相同具有最少的存储单元。
-
-由于信号是依次通过级联的各个环节，只要一个环节出现了问题，变影响整个系统。
-
-并联型：单独调整并联子系统的极点，子系统信号无交叉，系统稳定。
-
-但是不能单独调节零点。
-
-\subsection{FIR 基本结构}
+\begin{longtable}{ll} 
+    \caption{DTFT 变换性质} \\ 
+    \toprule
+    性质名称 & 表达式  \\
+    \midrule
+    \endfirsthead
+    
+    \toprule
+    性质名称 & 表达式  \\
+    \midrule
+    \endhead 
+  
+    \hline
+    \multicolumn{2}{c}{见下页}\\   \bottomrule
+    \endfoot
+  
+    \bottomrule
+    \endlastfoot
+    线性 & \\ 
+    时域平移-频域调制 &  \(x(n-m) \rightarrow e^{-j w m} X\left(e^{j w}\right)\) \\
+    时域调制-频域平移 & \(e^{j n w} x(n) \quad \rightarrow  X\left(e^{j\left(w-w_{0}\right)}\right)\) \\ 
+    时域翻折 & \(x(-n) \rightarrow X(e^{-j \omega})\) \\ 
+    帕塞瓦尔定理 & \(\begin{aligned}
+        \sum_{n=-\infty}^{\infty} x(n) y^{*}(n) &=\frac{1}{2 \pi} \int_{-\pi}^{\pi} X\left(e^{j w}\right) Y^{*}\left(e^{j w}\right) d w \\
+        \sum_{n=-\infty}^{\infty}|x(n)|^{2}&=\frac{1}{2 \pi} \int_{-\pi}^{\pi}\left|X\left(e^{j w}\right)\right|^{2} d w
+        \end{aligned}\)
+\end{longtable}
 
 
 
@@ -90,4 +160,4 @@ R_{P}=-20 \lg \left(\frac{1-\alpha_{1}}{1+\alpha_{1}}\right) \\
 \let\chapname\undefined
 \ifx\mainclass\undefined
 \end{document}
-\fi 
+\fi  

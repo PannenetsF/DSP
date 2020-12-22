@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.12.20)  21 DEC 2020 16:11
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.12.20)  22 DEC 2020 21:08
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/pannenetsf/Documents/Subjects/dsp/notes/chap/chap.05filter
-(/home/pannenetsf/Documents/Subjects/dsp/notes/chap/chap.05filter.tex
+**/home/pannenetsf/Documents/Subjects/dsp/notes/chap/chap.review
+(/home/pannenetsf/Documents/Subjects/dsp/notes/chap/chap.review.tex
 LaTeX2e <2020-10-01> patch level 2
 L3 programming layer <2020-12-07> xparse <2020-03-03> (./elegantbook.cls
 Document Class: elegantbook 2020/06/03 v4.0.1 ElegantBook document class
@@ -1237,9 +1237,16 @@ File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 ) (/opt/texlive2020/texmf-dist/tex/latex/tools/bm.sty
 Package: bm 2019/07/24 v1.2d Bold Symbol Support (DPC/FMi)
 LaTeX Info: Redefining \bm on input line 209.
-)) (../needed.tex)
-No file chap.05filter.aux.
-\openout1 = `chap.05filter.aux'.
+)) (../needed.tex (/opt/texlive2020/texmf-dist/tex/generic/shapepar/shapepar.sty
+\cutoutsep=\skip94
+Package: shapepar 2013/03/26 v 2.2x, Shaped paragraphs
+\SH@scale=\dimen355
+\SH@boxb=\box139
+\SH@ntries=\count419
+\spec@bot=\dimen356
+\sqrtcount=\count420
+)) (./chap.review.aux)
+\openout1 = `chap.review.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
 LaTeX Font Info:    ... okay on input line 4.
@@ -1262,24 +1269,22 @@ LaTeX Font Info:    ... okay on input line 4.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 4.
 LaTeX Font Info:    ... okay on input line 4.
 Package hyperref Info: Link coloring ON on input line 4.
-(/opt/texlive2020/texmf-dist/tex/latex/hyperref/nameref.sty
+ (/opt/texlive2020/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (/opt/texlive2020/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/opt/texlive2020/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count419
+\c@section@level=\count421
 )
 LaTeX Info: Redefining \ref on input line 4.
 LaTeX Info: Redefining \pageref on input line 4.
 LaTeX Info: Redefining \nameref on input line 4.
+ (./chap.review.out) (./chap.review.out)
 \@outlinefile=\write10
-\openout10 = `chap.05filter.out'.
+\openout10 = `chap.review.out'.
 
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1317,8 +1322,8 @@ Package hyperref Warning: Rerun to get /PageLabels entry.
 
 ABD: EverySelectfont initializing macros
 LaTeX Info: Redefining \selectfont on input line 4.
-\c@mv@tabular=\count420
-\c@mv@boldtabular=\count421
+\c@mv@tabular=\count422
+\c@mv@boldtabular=\count423
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: longtable package is loaded.
@@ -1329,8 +1334,8 @@ Package caption Info: End \AtBeginDocument code.
  (/opt/texlive2020/texmf-dist/tex/latex/footmisc/footmisc.sty
 Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
 \FN@temptoken=\toks56
-\footnotemargin=\dimen355
-\c@pp@next@reset=\count422
+\footnotemargin=\dimen357
+\c@pp@next@reset=\count424
 Package footmisc Info: Declaring symbol style bringhurst on input line 855.
 Package footmisc Info: Declaring symbol style chicago on input line 863.
 Package footmisc Info: Declaring symbol style wiley on input line 872.
@@ -1338,36 +1343,106 @@ Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
 Package footmisc Info: Declaring symbol style lamport* on input line 903.
 Package footmisc Info: Declaring symbol style lamport*-robust on input line 924.
 )
-\c@lstlisting=\count423
+\c@lstlisting=\count425
 
 第\nobreakspace {}一\nobreakspace {}章 1.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 9.
+(Font)              scaled to size 10.95pt on input line 12.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 17.28pt on input line 9.
+(Font)              scaled to size 17.28pt on input line 12.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 11.
-[1
+(Font)              scaled to size 14.4pt on input line 14.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 16.
+(/opt/texlive2020/texmf-dist/tex/latex/jknapltx/ursfs.fd
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 16.
+ (/opt/texlive2020/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 16.
+ (/opt/texlive2020/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 12.0pt on input line 22.
+ [1
 
 
-] (./chap.05filter.aux)
+]
+第\nobreakspace {}二\nobreakspace {}章 2.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 10.0pt on input line 92.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 10.0pt on input line 92.
+[2
 
-Package rerunfilecheck Warning: File `chap.05filter.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+]
 
-Package rerunfilecheck Info: Checksums for `chap.05filter.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  C27F8502A70A87EC8C6C5786D7B88A89;375.
+Package fontspec Warning: Font "FandolKai-Regular" does not contain requested
+(fontspec)                Script "CJK".
+
+
+Package fontspec Info: Font family 'FandolKai-Regular(0)' created for font
+(fontspec)             'FandolKai-Regular' with options
+(fontspec)             [Script={CJK},Extension={.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"[FandolKai-Regular.otf]/OT:language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 8.0pt on input line 159.
+[3] [4]
+Overfull \hbox (10.86806pt too wide) in alignment at lines 247--252
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (10.86806pt too wide) in alignment at lines 252--257
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (10.86806pt too wide) in alignment at lines 257--261
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (10.86806pt too wide) in alignment at lines 261--264
+ [] [] [] [] 
+ []
+
+LaTeX Font Info:    Trying to load font information for T1+ntxsups on input line 275.
+(/opt/texlive2020/texmf-dist/tex/latex/newtx/t1ntxsups.fd
+File: t1ntxsups.fd 2015/01/17 v1.0
+)
+LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
+(Font)              scaled to size 10.95pt on input line 275.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 9.0pt on input line 275.
+LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
+(Font)              scaled to size 9.0pt on input line 275.
+
+Overfull \hbox (10.86806pt too wide) in alignment at lines 264--276
+ [] [] [] [] 
+ []
+
+[5] [6] [7] (./chap.review.aux)
+Package rerunfilecheck Info: File `chap.review.out' has not changed.
+(rerunfilecheck)             Checksum: 5DB5768B689357B9C9D31684A18D5C27;1604.
  )
-(\end occurred when \ifx on line 35 was incomplete) 
+(\end occurred when \ifx on line 313 was incomplete) 
 Here is how much of TeX's memory you used:
- 37952 strings out of 477298
- 786651 string characters out of 5835645
- 1483782 words of memory out of 5000000
- 56869 multiletter control sequences out of 15000+600000
- 416052 words of font info for 46 fonts, out of 8000000 for 9000
+ 38204 strings out of 477298
+ 788665 string characters out of 5835645
+ 1494780 words of memory out of 5000000
+ 57069 multiletter control sequences out of 15000+600000
+ 441129 words of font info for 100 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 113i,11n,135p,620b,735s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 113i,17n,135p,618b,607s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on chap.05filter.pdf (1 page).
+Output written on chap.review.pdf (7 pages).

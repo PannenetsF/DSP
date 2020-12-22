@@ -98,6 +98,34 @@ R_{P}=-20 \lg \left(\frac{1-\alpha_{1}}{1+\alpha_{1}}\right) \\
 
 将 \(S\) 平面转换到 \(Z\) 平面 。
 
+\subsection{冲激响应不变法}
+
+
+方法：使数字滤波器的单位冲激响应序列为模拟单位冲激响应的采样。
+
+\[
+h(n)=\left.h_{c}(t)\right|_{t=n T}=h_{c}(n T)
+\]
+
+\[
+\left.H(z)\right|_{z=e^{r}}=\frac{1}{T} \sum_{n=-\infty}^{+\infty} H_{c}\left(s-j k \Omega_{s}\right)=\frac{1}{T} \sum_{n=-\infty}^{+\infty} H_{c}\left(s-j \frac{2 \pi k}{T}\right)
+\]
+
+\[
+H_{e f f}(j \Omega)=\left\{\begin{array}{cc}
+\left.H\left(e^{j \omega}\right)\right|_{\omega=\Omega T}, & |\Omega|<\pi / T \\
+0, & |\Omega| \geq \pi / T
+\end{array}\right.
+\]
+
+将模拟滤波器分解为极点并联形式，不保证零点对应。
+
+采样时间太小时增益过高，需要进行一定衰减，如在系统函数乘以周期。
+
+高频采样可以减少混叠。
+
+
+
 % End Here
 
 \let\chapname\undefined
