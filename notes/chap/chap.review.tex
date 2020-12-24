@@ -371,11 +371,62 @@ y(n)=x(n)^{*} h(n) \\
 H_{a p}(z)=\frac{z^{-1}-a^{*}}{1-a z^{-1}}=-a^{*}\left(\frac{z-\frac{1}{a^{*}}}{z-a}\right)
 \]
 
-其相位响应为：
+其相位响应为：群延迟为正值，连续相位递减。
 
 
+\[
+\begin{aligned}
+&\text { Assume: } \quad a=r e^{j \theta}\\
+&\arg \left[H_{a p}\left(e^{j \omega}\right)\right]\\
+&=-\omega-2 \operatorname{arctg}\left[\frac{r \sin (\omega-\theta)}{1-r \cos (\omega-\theta)}\right]\\
+&g r d\left[H_{a p}\left(e^{j \omega}\right)\right]\\
+&=\frac{1-r^{2}}{\left|1-r e^{-j(\omega-\theta)}\right|^{2}}
+\end{aligned}
+\]
 
-\subsection{}
+用途：
+
+\begin{itemize}
+    \item 相位均衡器，用于提高群延迟
+    \item 任何因果稳定系统均可以分解为全通系统和最小相位的级联
+    \item 若是系统不稳定，可以用于交换系统的零极点，而不改变幅度特性
+\end{itemize}
+
+
+\subsection{最小相位系统}
+
+要求极点在单位圆内（主要考虑系统稳定性），要求零点在单位圆内（主要考虑相位变化最小）。
+
+最小相位系统零极点均在单位圆内，极点往往与系统稳定性联系在一起，零点则往往与系统的延时特性联系在一起。逆系统也是因果稳定的，可以实现幅度和相位失真的完全补偿。
+
+\begin{itemize}
+    \item 最小相位延迟，全通系统总是使最小相位系统的连续相位减小：\[
+        \begin{aligned}
+            H(z)&=H_{\min }(z) H_{a p}(z)\\ 
+            \arg \left[H\left(e^{j \omega}\right)\right]&=\arg \left[H \min \left(e^{j \omega}\right)\right]+\arg \left[H_{a p}\left(e^{j \omega}\right)\right] \\
+            \arg \left[H\left(e^{j \omega}\right)\right] &\leq \arg \left[H_{\min }\left(e^{j \omega}\right)\right] \\
+            \left|\arg \left[H\left(e^{j \omega}\right)\right]\right| &\geq\left|\arg \left[H_{\min }\left(e^{j \omega}\right)\right]\right| 
+        \end{aligned}
+        \]
+    \item 最小群延迟，全通系统的群延迟对于所有的频率皆为正值：\[
+    \begin{aligned}
+        \operatorname{grd}\left[H\left(e^{j \omega}\right)\right]&=\operatorname{grd}\left[H_{\min }\left(e^{j \omega}\right)\right]+\operatorname{grd}\left[H_{a p}\left(e^{j \omega}\right)\right]\\
+        \operatorname{grd}\left[H\left(e^{j \omega}\right)\right] &\geq \operatorname{grd}\left[H_{\min }\left(e^{j \omega}\right)\right]
+    \end{aligned}
+        \]
+    \item 最小能量延迟，最集中在 \(n = 0\) 范围内：\[
+        \sum_{m=0}^{n}|h(n)|^{2} \leq \sum_{m=0}^{n}\left|h_{\min }(m)\right|^{2}
+        \] 
+        因此：\[
+            |h(0)| \leq\left|h_{\min }(0)\right|
+            \]
+\end{itemize}
+
+最大能量延迟则发生在全部零点位于单位圆外的系统，因此该系统也称为最大相位系统。
+
+\subsection{系统的补偿}
+
+幅度失真由最小相位因子补偿，相位失真利用全通因子补偿特定频段。
 
 \chapter{复习题}
 
