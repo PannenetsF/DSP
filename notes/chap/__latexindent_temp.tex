@@ -1,333 +1,388 @@
 \ifx\mainclass\undefined
 \documentclass[cn,11pt,chinese,black,simple]{elegantbook}
+\usepackage{pdfpages}
 \input{../needed.tex}
 \begin{document}
 \fi 
-\def\chapname{05filter}
+\def\chapname{review}
+
+
 
 % Start Here
-\chapter{滤波器设计基础}
 
-\section{滤波器是什么}
+\chapter{离散信号与系统}
 
-\subsection{滤波器基础概念}
+\section{因果性、记忆性}
 
-LTI 系统的时域卷积和特性造成了频域的滤波效应，主要是指的幅度特性，并且滤波器不会造成新的频率分量。
+是否用到了 \(x[n]\) 的未来值/过去值，而不是其他可计算的值。
 
-根据频段内的幅度特性分为四类基本滤波器：低通、高通、带通、带阻。
+\section{LTI 系统}
 
-根据实现方式，也就是冲激的形式：分为 IIR （无限长冲激响应系统）与 FIR （有限长 单位冲激响应）。
+既是线性系统，又是时不变系统，称为LTI系统。其\textbf{充要条件}是 \(y[n] = x[n] \otimes h[n]\) 。
 
-\subsection{滤波器设计步骤}
+\subsection{因果系统}
 
+\(h[n] = h[n] u[n]\) 
 
-\begin{enumerate}
-    \item 按照任务要求，确定滤波器的性能指标
-    \item 用一个因果稳定的离散线性时不变系统按照某一准则去逼近所要得到的性能指标可以选用IIR滤波器也可选用FIR滤波器
-    \item 利用有限精度，选择合适的系统结构来实现
-    \begin{itemize}
-        \item 软件实现
-        \item 硬件实现
-    \end{itemize}
-\end{enumerate}
-
-\subsection{性能指标}
-
-增益、衰减都使用分贝来描述。
-
-通带指标：在通带中幅度响应以误差 \(\pm \alpha\) 逼近 \(1\) ，这称作通带容限，或者表示为通带波纹 \(R_p\) ，通道最大衰减。其中 \(\omega_c\) 指通带边缘，其幅度特性为 \(1 - \alpha_1\) 。波纹一般是最大衰减的两倍。
+\subsection{稳定系统}
 
 \[
-\begin{array}{l}
-1-\alpha_{1} \leq\left|H\left(e^{j w}\right)\right| \leq 1+\alpha_{1} \\
-R_{P}=-20 \lg \left(\frac{1-\alpha_{1}}{1+\alpha_{1}}\right) \\
-\delta_{1}=20 \lg \left|\frac{1}{H\left(e^{j \omega_{c}}\right)}\right|=-20 \lg \left(1-\alpha_{1}\right)=20 \lg \left|\frac{H_{\max }\left(e^{j w}\right)}{H\left(e^{j \omega_{c}}\right)}\right|
-\end{array}
+\dsum_{-\infty}^{+\infty} |h(n)| =M<+\infty
 \]
 
-阻带指标：阻带中幅度响应以误差 \(\alpha_2\) 逼近 \(0\) ，这叫做阻带容限，阻带波纹为 \(\delta_2\) ，最小衰减为 \(A_s\) 。在 \(\omega_{st}\) 的位置，幅值为 \(\alpha_2\) 。
+\subsection{特征频率与 LTI 系统}
+
+若是有一个无限长的指数信号，那么有一个单频信号：
+
+2.27
 
 \[
-\begin{array}{l}
-0 \leq\left|H\left(e^{j w}\right)\right| \leq \alpha_{2} \\
-\delta_{2}=A_{s}=-20 \lg \left(\alpha_{2}\right)
-\end{array}
+    \left[e^{j \omega_{0} n}\right]\rightarrow \dsum_{k=-\infty}^{+\infty} 2 \pi \delta\left(\omega-\omega_{0}+2 k \pi\right)
 \]
 
-过渡带一般指一段带宽 \(|\omega_{st} - \omega_c|\) 一般对其宽度有要求，其幅度特性一般不要求。
+但是若是有限长，那么就有引入除去 \(\omega_0\) 的分量，因此对于一个 LTI 系统来说，放大 \(e^{j \omega_0 n}\) 和 \(e^{j \omega_0 n} u[n]\) 需要的系统函数是不一样的。
 
+\section{差分方程的阶数}
 
-\section{滤波器结构}
+输出 \(y[n-i]\) 最高值和最低值 \(i\) 的差值。
 
-根据数据流进行系统的搭建。
-
-转置定理，输入输出及其支路方向逆转可以，再将输入输出交换，结论仍成立。
-
-\subsection{IIR 基本结构}
-
-{直接 I 型} ： 输入移位 + 输出移位。
-
-直接 II 型 ： 交换次序，合并支路。
-
-直接I型和II型共同缺点是结构系数与系统函数的零、极点关系不明显，对滤波器性能控制不直接。
-
-系统的极点在某些临界条件下对系数的变化过于灵敏，从而使系统频率响应对系数的变化过于灵敏，对有限精度（有限字长）运算容易出现不稳定或较大误差。
-
-级联型 ： 便于准确实现滤波器零、极点，调整滤波器频率响应性能与直接II型相同具有最少的存储单元。
-
-由于信号是依次通过级联的各个环节，只要一个环节出现了问题，变影响整个系统。
-
-并联型：单独调整并联子系统的极点，子系统信号无交叉，系统稳定。
-
-但是不能单独调节零点。
-
-\subsection{FIR 基本结构}
-
-直接：卷积和公式
-
-转置：存储单元、计算量最少
-
-级联型：分解为二阶因子形式
-
-频率抽样型：
-
-线性相位型：
-
-\section{模拟域设计}
-
-将 \(S\) 平面转换到 \(Z\) 平面 。
-
-步骤：
-
-\begin{itemize}
-    \item 离散指标转换到模拟指标
-    \item 模拟原型滤波器来逼近 \(H_c(s)\)
-    \item 变换到数字滤波器 \(H(z)\)
-    \item 数字滤波器进行等效变换后完成性能验证 \(H_{eff}(s)\)
-\end{itemize}
-
-变换条件：
-
-\begin{itemize}
-    \item 频率响应对应：\(S\) 平面虚轴需要映射到 \(Z\) 平面单位圆
-    \item 因果稳定：\(S\) 左半平面映射到单位圆内部，这样才是一个外圆环
-\end{itemize}
-
-主要方式：
-
-\begin{itemize}
-    \item 冲激响应不变法
-    \item 双线性 Z 变换
-\end{itemize}
-
-
-\subsection{冲激响应不变法}
-
-
-方法：使数字滤波器的单位冲激响应序列为模拟单位冲激响应的采样。
-
-
-\[
-h(n)=\left.h_{c}(t)\right|_{t=n T}=h_{c}(n T)
-\]
-
-\[
-\left.H(z)\right|_{z=e^{r}}=\frac{1}{T} \sum_{n=-\infty}^{+\infty} H_{c}\left(s-j k \Omega_{s}\right)=\frac{1}{T} \sum_{n=-\infty}^{+\infty} H_{c}\left(s-j \frac{2 \pi k}{T}\right)
-\]
-
-
-原型：
-
-\[
-H_{c}(s)=\sum_{k=1}^{N} \frac{A_{k}}{s-s_{k}}
-\]
-
-
-将模拟滤波器分解为极点并联形式，不保证零点对应。
-采样时间太小时增益过高，需要进行一定衰减，如在系统函数乘以周期。
-模拟原型滤波器时域通常都无法理想带限，高频采样可以减少混叠。
+LCCDE = linear constant-coefficient difference equation .
 
 
 
-\[
-H_{e f f}(j \Omega)=\left\{\begin{array}{cc}
-\left.H\left(e^{j \omega}\right)\right|_{\omega=\Omega T}, & |\Omega|<\pi / T \\
-0, & |\Omega| \geq \pi / T
-\end{array}\right.
-\]
-
-改换到阶跃响应不变法可以减少混叠。
+\chapter{DTFT 变换}
 
 
-\subsection{双线性 Z 变换}
+\section{频域阶数}
 
-冲激响应不变法和阶跃响应不变法由于使用了时域上的
-采样原理，所以不可避免的产生了频率响应混叠失真。
+2.42
 
-这是一种单值映射。
+若是在原有的系统函数多一个 \(z\) ，说明原来 \(a_0 z^0\) 的位置变成了 \(a_0 z^1\) ，也就是 \(a_n\) 变成了 \(a_{n+1}\) 。 同理 \(z^{-1}\) 对应 \(a_{n-1}\) 。由于使用因果信号， \(z^{-1}\) 的形式更合适。
 
-\[
-s=\frac{1-z^{-1}}{1+z^{-1}}
-\]
+\section{系统设计}
 
-工程中有 \[
-    \Omega=c^{*} \operatorname{tg}(\omega / 2)
-    \]
+2.56 ，
 
-那么
+需要一个系统时，可以通过其定义入手，配凑式子。 同时，对于特定的频率分量，其幅度、角度变换是由其频率响应改变的。
 
-\[
-H(z)=\left.H_{c}(s)\right|_{s=c \frac{1-z^{-1}}{1+z^{-1}}}
-\]
-
-变换不影响因果性与稳定性：
+\section{DTFT 推导细节}
 
 \[
 \begin{aligned}
-z & =\frac{c+s}{c-s} \\
-|z| &=\sqrt{(c+\sigma)^{2}+\Omega^{2}} / \sqrt{(c-\sigma)^{2}+\Omega^{2}} \\ 
-s &= \sigma + j \Omega
+D T F T^{-1}\left[X\left(e^{j \omega}\right)\right]&=\dfrac{1}{2 \pi} \int_{-\pi}^{\pi} X\left(e^{j \omega}\right) e^{j \omega n} d \omega \\
+&=\dfrac{1}{2 \pi} \int_{-\pi}^{\pi}\left(\dsum_{k=-\infty}^{+\infty} x(k) e^{-j \omega k}\right) e^{j \omega n} d \omega \\
+&=\dsum_{k=-\infty}^{+\infty} x(k) \dfrac{1}{2 \pi} \int_{-\pi}^{\pi} e^{-j \omega(k-n)} d \omega\\
+&=\dsum_{k=-\infty}^{+\infty} x(k) \delta(k-n)=x(n)
 \end{aligned}
 \]
 
-\begin{itemize}
-    \item \(\sigma < 0\) ,  \(|z| > 1\) 
-    \item \(\sigma > 0\) ,  \(|z| < 1\) 
-    \item \(\sigma = 0\) ,  \(|z| = 1\) 
-\end{itemize}
+注意  \(2\pi\) 与 \(\delta(n)\) 的由来：单位虚数的积分。
 
+将 IDTFT 展开成累加的形式，实际上是将不同频率的分量逐个恢复：
 
-当时频率直接出现了畸变，并且丧失了线性相位特性。
-
-\subsubsection{频率预畸变}
-
-计算在通带、阻带的边缘频率，设计在这些位置满足指标的模拟原型。其中 \( 2 / T_D = c\) 。
-
-\[
+\begin{align*}
     \begin{array}{l}
-        \Omega_{D}=\frac{2}{T_{d}} \tan \left(\frac{\omega_{P}}{2}\right) \\
-        \Omega_{s}=\frac{2}{T_{d}} \tan \left(\frac{\omega_{s}}{2}\right)
-        \end{array}\]
+    X(n)=\dfrac{1}{2 \pi} \int_{-\pi}^{\pi} X\left(e^{j \omega}\right) e^{j \omega n} d \omega \\
+    =\dfrac{1}{2 \pi} \dsum_{-\infty}^{+\infty} X\left(e^{j k \Delta \omega}\right) e^{j k \Delta \omega n} \Delta \omega=\dsum_{-\infty}^{+\infty} \dfrac{\left[X\left(e^{j k \Delta \omega}\right) \Delta \omega\right]}{2 \pi} e^{j k \Delta \omega n}
+    \end{array}
+\end{align*}
 
-\subsection{数字频带变换}
 
-通过映射转换关系：将数字低通有理系统\(z\)变成因果稳定的有理系统\(Z\)，要求：
 
-\begin{itemize}
-    \item 映射是有理函数
-    \item 单位圆相互对应
-    \item 单位圆内部相互对应
-\end{itemize}
+\begin{longtable}{ll} 
+    \caption{DTFT 变换对} \\ 
+    \toprule
+    时域函数 & DTFT  \\
+    \midrule
+    \endfirsthead
+    
+    \toprule
+    时域函数 & DTFT  \\
+    \midrule
+    \endhead 
+  
+    \hline
+    \multicolumn{2}{c}{见下页}\\   \bottomrule
+    \endfoot
+  
+    \bottomrule
+    \endlastfoot
+    \(\delta(n)\) & 1\\
+    \(1\) & \(\dsum_{k=-\infty}^{+\infty} 2 \pi \delta(\omega+2 k \pi)\) \\ 
+    \(u(n)\) & \(\dfrac{1}{1-e^{-j \omega}}+\dsum_{k=-\infty}^{+\infty} \pi \delta(\omega+2 k \pi)\)  \\
+    \(e^{j\omega_0 n}\) & \(
+        \dsum_{k=-\infty}^{+\infty} 2 \pi \delta\left(\omega-\omega_{0}+2 k \pi\right)
+        \)\\
+    \(W_N(n)\) & \(\dfrac{\sin \left(\dfrac{\omega N}{2}\right)}{\sin \left(\dfrac{\omega}{2}\right)} e^{-j \dfrac{(N-1) \omega}{2}}\) \\
+    \(\dfrac{w_{c}}{\pi} \dfrac{\sin \left[w_{c}(n-\alpha)\right]}{w_{c}(n-\alpha)}\)  & \(e^{-j\omega\alpha} (u(\omega+\omega_c) - u(\omega-\omega_c))\)\\ 
+\end{longtable}
 
-\[
-    H_{d}(Z)=\left.H_{L}(z)\right|_{z^{-1}=G\left(Z^{-1}\right)}\]
 
-\(z, Z\) 对应 \(\theta, \omega\) ：
+\begin{longtable}{ll} 
+    \caption{DTFT 变换性质} \\ 
+    \toprule
+    性质名称 & 表达式  \\
+    \midrule
+    \endfirsthead
+    
+    \toprule
+    性质名称 & 表达式  \\
+    \midrule
+    \endhead 
+  
+    \hline
+    \multicolumn{2}{c}{见下页}\\   \bottomrule
+    \endfoot
+  
+    \bottomrule
+    \endlastfoot
+    线性 & \\ 
+    时域平移-频域调制 &  \(x(n-m) \rightarrow e^{-j w m} X\left(e^{j w}\right)\) \\
+    时域调制-频域平移 & \(e^{j n w} x(n) \quad \rightarrow  X\left(e^{j\left(w-w_{0}\right)}\right)\) \\ 
+    时域翻折 & \(x(-n) \rightarrow X(e^{-j \omega})\) \\ 
+    帕塞瓦尔定理 & \(\begin{aligned}
+        \dsum_{n=-\infty}^{\infty} x(n) y^{*}(n) &=\dfrac{1}{2 \pi} \int_{-\pi}^{\pi} X\left(e^{j w}\right) Y^{*}\left(e^{j w}\right) d w \\
+        \dsum_{n=-\infty}^{\infty}|x(n)|^{2}&=\dfrac{1}{2 \pi} \int_{-\pi}^{\pi}\left|X\left(e^{j w}\right)\right|^{2} d w
+        \end{aligned}\) \\
+\end{longtable}
 
-\[
-e^{-j \theta}=\left|G\left(e^{-j \omega}\right)\right| e^{j \arg \left[G\left(e^{-j \omega}\right)\right]}
+可以利用帕赛瓦尔定理解决一些求和式子：Slide P83.
+
+
+
+\section{DTFT 对称性}
+
+共轭对称与共轭反对称序列定义，实际上是实部、虚部分别的奇偶对称： \[
+    \begin{array}{l}
+    x_{e}(n)=x_{e}^{*}(-n) \\
+    x_{o}(n)=-x_{o}^{*}(-n)
+    \end{array}
 \]
 
-\section{FIR 最优化准则} 
+任意序列都可以进行共轭分解：
 
-严格线性相位！
-
-两种准则：
-
-\begin{itemize}
-    \item 均方误差最小：无偏估计，主要介绍
-    \item 最大误差最小
-\end{itemize}
-
-\subsection{矩形窗}
-
-矩形窗设计法满足最小均方误差准则，\(\alpha = (N - 1) / 2\) 。
-
-若有线性相位约束，窗函数必须保证所截取 \(h(n)\) 是对称的。
-
-过渡带带宽正比于主瓣宽度 \(4 \pi / N\)。截止频率位于 \((\omega_p + \omega_{st}) / 2\) 。
-
-但是矩形窗截断造成肩峰为 \(8.95 \%\)，则阻带最小衰减为 -21db，在工程上远不够。
-
-\[
-w(n)=R_{N}(n) \quad W_{R}\left(e^{j w}\right)=W_{R}(w) e^{=j\left(\frac{N-1}{2}\right) w}
-\]
-
-\subsection{三角窗}
-
-\[
-w(n)=\left\{\begin{array}{l}
-\frac{2 n}{N-1}, 0 \leq n \leq \frac{N-1}{2} \\
-2-\frac{2 n}{N-1}, \frac{N-1}{2}<n \leq N-1
-\end{array}\right.
-\]
-
-\[
-W\left(e^{j w}\right)=\frac{2}{N-1}\left[\frac{\sin \left[\left(\frac{N-1}{4}\right) w\right]}{\sin \left(\frac{w}{2}\right)}\right]^{2} e^{-j\left(\frac{N-1}{2}\right) w} \approx \frac{2}{N}\left[\frac{\sin \left(\frac{N w}{4}\right)}{\sin \left(\frac{w}{2}\right)}\right]^{2} e^{-j\left(\frac{N-1}{2}\right) w}
-\]
-
-
-主瓣宽度 \(8 \pi / M\) ，突出主瓣。
-
-\subsection{Hanning}
-
-对次瓣进行衰减，主瓣宽度为 \(8 \pi / N\) ，衰减为 \(44 dB\) 。
-
-\[
-w(n)=\frac{1}{2}\left[1-\cos \left(\frac{2 \pi n}{N-1}\right)\right] R_{N}(n)
-\]
+\[\begin{aligned}
+    x(n) &= x_e(n) + x_o(n) \\ 
+    x(-n) &= x_e(-n) + x_o(-n) = x_e^*(n) - x_o^*(n) 
+\end{aligned}\]
 
 \[
 \begin{array}{l}
-W\left(e^{j w}\right)=D T F T \quad[w(n)] \\
-=\left\{0.5 W_{R}(w)+0.25\left[W_{R}\left(w-\frac{2 \pi}{N-1}\right)+W_{R}\left(w+\frac{2 \pi}{N-1}\right)\right]\right\} e^{-j\left(\frac{N-1}{2}\right) w} \\
-=W(w) e^{-j\left(\frac{N-1}{2}\right) w}
+x_{e}(n)=\frac{1}{2}\left[x(n)+x^{*}(-n)\right] \\
+x_{o}(n)=\frac{1}{2}\left[x(n)-x^{*}(-n)\right]
 \end{array}
 \]
 
-\subsection{Hamming}
-
-\(53 dB\) 。
+根据下一小节的性质：
 
 \[
-w(n)=\left[0.54-0.46 \cos \left(\frac{2 \pi n}{N-1}\right)\right] R_{R}(n)
+\begin{array}{l}
+X_{e}\left(e^{j \omega}\right)=\frac{1}{2}\left[X\left(e^{j \omega}\right)+X^{*}\left(e^{-j \omega}\right)\right] \\
+X_{o}\left(e^{j \omega}\right)=\frac{1}{2}\left[X\left(e^{j \omega}\right)-X^{*}\left(e^{-j \omega}\right)\right]
+\end{array}
 \]
+
+同样的对频域函数进行变换：
+
+\[X(e^{j\omega}) = X_e(e^{j\omega}) + X_o(e^{-j\omega})\] 
+
+\[
+\begin{array}{l}
+X_{e}\left(e^{j \omega}\right)=\frac{1}{2}\left[X\left(e^{j \omega}\right)+X^{*}\left(e^{-j \omega}\right)\right] \\
+X_{o}\left(e^{j \omega}\right)=\frac{1}{2}\left[X\left(e^{j \omega}\right)-X^{*}\left(e^{-j \omega}\right)\right]
+\end{array}
+\]
+
+逆变换：
+\[
+\begin{array}{l}
+D T F T\{\operatorname{Re}[x(n)]\}=X_{e}\left(e^{j \omega}\right) \\
+D T F T\{j \operatorname{Im}[x(n)]\}=X_{o}\left(e^{j \omega}\right)
+\end{array}
+\]
+\section{变换共轭性质}
+
+具有普适性。
+
+\[
+\begin{array}{c}
+\mathcal{Z}\left[x^{*}[n]\right]=\dsum_{n=-\infty}^{\infty} x^{*}[n] z^{-n}=\left(\dsum_{n=-\infty}^{\infty} x[n]\left(z^{*}\right)^{-n}\right)^{*}=X^{*}\left(z^{*}\right) \\
+\mathcal{Z}[x[-n]]=\dsum_{n=-\infty}^{\infty} x[-n] z^{-n}=\dsum_{n=-\infty}^{\infty} x[n]\left(z^{-1}\right)^{-n}=X\left(z^{-1}\right) \\
+\mathcal{Z}[\operatorname{Re}\{x[n]\}]=\mathcal{Z}\left[\dfrac{x[n]+x^{*}[n]}{2}\right]=\dfrac{1}{2}\left[X(z)+X^{*}\left(z^{*}\right)\right] \\
+\mathcal{Z}[\operatorname{Im}\{x[n]\}]=\mathcal{Z}\left[\dfrac{z[n]-x^{*}[n]}{2 j}\right]=\dfrac{1}{2 j}\left[X(z)-X^{*}\left(z^{*}\right)\right]
+\end{array}
+\]
+
+\section{Z 变换}
+
+
+\begin{longtable}{lll} 
+    \caption{\(\mathscr{Z}\)变换对} \\ 
+    \toprule
+    时域函数 & \(z\)域函数 & ROC \\
+    \midrule
+    \endfirsthead
+    
+    \toprule
+    时域函数 & \(z\)域函数 & ROC \\
+    \midrule
+    \endhead 
+  
+    \hline
+    \multicolumn{3}{c}{见下页}\\   \bottomrule
+    \endfoot
+  
+    \bottomrule
+    \endlastfoot
+    \(\delta(n)\) & 1 & 全平面\\
+    \(u(n)\) & \(\dfrac{z}{z-1}\) & \(\abs{z}>1\) \\
+    \(a^n u(n)\) & \(\dfrac{z}{z-a}\) & \(\abs{z}>a\) \\
+    \(-a^n u(-n-1)\) & \(\dfrac{z}{z-a}\) & \(\abs{z}<a\)\\
+    \(\cos(\omega_0 n)u(n)\) & \(\dfrac{z^2-z \cos \omega_0}{z^2 - 2 z \cos\omega_0 + 1}\) & \(\abs{z}>1\) \\
+    \(\sin(\omega_0 n)u(n)\) & \(\dfrac{z \sin\omega_0}{z^2 -2 z \cos\omega_0 + 1}\) &  \(\abs{z}>1\) \\
+
+\end{longtable}
+  
+
+
+\begin{longtable}{llll} 
+    \caption{\(\mathscr{Z}\)变换性质} \\ 
+    \toprule
+    时域函数 & \(z\)域函数 & 原ROC  & 变换后ROC\\
+    \midrule
+    \endfirsthead
+    
+    \toprule
+    时域函数 & \(z\)域函数 & 原ROC  & 变换后ROC\\
+    \midrule
+    \endhead 
+  
+    \hline
+    \multicolumn{4}{c}{见下页}\\   \bottomrule
+    \endfoot
+  
+    \bottomrule
+    \endlastfoot
+    \(x(-n)\) & \(X(z^{-1})\) & \(\alpha < \abs{z} < \beta\) & \(\dfrac{1}{\beta} < \abs{z} < \dfrac{1}{\alpha}\)\\
+    \(x(\dfrac{n}{a}),a>0\) & \(X(z^a)\) & \(\alpha < \abs{z} < \beta\) & \(\alpha^{1/a} < \abs{z} < \beta^{1/a}\) \\
+    \(x(n \pm m)\) & 双边 \(z^{\pm m}X(z)\) &  \(\alpha < \abs{z} < \beta\) &  \(\alpha < \abs{z} < \beta\) \\
+    \(x(n - m)u(n)\) & 单边 \(z^{-m} \left[X(z) + \dsum_{k=-m}^{-1}x(k)z^{-k}\right]\) & \(\abs{z} > a\) & \(\abs{z} > a\) \\
+    \(x(n + m)u(n)\) & 单边 \(z^{m} \left[X(z) - \dsum_{k=0}^{m-1}x(k)z^{-k}\right]\) & \(\abs{z} > a\) & \(\abs{z} > a\) \\
+    线性性 & & & 原收敛域的交集 \\
+    \(n x(n)\) & \(-z \dfrac{\dd{X(z)}}{\dd{z}}\) & \(\alpha < \abs{z} < \beta\) & \(\alpha < \abs{z} < \beta\)\\
+    \(n^m x(n)\) & \(\left[-z\dfrac{\dd{}}{\dd{z}}\right]^m X(z)\) & \(\alpha < \abs{z} < \beta\) & \(\alpha < \abs{z} < \beta\)\\
+    \(a^n x(n)\) & \(X(\dfrac{z}{a})\) &  \(\alpha < \abs{z} < \beta\) &  \(\alpha < \abs{\dfrac{z}{a}} < \beta\) \\
+    \(x_1(n) \otimes x_2(n)\) & \(X_1(z) X_2(z)\) & & 原收敛域交集 \\
+    \(x_1(n)x_2(n)\) & \(\dfrac{1}{2 \pi j}\displaystyle\oint_C X_1(\dfrac{z}{v})X_2(v) v^{-1} \dd{v} \)\footnote{其中\(C\)是\(X_1(\dfrac{z}{v})X_2(v)\) 收敛域交集内的逆时针方向围线} & & 收敛域是边界的乘积 \\
+\end{longtable}
+
+初值定理 \[\lim _{z \rightarrow \infty} X(z)=\lim _{z \rightarrow \infty} \dsum_{n=0}^{\infty} x(n) z^{-n}=x(0)\]
+
+终值定理 \[\lim_{z\rightarrow 1}(z-1)X(z) = x(\infty)\]
+
+帕塞瓦尔定理
+
+\[
+\left.Y(z)\right|_{z=1}=\sum_{n=-\infty}^{+\infty} x(n) h^{*}(n)=\frac{1}{2 \pi j} \oint_{c} X(v) H^{*}\left(\frac{1}{V^{*}}\right)_{V}^{-1} d V
+\]
+
+\section{逆 Z 变换}
+
+\subsection{部分分式法}
+
+对于有理多项式 \[
+    X(z)=\dfrac{B(z)}{A(z)}=\dfrac{b_{m} z^{m}+b_{m-1} z^{m-1}+\cdots+b_{1} z+b_{0}}{a_{n} z^{n}+a_{n-1} z^{n-1}+\cdots+a_{1} z+a_{0}}
+\]
+对于分解得到的 \(\dfrac{k z}{z-a}\)
 
 \[
 \begin{aligned}
-W(w)=& 0.54 W_{R}(w)+0.23\left[W_{R}\left(w-\frac{2 \pi}{N-1}\right)+W_{R}\left(w+\frac{2 \pi}{N-1}\right)\right] \\
-& \approx 0.54 W_{R}(w)+0.23\left[W_{R}\left(w-\frac{2 \pi}{N}\right)+W_{R}\left(w+\frac{2 \pi}{N}\right)\right],(\text { 当 } N>1)
-\end{aligned}
+    &k a^n u(n), \abs{z} > a\\
+    &-k a^n u(-n-1), \abs{z} < a\\
+\end{aligned}    
 \]
 
-\subsection{Blackman}
+\section{从能量看 Z 变换与 DTFT} 
 
-\(74 dB\)  \(12 \pi / N\) 
+时域频域的能量是一致的，没有发生衰减。
 
-\[
-w(n)=\left[0.42-0.5 \cos \left(\frac{2 \pi n}{N-1}\right)+0.08 \cos \left(\frac{4 \pi n}{N-1}\right)\right] R_{N}(n)
-\]
+
+\section{Z 变换与时域频域}
+
+为了解决非零状态系统，使用单边 Z 变换。
+
+系统不改变频率：
 
 \[
 \begin{array}{l}
-W(w)=0.42 W_{R}(w) \\
-+0.25\left[W_{R}\left(w-\frac{2 \pi}{N-1}\right)+W_{R}\left(w+\frac{2 \pi}{N-1}\right)\right]+0.04\left[W_{R}\left(w-\frac{4 \pi}{N-1}\right)+W_{R}\left(w+\frac{4 \pi}{N-1}\right)\right]
+y(n)=x(n)^{*} h(n) \\
+=\sum_{m=-\infty}^{+\infty} h(m) e^{j\left[\omega_{0}(n-m)+\phi\right]}=e^{j\left[\omega_{0} n+\phi\right]} \sum_{m=-\infty}^{+\infty} h(m) e^{-j \omega_{0} m} \\
+=e^{j\left[\omega_{0} n+\phi\right]} H\left(e^{j \omega_{0}}\right)=x(n) H\left(e^{j \omega_{0}}\right)
 \end{array}
 \]
 
-\subsection{Kaiser}
+\section{系统零极点与频率响应}
+
+\textbf{单位圆}上的系统函数是频率响应。
+
+\subsection{幅度响应}
+
+\begin{itemize}
+    \item 原点处的零极点幅度无影响
+    \item 经过单位圆上的零点幅度归零，单位圆附近的零点出现谷点
+    \item 经过单位圆上的极点幅度无穷大，单位圆附近的极点出现峰点
+    \item 远离零极点时影响较小
+\end{itemize}
+
+\subsection{相位响应}
+
+\begin{itemize}
+    \item 原点处的零极点对相位影响为线性，极点会引起滞后，零点会引起超前
+    \item 靠近单位圆的零极点会引起较大的波动
+    \item 远离极点零点的位置变换比较平缓
+    \item 单位圆外部零点或极点造成相位连续增长，而单位圆内零极点对相位影响则随频率周期性归零
+\end{itemize}
+
+对于圆内外零极点：
+
+\begin{itemize}
+    \item 圆内极点：顺时针经过，相位迅速延后
+    \item 圆外极点：顺时针经过，相位迅速提前
+    \item 圆内零点：顺时针经过：相位迅速提前
+    \item 圆外零点：顺时针经过：相位迅速延后
+\end{itemize}
+
+过单位圆零点相位突变 \(\pi\) 。
+
+\section{LTI 系统幅相特性分析}
+
+当给定幅度特性时，总可以通过共轭分解找到一个系统满足要求：
+ 
 
 \[
-w(n)=\frac{I_{0}\left(\beta \sqrt{1-\left(1-\frac{2 n}{N-1}\right)^{2}}\right)}{I_{0}(\beta)}
+\left|H\left(e^{j \omega}\right)\right|^{2}=H\left(e^{j \omega}\right) H *\left(e^{j \omega}\right)=\left.H(z) H^{*}\left(\frac{1}{z^{*}}\right)\right|_{z=e^{j \omega}}
 \]
 
-\(\beta\) 越大，过渡越大，衰减越大。
+\subsection{全通系统}
 
+频响恒为 \(1\) ，其零极点分别为：
 
+\[
+H_{a p}(z)=\frac{z^{-1}-a^{*}}{1-a z^{-1}}=-a^{*}\left(\frac{z-\frac{1}{a^{*}}}{z-a}\right)
+\]
 
+\chapter{复习题}
+
+2.44，
+
+\appendix
+
+\chapter{零极点幅度相位研究}
+
+\includepdf[pages=-, pagecommand={}]{../figure/zp.pdf}
 % End Here
 
 \let\chapname\undefined
 \ifx\mainclass\undefined
 \end{document}
-\fi 
+\fi  

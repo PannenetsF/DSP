@@ -24,10 +24,13 @@ if (t == 3)
   [H, W] = freqz(b_m, 1, [0:2*pi/400:2*pi]);
   H_abs=abs(H);
   H_ang=angle(H);
-  in_fft = fftshift(fft(in_t, N));
-  h_fft = fftshift(fft(b_m, N));
+  in_fft = fft(in_t, N);
+  h_fft = fft(b_m, N);
   out_fft = in_fft .* h_fft;
+  in_fft = fftshift(in_fft);
+  h_fft = fftshift(h_fft);
   out_t = ifft(out_fft);
+  out_fft = fftshift(out_fft);
   w = 0:2*pi/(N-1):2*pi;
   if (prt == 1) 
     figure(3);

@@ -8,9 +8,8 @@ for i = 1:length(N)
   win_name = sprintf('hamming window and DFT with %d points', N(i));
 
   % build the series
-  n = 0:(L/1024):L;
-  n = n(1:length(n)-1);
-  x = sin(3 * pi * n / 10) + 0.5 * sin(2 * pi * n / 5);
+  n = 0:L-1;
+  x =  3 * sin((pi * n)/3) + 4 * sin((pi * n)/5) + 5 * sin((pi * n)/8);
   
   % choose the window
   win = hamming(L);
@@ -21,7 +20,8 @@ for i = 1:length(N)
   % do fft and show it
   Y = fft(y, N(i));
   Y = fftshift(Y);
-  stem(abs(Y), '.');
+  w = (0:N(i)-1).*(2*pi/N(i));
+  stem(w,abs(Y),'.-');
   title(win_name);
 endfor
 

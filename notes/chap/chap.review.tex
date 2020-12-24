@@ -354,7 +354,28 @@ y(n)=x(n)^{*} h(n) \\
 
 过单位圆零点相位突变 \(\pi\) 。
 
-\section{}
+\section{LTI 系统幅相特性分析}
+
+当给定幅度特性时，总可以通过共轭分解找到一个系统满足要求：
+ 
+
+\[
+\left|H\left(e^{j \omega}\right)\right|^{2}=H\left(e^{j \omega}\right) H *\left(e^{j \omega}\right)=\left.H(z) H^{*}\left(\frac{1}{z^{*}}\right)\right|_{z=e^{j \omega}}
+\]
+
+\subsection{全通系统}
+
+频响恒为 \(1\) ，其零极点分别为 \(a\) 与 \(1/a^*\)： 
+
+\[
+H_{a p}(z)=\frac{z^{-1}-a^{*}}{1-a z^{-1}}=-a^{*}\left(\frac{z-\frac{1}{a^{*}}}{z-a}\right)
+\]
+
+其相位响应为：
+
+
+
+\subsection{}
 
 \chapter{复习题}
 
