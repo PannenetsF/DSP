@@ -95,13 +95,37 @@ R_{P}=-20 \lg \left(\frac{1-\alpha_{1}}{1+\alpha_{1}}\right) \\
 
 \section{模拟域设计}
 
-
 将 \(S\) 平面转换到 \(Z\) 平面 。
+
+步骤：
+
+\begin{itemize}
+    \item 离散指标转换到模拟指标
+    \item 模拟原型滤波器来逼近 \(H_c(s)\)
+    \item 变换到数字滤波器 \(H(z)\)
+    \item 数字滤波器进行等效变换后完成性能验证 \(H_{eff}(s)\)
+\end{itemize}
+
+变换条件：
+
+\begin{itemize}
+    \item 频率响应对应：\(S\) 平面虚轴需要映射到 \(Z\) 平面单位圆
+    \item 因果稳定：\(S\) 左半平面映射到单位圆内部，这样才是一个外圆环
+\end{itemize}
+
+主要方式：
+
+\begin{itemize}
+    \item 冲激响应不变法
+    \item 双线性 Z 变换
+\end{itemize}
+
 
 \subsection{冲激响应不变法}
 
 
 方法：使数字滤波器的单位冲激响应序列为模拟单位冲激响应的采样。
+
 
 \[
 h(n)=\left.h_{c}(t)\right|_{t=n T}=h_{c}(n T)
@@ -111,6 +135,20 @@ h(n)=\left.h_{c}(t)\right|_{t=n T}=h_{c}(n T)
 \left.H(z)\right|_{z=e^{r}}=\frac{1}{T} \sum_{n=-\infty}^{+\infty} H_{c}\left(s-j k \Omega_{s}\right)=\frac{1}{T} \sum_{n=-\infty}^{+\infty} H_{c}\left(s-j \frac{2 \pi k}{T}\right)
 \]
 
+
+原型：
+
+\[
+H_{c}(s)=\sum_{k=1}^{N} \frac{A_{k}}{s-s_{k}}
+\]
+
+
+将模拟滤波器分解为极点并联形式，不保证零点对应。
+采样时间太小时增益过高，需要进行一定衰减，如在系统函数乘以周期。
+模拟原型滤波器时域通常都无法理想带限，高频采样可以减少混叠。
+
+
+
 \[
 H_{e f f}(j \Omega)=\left\{\begin{array}{cc}
 \left.H\left(e^{j \omega}\right)\right|_{\omega=\Omega T}, & |\Omega|<\pi / T \\
@@ -118,11 +156,172 @@ H_{e f f}(j \Omega)=\left\{\begin{array}{cc}
 \end{array}\right.
 \]
 
-将模拟滤波器分解为极点并联形式，不保证零点对应。
+改换到阶跃响应不变法可以减少混叠。
 
-采样时间太小时增益过高，需要进行一定衰减，如在系统函数乘以周期。
 
-高频采样可以减少混叠。
+\subsection{双线性 Z 变换}
+
+冲激响应不变法和阶跃响应不变法由于使用了时域上的
+采样原理，所以不可避免的产生了频率响应混叠失真。
+
+这是一种单值映射。
+
+\[
+s=\frac{1-z^{-1}}{1+z^{-1}}
+\]
+
+工程中有 \[
+    \Omega=c^{*} \operatorname{tg}(\omega / 2)
+    \]
+
+那么
+
+\[
+H(z)=\left.H_{c}(s)\right|_{s=c \frac{1-z^{-1}}{1+z^{-1}}}
+\]
+
+变换不影响因果性与稳定性：
+
+\[
+\begin{aligned}
+z & =\frac{c+s}{c-s} \\
+|z| &=\sqrt{(c+\sigma)^{2}+\Omega^{2}} / \sqrt{(c-\sigma)^{2}+\Omega^{2}} \\ 
+s &= \sigma + j \Omega
+\end{aligned}
+\]
+
+\begin{itemize}
+    \item \(\sigma < 0\) ,  \(|z| > 1\) 
+    \item \(\sigma > 0\) ,  \(|z| < 1\) 
+    \item \(\sigma = 0\) ,  \(|z| = 1\) 
+\end{itemize}
+
+
+当时频率直接出现了畸变，并且丧失了线性相位特性。
+
+\subsubsection{频率预畸变}
+
+计算在通带、阻带的边缘频率，设计在这些位置满足指标的模拟原型。其中 \( 2 / T_D = c\) 。
+
+\[
+    \begin{array}{l}
+        \Omega_{D}=\frac{2}{T_{d}} \tan \left(\frac{\omega_{P}}{2}\right) \\
+        \Omega_{s}=\frac{2}{T_{d}} \tan \left(\frac{\omega_{s}}{2}\right)
+        \end{array}\]
+
+\subsection{数字频带变换}
+
+通过映射转换关系：将数字低通有理系统\(z\)变成因果稳定的有理系统\(Z\)，要求：
+
+\begin{itemize}
+    \item 映射是有理函数
+    \item 单位圆相互对应
+    \item 单位圆内部相互对应
+\end{itemize}
+
+\[
+    H_{d}(Z)=\left.H_{L}(z)\right|_{z^{-1}=G\left(Z^{-1}\right)}\]
+
+\(z, Z\) 对应 \(\theta, \omega\) ：
+
+\[
+e^{-j \theta}=\left|G\left(e^{-j \omega}\right)\right| e^{j \arg \left[G\left(e^{-j \omega}\right)\right]}
+\]
+
+\section{FIR 最优化准则} 
+
+严格线性相位！
+
+两种准则：
+
+\begin{itemize}
+    \item 均方误差最小：无偏估计，主要介绍
+    \item 最大误差最小
+\end{itemize}
+
+\subsection{矩形窗}
+
+矩形窗设计法满足最小均方误差准则，\(\alpha = (N - 1) / 2\) 。
+
+若有线性相位约束，窗函数必须保证所截取 \(h(n)\) 是对称的。
+
+过渡带带宽正比于主瓣宽度 \(4 \pi / N\)。截止频率位于 \((\omega_p + \omega_{st}) / 2\) 。
+
+但是矩形窗截断造成肩峰为 \(8.95 \%\)，则阻带最小衰减为 -21db，在工程上远不够。
+
+\[
+w(n)=R_{N}(n) \quad W_{R}\left(e^{j w}\right)=W_{R}(w) e^{=j\left(\frac{N-1}{2}\right) w}
+\]
+
+\subsection{三角窗}
+
+\[
+w(n)=\left\{\begin{array}{l}
+\frac{2 n}{N-1}, 0 \leq n \leq \frac{N-1}{2} \\
+2-\frac{2 n}{N-1}, \frac{N-1}{2}<n \leq N-1
+\end{array}\right.
+\]
+
+\[
+W\left(e^{j w}\right)=\frac{2}{N-1}\left[\frac{\sin \left[\left(\frac{N-1}{4}\right) w\right]}{\sin \left(\frac{w}{2}\right)}\right]^{2} e^{-j\left(\frac{N-1}{2}\right) w} \approx \frac{2}{N}\left[\frac{\sin \left(\frac{N w}{4}\right)}{\sin \left(\frac{w}{2}\right)}\right]^{2} e^{-j\left(\frac{N-1}{2}\right) w}
+\]
+
+
+主瓣宽度 \(8 \pi / M\) ，突出主瓣。
+
+\subsection{Hanning}
+
+对次瓣进行衰减，主瓣宽度为 \(8 \pi / N\) ，衰减为 \(44 dB\) 。
+
+\[
+w(n)=\frac{1}{2}\left[1-\cos \left(\frac{2 \pi n}{N-1}\right)\right] R_{N}(n)
+\]
+
+\[
+\begin{array}{l}
+W\left(e^{j w}\right)=D T F T \quad[w(n)] \\
+=\left\{0.5 W_{R}(w)+0.25\left[W_{R}\left(w-\frac{2 \pi}{N-1}\right)+W_{R}\left(w+\frac{2 \pi}{N-1}\right)\right]\right\} e^{-j\left(\frac{N-1}{2}\right) w} \\
+=W(w) e^{-j\left(\frac{N-1}{2}\right) w}
+\end{array}
+\]
+
+\subsection{Hamming}
+
+\(53 dB\) 。
+
+\[
+w(n)=\left[0.54-0.46 \cos \left(\frac{2 \pi n}{N-1}\right)\right] R_{R}(n)
+\]
+
+\[
+\begin{aligned}
+W(w)=& 0.54 W_{R}(w)+0.23\left[W_{R}\left(w-\frac{2 \pi}{N-1}\right)+W_{R}\left(w+\frac{2 \pi}{N-1}\right)\right] \\
+& \approx 0.54 W_{R}(w)+0.23\left[W_{R}\left(w-\frac{2 \pi}{N}\right)+W_{R}\left(w+\frac{2 \pi}{N}\right)\right],(\text { 当 } N>1)
+\end{aligned}
+\]
+
+\subsection{Blackman}
+
+\(74 dB\)  \(12 \pi / N\) 
+
+\[
+w(n)=\left[0.42-0.5 \cos \left(\frac{2 \pi n}{N-1}\right)+0.08 \cos \left(\frac{4 \pi n}{N-1}\right)\right] R_{N}(n)
+\]
+
+\[
+\begin{array}{l}
+W(w)=0.42 W_{R}(w) \\
++0.25\left[W_{R}\left(w-\frac{2 \pi}{N-1}\right)+W_{R}\left(w+\frac{2 \pi}{N-1}\right)\right]+0.04\left[W_{R}\left(w-\frac{4 \pi}{N-1}\right)+W_{R}\left(w+\frac{4 \pi}{N-1}\right)\right]
+\end{array}
+\]
+
+\subsection{Kaiser}
+
+\[
+w(n)=\frac{I_{0}\left(\beta \sqrt{1-\left(1-\frac{2 n}{N-1}\right)^{2}}\right)}{I_{0}(\beta)}
+\]
+
+\(\beta\) 越大，过渡越大，衰减越大。
 
 
 

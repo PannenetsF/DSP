@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.12.20)  22 DEC 2020 21:08
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.12.20)  24 DEC 2020 12:39
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/pannenetsf/Documents/Subjects/dsp/notes/chap/chap.review
-(/home/pannenetsf/Documents/Subjects/dsp/notes/chap/chap.review.tex
+**/home/pannenetsf/Documents/Subjects/dsp/notes/chap/chap.05filter
+(/home/pannenetsf/Documents/Subjects/dsp/notes/chap/chap.05filter.tex
 LaTeX2e <2020-10-01> patch level 2
 L3 programming layer <2020-12-07> xparse <2020-03-03> (./elegantbook.cls
 Document Class: elegantbook 2020/06/03 v4.0.1 ElegantBook document class
@@ -1245,8 +1245,8 @@ Package: shapepar 2013/03/26 v 2.2x, Shaped paragraphs
 \SH@ntries=\count419
 \spec@bot=\dimen356
 \sqrtcount=\count420
-)) (./chap.review.aux)
-\openout1 = `chap.review.aux'.
+)) (./chap.05filter.aux)
+\openout1 = `chap.05filter.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
 LaTeX Font Info:    ... okay on input line 4.
@@ -1281,9 +1281,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 4.
 LaTeX Info: Redefining \pageref on input line 4.
 LaTeX Info: Redefining \nameref on input line 4.
- (./chap.review.out) (./chap.review.out)
+ (./chap.05filter.out) (./chap.05filter.out)
 \@outlinefile=\write10
-\openout10 = `chap.review.out'.
+\openout10 = `chap.05filter.out'.
 
 
 *geometry* driver: auto-detecting
@@ -1347,35 +1347,26 @@ Package footmisc Info: Declaring symbol style lamport*-robust on input line 924.
 
 第\nobreakspace {}一\nobreakspace {}章 1.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 12.
+(Font)              scaled to size 10.95pt on input line 9.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 17.28pt on input line 12.
+(Font)              scaled to size 17.28pt on input line 9.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 14.
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 16.
+(Font)              scaled to size 14.4pt on input line 11.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 12.0pt on input line 13.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 38.
 (/opt/texlive2020/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 16.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 38.
  (/opt/texlive2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 16.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 38.
  (/opt/texlive2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 12.0pt on input line 22.
- [1
+) [1
 
-
-]
-第\nobreakspace {}二\nobreakspace {}章 2.
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 92.
-LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.0pt on input line 92.
-[2
 
 ]
 
@@ -1395,54 +1386,27 @@ Package fontspec Info: Font family 'FandolKai-Regular(0)' created for font
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 159.
-[3] [4]
-Overfull \hbox (10.86806pt too wide) in alignment at lines 247--252
- [] [] [] [] 
- []
-
-
-Overfull \hbox (10.86806pt too wide) in alignment at lines 252--257
- [] [] [] [] 
- []
-
-
-Overfull \hbox (10.86806pt too wide) in alignment at lines 257--261
- [] [] [] [] 
- []
-
-
-Overfull \hbox (10.86806pt too wide) in alignment at lines 261--264
- [] [] [] [] 
- []
-
-LaTeX Font Info:    Trying to load font information for T1+ntxsups on input line 275.
-(/opt/texlive2020/texmf-dist/tex/latex/newtx/t1ntxsups.fd
-File: t1ntxsups.fd 2015/01/17 v1.0
-)
-LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
-(Font)              scaled to size 10.95pt on input line 275.
+(Font)              scaled to size 8.0pt on input line 119.
+[2] [3] [4]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 9.0pt on input line 275.
-LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
-(Font)              scaled to size 9.0pt on input line 275.
-
-Overfull \hbox (10.86806pt too wide) in alignment at lines 264--276
- [] [] [] [] 
+(Font)              scaled to size 6.0pt on input line 299.
+ [5]
+Overfull \hbox (1.97742pt too wide) detected at line 316
+[]
  []
 
-[5] [6] [7] (./chap.review.aux)
-Package rerunfilecheck Info: File `chap.review.out' has not changed.
-(rerunfilecheck)             Checksum: 5DB5768B689357B9C9D31684A18D5C27;1604.
+[6] (./chap.05filter.aux)
+Package rerunfilecheck Info: File `chap.05filter.out' has not changed.
+(rerunfilecheck)             Checksum: 2FD8902F7A753B8DEB7732DD63883011;606.
  )
-(\end occurred when \ifx on line 313 was incomplete) 
+(\end occurred when \ifx on line 331 was incomplete) 
 Here is how much of TeX's memory you used:
- 38204 strings out of 477298
- 788665 string characters out of 5835645
- 1494780 words of memory out of 5000000
- 57069 multiletter control sequences out of 15000+600000
- 441129 words of font info for 100 fonts, out of 8000000 for 9000
+ 38201 strings out of 477298
+ 790878 string characters out of 5835645
+ 1493782 words of memory out of 5000000
+ 57079 multiletter control sequences out of 15000+600000
+ 429651 words of font info for 76 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 113i,17n,135p,618b,607s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 113i,12n,135p,620b,737s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on chap.review.pdf (7 pages).
+Output written on chap.05filter.pdf (6 pages).

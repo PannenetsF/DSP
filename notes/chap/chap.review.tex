@@ -1,5 +1,6 @@
 \ifx\mainclass\undefined
 \documentclass[cn,11pt,chinese,black,simple]{elegantbook}
+\usepackage{pdfpages}
 \input{../needed.tex}
 \begin{document}
 \fi 
@@ -306,9 +307,62 @@ D T F T\{j \operatorname{Im}[x(n)]\}=X_{o}\left(e^{j \omega}\right)
 时域频域的能量是一致的，没有发生衰减。
 
 
-\section*{复习题}
+\section{Z 变换与时域频域}
+
+为了解决非零状态系统，使用单边 Z 变换。
+
+系统不改变频率：
+
+\[
+\begin{array}{l}
+y(n)=x(n)^{*} h(n) \\
+=\sum_{m=-\infty}^{+\infty} h(m) e^{j\left[\omega_{0}(n-m)+\phi\right]}=e^{j\left[\omega_{0} n+\phi\right]} \sum_{m=-\infty}^{+\infty} h(m) e^{-j \omega_{0} m} \\
+=e^{j\left[\omega_{0} n+\phi\right]} H\left(e^{j \omega_{0}}\right)=x(n) H\left(e^{j \omega_{0}}\right)
+\end{array}
+\]
+
+\section{系统零极点与频率响应}
+
+\textbf{单位圆}上的系统函数是频率响应。
+
+\subsection{幅度响应}
+
+\begin{itemize}
+    \item 原点处的零极点幅度无影响
+    \item 经过单位圆上的零点幅度归零，单位圆附近的零点出现谷点
+    \item 经过单位圆上的极点幅度无穷大，单位圆附近的极点出现峰点
+    \item 远离零极点时影响较小
+\end{itemize}
+
+\subsection{相位响应}
+
+\begin{itemize}
+    \item 原点处的零极点对相位影响为线性，极点会引起滞后，零点会引起超前
+    \item 靠近单位圆的零极点会引起较大的波动
+    \item 远离极点零点的位置变换比较平缓
+    \item 单位圆外部零点或极点造成相位连续增长，而单位圆内零极点对相位影响则随频率周期性归零
+\end{itemize}
+
+对于圆内外零极点：
+
+\begin{itemize}
+    \item 圆内极点：顺时针经过，相位迅速延后
+    \item 圆外极点：顺时针经过，相位迅速提前
+    \item 圆内零点：顺时针经过：相位迅速提前
+    \item 圆外零点：顺时针经过：相位迅速延后
+\end{itemize}
+
+过单位圆零点相位突变 \(\pi\) 。
+
+\chapter{复习题}
 
 2.44，
+
+\appendix
+
+\chapter{零极点幅度相位研究}
+
+\includepdf[pages=-, pagecommand={}]{../figure/zp.pdf}
 % End Here
 
 \let\chapname\undefined
