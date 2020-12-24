@@ -20,6 +20,7 @@ for i = 1:length(N)
   
   % do fft and show it
   Y = fft(y, N(i));
+  Y = fftshift(Y);
   stem(abs(Y), '.');
   title(win_name);
 endfor

@@ -2,6 +2,7 @@
 smps = length(in_t);
 % fft the input audio 
 in_f = fft(in_t, smps);
+in_f = fftshift(in_f);
 % in_f = fftshift(in_f);
 f = ((1:length(in_f))-(length(in_f) / 2))/(length(in_f) / 2)*pi;
 
@@ -17,6 +18,7 @@ title("The angle of the audio\'s frequency");
 
 
 % compute the white noise
+in_f = fftshift(in_f);
 check_f = abs(in_f(1:ceil(length(in_f)/2)));
 [max_v, max_i] = max(check_f)
 freq_white = 2 * pi * max_i / smps / (1/fs) / 2 / pi;
@@ -29,6 +31,7 @@ in_f = fft(in_t, smps);
 f = ((1:length(in_f))-(length(in_f) / 2))/(length(in_f) / 2)*pi;
 
 % plot the input audio's frequency after down sampling 
+in_f = fftshift(in_f);
 figure(6);
 subplot(2,1,1);
 plot(f, abs(in_f), '.-.');
@@ -60,6 +63,7 @@ title(sprintf('n = %d order Bandpass Filter: phase-frequency response',N))
 figure(9)
 out_t = conv(in_t, fcoeff);
 out_f = fft(out_t, length(out_t));
+out_f = fftshift(out_f);
 % out_f = fftshift(out_f);
 
 % plot the output audio's frequency
@@ -75,6 +79,7 @@ figure(10)
 smps = 10000;
 % fft the input audio 
 out_f = fft(out_t, smps);
+out_f = fftshift(out_f);
 % in_f = fftshift(in_f);
 f = ((1:length(out_f))-(length(out_f) / 2))/(length(out_f) / 2)*pi;
 

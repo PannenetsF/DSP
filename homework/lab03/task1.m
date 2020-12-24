@@ -29,6 +29,7 @@ for len = 1:length(L)
     
     % do fft and show it
     Y = fft(y, l_now);
+    Y = fftshift(Y);
     subplot(2,1,wt);
     stem(abs(Y), '.');
     title(win_name);

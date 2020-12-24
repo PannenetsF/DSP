@@ -17,17 +17,18 @@ if (t == 2 && prt == 1)
     figure(6);
     stem(b_m);
     title("The time zone waveform of h");
-    saveas(6, './6.png');    
+    saveas(6, './l1s1p6.png');    
 endif
 
 if (t == 3)
   [H, W] = freqz(b_m, 1, [0:2*pi/400:2*pi]);
   H_abs=abs(H);
   H_ang=angle(H);
-  in_fft = fft(in_t, N);
-  h_fft = fft(b_m, N);
+  in_fft = fftshift(fft(in_t, N));
+  h_fft = fftshift(fft(b_m, N));
   out_fft = in_fft .* h_fft;
   out_t = ifft(out_fft);
+  w = 0:2*pi/(N-1):2*pi;
   if (prt == 1) 
     figure(3);
     subplot(2,1,1)
@@ -42,9 +43,10 @@ if (t == 3)
     figure(5);
     stem(abs(out_fft));
     title('The frequency domain waveform of OUTPUT');
-    saveas(3,'./3.png');
-    saveas(4,'./4.png');
-    saveas(5,'./5.png');
+
+    saveas(3,'./l1s1p3.png');
+    saveas(4,'./l1s1p4.png');
+    saveas(5,'./l1s1p5.png');
   endif
 else
   out_t = func_comp(in_t, b_m);
@@ -57,8 +59,8 @@ if (prt == 1)
   figure(2);
   stem(out_t);
   title('The time domain waveform of OUTPUT');
-  saveas(1,'./1.png');
-  saveas(2,'./2.png');
+  saveas(1,'./l1s1p1.png');
+  saveas(2,'./l1s1p2.png');
 endif
 
 
