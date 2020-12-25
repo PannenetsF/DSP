@@ -168,8 +168,8 @@ D T F T^{-1}\left[X\left(e^{j \omega}\right)\right]&=\dfrac{1}{2 \pi} \int_{-\pi
 
 \[
 \begin{array}{l}
-x_{e}(n)=\frac{1}{2}\left[x(n)+x^{*}(-n)\right] \\
-x_{o}(n)=\frac{1}{2}\left[x(n)-x^{*}(-n)\right]
+x_{e}(n)=\dfrac{1}{2}\left[x(n)+x^{*}(-n)\right] \\
+x_{o}(n)=\dfrac{1}{2}\left[x(n)-x^{*}(-n)\right]
 \end{array}
 \]
 
@@ -177,8 +177,8 @@ x_{o}(n)=\frac{1}{2}\left[x(n)-x^{*}(-n)\right]
 
 \[
 \begin{array}{l}
-X_{e}\left(e^{j \omega}\right)=\frac{1}{2}\left[X\left(e^{j \omega}\right)+X^{*}\left(e^{-j \omega}\right)\right] \\
-X_{o}\left(e^{j \omega}\right)=\frac{1}{2}\left[X\left(e^{j \omega}\right)-X^{*}\left(e^{-j \omega}\right)\right]
+X_{e}\left(e^{j \omega}\right)=\dfrac{1}{2}\left[X\left(e^{j \omega}\right)+X^{*}\left(e^{-j \omega}\right)\right] \\
+X_{o}\left(e^{j \omega}\right)=\dfrac{1}{2}\left[X\left(e^{j \omega}\right)-X^{*}\left(e^{-j \omega}\right)\right]
 \end{array}
 \]
 
@@ -188,8 +188,8 @@ X_{o}\left(e^{j \omega}\right)=\frac{1}{2}\left[X\left(e^{j \omega}\right)-X^{*}
 
 \[
 \begin{array}{l}
-X_{e}\left(e^{j \omega}\right)=\frac{1}{2}\left[X\left(e^{j \omega}\right)+X^{*}\left(e^{-j \omega}\right)\right] \\
-X_{o}\left(e^{j \omega}\right)=\frac{1}{2}\left[X\left(e^{j \omega}\right)-X^{*}\left(e^{-j \omega}\right)\right]
+X_{e}\left(e^{j \omega}\right)=\dfrac{1}{2}\left[X\left(e^{j \omega}\right)+X^{*}\left(e^{-j \omega}\right)\right] \\
+X_{o}\left(e^{j \omega}\right)=\dfrac{1}{2}\left[X\left(e^{j \omega}\right)-X^{*}\left(e^{-j \omega}\right)\right]
 \end{array}
 \]
 
@@ -283,7 +283,7 @@ D T F T\{j \operatorname{Im}[x(n)]\}=X_{o}\left(e^{j \omega}\right)
 帕塞瓦尔定理
 
 \[
-\left.Y(z)\right|_{z=1}=\sum_{n=-\infty}^{+\infty} x(n) h^{*}(n)=\frac{1}{2 \pi j} \oint_{c} X(v) H^{*}\left(\frac{1}{V^{*}}\right)_{V}^{-1} d V
+\left.Y(z)\right|_{z=1}=\dsum_{n=-\infty}^{+\infty} x(n) h^{*}(n)=\dfrac{1}{2 \pi j} \oint_{c} X(v) H^{*}\left(\dfrac{1}{V^{*}}\right)_{V}^{-1} d V
 \]
 
 \section{逆 Z 变换}
@@ -316,7 +316,7 @@ D T F T\{j \operatorname{Im}[x(n)]\}=X_{o}\left(e^{j \omega}\right)
 \[
 \begin{array}{l}
 y(n)=x(n)^{*} h(n) \\
-=\sum_{m=-\infty}^{+\infty} h(m) e^{j\left[\omega_{0}(n-m)+\phi\right]}=e^{j\left[\omega_{0} n+\phi\right]} \sum_{m=-\infty}^{+\infty} h(m) e^{-j \omega_{0} m} \\
+=\dsum_{m=-\infty}^{+\infty} h(m) e^{j\left[\omega_{0}(n-m)+\phi\right]}=e^{j\left[\omega_{0} n+\phi\right]} \dsum_{m=-\infty}^{+\infty} h(m) e^{-j \omega_{0} m} \\
 =e^{j\left[\omega_{0} n+\phi\right]} H\left(e^{j \omega_{0}}\right)=x(n) H\left(e^{j \omega_{0}}\right)
 \end{array}
 \]
@@ -360,7 +360,7 @@ y(n)=x(n)^{*} h(n) \\
  
 
 \[
-\left|H\left(e^{j \omega}\right)\right|^{2}=H\left(e^{j \omega}\right) H *\left(e^{j \omega}\right)=\left.H(z) H^{*}\left(\frac{1}{z^{*}}\right)\right|_{z=e^{j \omega}}
+\left|H\left(e^{j \omega}\right)\right|^{2}=H\left(e^{j \omega}\right) H *\left(e^{j \omega}\right)=\left.H(z) H^{*}\left(\dfrac{1}{z^{*}}\right)\right|_{z=e^{j \omega}}
 \]
 
 \subsection{全通系统}
@@ -368,7 +368,7 @@ y(n)=x(n)^{*} h(n) \\
 频响恒为 \(1\) ，其零极点分别为 \(a\) 与 \(1/a^*\)： 
 
 \[
-H_{a p}(z)=\frac{z^{-1}-a^{*}}{1-a z^{-1}}=-a^{*}\left(\frac{z-\frac{1}{a^{*}}}{z-a}\right)
+H_{a p}(z)=\dfrac{z^{-1}-a^{*}}{1-a z^{-1}}=-a^{*}\left(\dfrac{z-\dfrac{1}{a^{*}}}{z-a}\right)
 \]
 
 其相位响应为：群延迟为正值，连续相位递减。
@@ -378,9 +378,9 @@ H_{a p}(z)=\frac{z^{-1}-a^{*}}{1-a z^{-1}}=-a^{*}\left(\frac{z-\frac{1}{a^{*}}}{
 \begin{aligned}
 &\text { Assume: } \quad a=r e^{j \theta}\\
 &\arg \left[H_{a p}\left(e^{j \omega}\right)\right]\\
-&=-\omega-2 \operatorname{arctg}\left[\frac{r \sin (\omega-\theta)}{1-r \cos (\omega-\theta)}\right]\\
+&=-\omega-2 \operatorname{arctg}\left[\dfrac{r \sin (\omega-\theta)}{1-r \cos (\omega-\theta)}\right]\\
 &g r d\left[H_{a p}\left(e^{j \omega}\right)\right]\\
-&=\frac{1-r^{2}}{\left|1-r e^{-j(\omega-\theta)}\right|^{2}}
+&=\dfrac{1-r^{2}}{\left|1-r e^{-j(\omega-\theta)}\right|^{2}}
 \end{aligned}
 \]
 
@@ -397,7 +397,7 @@ H_{a p}(z)=\frac{z^{-1}-a^{*}}{1-a z^{-1}}=-a^{*}\left(\frac{z-\frac{1}{a^{*}}}{
 
 要求极点在单位圆内（主要考虑系统稳定性），要求零点在单位圆内（主要考虑相位变化最小）。
 
-最小相位系统零极点均在单位圆内，极点往往与系统稳定性联系在一起，零点则往往与系统的延时特性联系在一起。逆系统是稳定的。
+最小相位系统零极点均在单位圆内，极点往往与系统稳定性联系在一起，零点则往往与系统的延时特性联系在一起。逆系统也是因果稳定的，可以实现幅度和相位失真的完全补偿。
 
 \begin{itemize}
     \item 最小相位延迟，全通系统总是使最小相位系统的连续相位减小：\[
@@ -414,8 +414,112 @@ H_{a p}(z)=\frac{z^{-1}-a^{*}}{1-a z^{-1}}=-a^{*}\left(\frac{z-\frac{1}{a^{*}}}{
         \operatorname{grd}\left[H\left(e^{j \omega}\right)\right] &\geq \operatorname{grd}\left[H_{\min }\left(e^{j \omega}\right)\right]
     \end{aligned}
         \]
-    \item 最小能量延迟
+    \item 最小能量延迟，最集中在 \(n = 0\) 范围内：\[
+        \dsum_{m=0}^{n}|h(n)|^{2} \leq \dsum_{m=0}^{n}\left|h_{\min }(m)\right|^{2}
+        \] 
+        因此：\[
+            |h(0)| \leq\left|h_{\min }(0)\right|
+            \]
 \end{itemize}
+
+最大能量延迟则发生在全部零点位于单位圆外的系统，因此该系统也称为最大相位系统。
+
+\subsection{系统的补偿}
+
+幅度失真由最小相位因子补偿，相位失真利用全通因子补偿特定频段。
+
+\subsection{线性相位系统}
+
+定义：群延迟 \(\alpha\) 为常数 \(\phi(\omega) = - \alpha \omega + \beta\)
+
+线性相位响应时域表现为信号平移，波形不发生失真。
+
+不考虑幅度响应条件下，线性相位系统即是所要寻找的物理可实现的无失真传输系统。
+
+若是群延迟 \(\alpha\) 满足 \(2 \alpha\) 为整数，那么单位冲激响应严格对称，否则不严格对称，但是仍满足线性相位。
+
+\subsection{广义线性相位系统}
+
+在系统相位存在突变以及固定相位时，仍然存在恒定群延迟。
+
+已知线性相位系统存在对称性，进行分析：
+
+\[
+\begin{aligned}
+H\left(e^{j \omega}\right) &=A(\omega) e^{-j(\omega \alpha-\beta)} \\
+D T F T \quad[h(\alpha-n)]=H\left(e^{-j \omega}\right) e^{-j \omega \alpha} &=A(\omega) e^{j \beta} \\
+D T F T \quad[h(n+\alpha)]=H\left(e^{j \omega}\right) e^{j \omega \alpha} &=A(-\omega) e^{j \beta}
+\end{aligned}
+\]
+
+因此，\(A(\omega)\) 的对称性决定了 \(h(n)\) 的对称性（一致）。
+
+根据对称形式与 \(2 \alpha\) 的奇偶性，有四类 FIR 线性相位滤波器。
+
+对称冲激响应的系统特性推导：
+
+\[
+    \begin{aligned}
+h(n)&=\pm h(N-1-n) \quad 0 \leq n \leq N-1 \\
+H(z)&=\dsum_{n=0}^{N-1} h(n) z^{-n}=\dsum_{n=0}^{N-1} \pm h(N-1-n) z^{-n} \\
+\text { 令 } m=N-1-n &=\dsum_{m=0}^{N-1} \pm h(m) z^{-(N-1-m)} \\
+&=\pm z^{-(N-1)} \dsum_{m=0}^{N-1} h(m) z^{m} \\
+&=\pm z^{-(N-1)} H\left(z^{-1}\right)
+\end{aligned}
+\]
+
+得到：
+
+\begin{enumerate}
+    \item 系统零点个数等于系统在原点的极点阶数相等
+    \item \(z_i\) 与 \(z^{-1}_i\) 均为零点
+    \item \(h(n)\) 为实数，零点共轭成对
+\end{enumerate}
+
+四类，其中 \(M = N - 1\)：
+
+\[
+\begin{aligned}
+H(z) &=\pm z^{-(N-1)} H\left(z^{-1}\right) \\
+H(z) &=\dfrac{1}{2}\left[H(z) \pm z^{-(N-1)} H\left(z^{-1}\right)\right] \\
+&=\dfrac{1}{2}\left[\dsum_{n=0}^{N-1} h(n) z^{-n} \pm z^{-(N-1)} \dsum_{n=0}^{N-1} h(n) z^{n}\right] \\
+&=\dfrac{1}{2} \dsum_{n=0}^{N-1} h(n)\left[z^{-n} \pm z^{-(N-1)} z^{n}\right] \\
+&=z^{-\dfrac{N-1}{2}} \dsum_{n=0}^{N-1} h(n)\left[\dfrac{z^{\left(\dfrac{N-1}{2}-n\right)} \pm z^{-\left(\dfrac{N-1}{2}-n\right)}}{2}\right] \\
+H(\omega) &= e^{-j \omega \dfrac{N-1}{2}}  h(n)\left[\dfrac{(e^{j\omega})^{\left(\dfrac{N-1}{2}-n\right)} \pm (e^{j\omega})^{-\left(\dfrac{N-1}{2}-n\right)}}{2}\right]
+\end{aligned}
+\]
+
+\begin{itemize}
+    \item I 类：\(M\) 为偶数，偶对称： \(h(n) = h(M-n)\) \[
+        H(\omega)=\dsum_{n=0}^{N-1} h(n) \cos \left[\left(\dfrac{N-1}{2}-n\right) \omega\right] = \dsum_{n=0}^{N-1} h(n) \cos \left[\left(\dfrac{M}{2}-n\right) \omega\right]
+        \]
+    \item II 类：\(M\) 为奇数，偶对称，存在特殊零点： \[
+        H(z)=z^{-M} H\left(z^{-1}\right)
+        \] 解得\(z = -1, \omega = \pi\) \[
+            \begin{aligned}
+            H(\omega)=\dsum_{n=0}^{N-1} h(n) \cos \left[\left(\dfrac{N-1}{2}-n\right) \omega\right] &=\dsum_{n=0}^{\dfrac{N}{2}-1} 2 h(n) \cos \left[\left(\dfrac{N-1}{2}-n\right) \omega\right] \\
+            \text {  } \dfrac{N}{2}-n=m &=\dsum_{m=1}^{\dfrac{N}{2}} 2 h\left(\dfrac{N}{2}-m\right) \cos \left[\left(m-\dfrac{1}{2}\right) \omega\right]
+            \end{aligned}
+            \]
+    \item III类：\(M\) 为偶数，\(h(n) = -h(M-n)\) 特殊零点： \(z = \pm 1\) 。\[
+        \begin{array}{rl}
+        H(\omega) & =\dsum_{n=0}^{\dfrac{N-3}{2}} 2 h(n) \sin \left[\left(\dfrac{N-1}{2}-n\right) \omega\right] \\
+         (\dfrac{N-1}{2}-n=m) & =\dsum_{m=1}^{\dfrac{N-1}{2}} 2 h\left(\dfrac{N-1}{2}-m\right) \sin (m \omega)
+        \end{array}
+        \]
+    \item \(M\) 为奇数，\(h(n) = -h(M-n)\) 特殊零点： \(z = 1\) 。\[
+            \begin{aligned}
+                H(\omega)&=\sum_{n=0}^{N-1} h(n) \sin \left[\left(\frac{N-1}{2}-n\right) \omega\right] \\
+                & =\sum_{n=0}^{\frac{N}{2}-1} 2 h(n) \sin \left[\left(\frac{N-1}{2}-n\right) \omega\right] \\
+                (\frac{N}{2}-n=m) &=\sum_{m=1}^{\frac{N}{2}} 2 h\left(\frac{N}{2}-m\right) \sin \left[\left(m-\frac{1}{2}\right) \omega\right]
+            \end{aligned}
+        \]
+\end{itemize}
+
+\subsubsection{最小相位分解}
+
+根据零点成对进行分解，分解到最小相位系统与线性相位系统。
+
 
 \chapter{复习题}
 

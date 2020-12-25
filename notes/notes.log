@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.12.20)  25 DEC 2020 14:12
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.12.20)  25 DEC 2020 10:57
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/pannenetsf/Documents/Subjects/dsp/notes/chap/chap.review
-(/home/pannenetsf/Documents/Subjects/dsp/notes/chap/chap.review.tex
+**/home/pannenetsf/Documents/Subjects/dsp/notes/notes
+(/home/pannenetsf/Documents/Subjects/dsp/notes/notes.tex
 LaTeX2e <2020-10-01> patch level 2
 L3 programming layer <2020-12-07> xparse <2020-03-03> (./elegantbook.cls
 Document Class: elegantbook 2020/06/03 v4.0.1 ElegantBook document class
@@ -1237,7 +1237,7 @@ File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 ) (/opt/texlive2020/texmf-dist/tex/latex/tools/bm.sty
 Package: bm 2019/07/24 v1.2d Bold Symbol Support (DPC/FMi)
 LaTeX Info: Redefining \bm on input line 209.
-)) (/opt/texlive2020/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+)) (./needed.tex (/opt/texlive2020/texmf-dist/tex/latex/pdfpages/pdfpages.sty
 Package: pdfpages 2020/01/28 v0.5q Insert pages of external PDF documents (AM)
  (/opt/texlive2020/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
@@ -1267,7 +1267,7 @@ File: ppxetex.def 2020/01/28 v0.5q Pdfpages driver for XeTeX (AM)
 \AM@toc@title=\toks57
 \c@AM@survey=\count423
 \AM@templatesizebox=\box140
-) (../needed.tex (/opt/texlive2020/texmf-dist/tex/generic/shapepar/shapepar.sty
+) (/opt/texlive2020/texmf-dist/tex/generic/shapepar/shapepar.sty
 \cutoutsep=\skip97
 Package: shapepar 2013/03/26 v 2.2x, Shaped paragraphs
 \SH@scale=\dimen361
@@ -1275,30 +1275,30 @@ Package: shapepar 2013/03/26 v 2.2x, Shaped paragraphs
 \SH@ntries=\count424
 \spec@bot=\dimen362
 \sqrtcount=\count425
-)) (./chap.review.aux)
-\openout1 = `chap.review.aux'.
+)) (./notes.aux)
+\openout1 = `notes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-Package hyperref Info: Link coloring ON on input line 5.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+Package hyperref Info: Link coloring ON on input line 24.
  (/opt/texlive2020/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (/opt/texlive2020/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1308,12 +1308,12 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count426
 )
-LaTeX Info: Redefining \ref on input line 5.
-LaTeX Info: Redefining \pageref on input line 5.
-LaTeX Info: Redefining \nameref on input line 5.
- (./chap.review.out) (./chap.review.out)
+LaTeX Info: Redefining \ref on input line 24.
+LaTeX Info: Redefining \pageref on input line 24.
+LaTeX Info: Redefining \nameref on input line 24.
+ (./notes.out) (./notes.out)
 \@outlinefile=\write10
-\openout10 = `chap.review.out'.
+\openout10 = `notes.out'.
 
 
 *geometry* driver: auto-detecting
@@ -1351,7 +1351,7 @@ LaTeX Info: Redefining \nameref on input line 5.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 5.
+LaTeX Info: Redefining \selectfont on input line 24.
 \c@mv@tabular=\count427
 \c@mv@boldtabular=\count428
 Package caption Info: Begin \AtBeginDocument code.
@@ -1381,39 +1381,60 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: dvipdfm (xetex) on input line 98.
 )
-第\nobreakspace {}一\nobreakspace {}章 1.
+Package hyperref Info: Option `pageanchor' set `false' on input line 26.
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: xetex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(0.0pt, 597.50787pt, 0.0pt)
+* v-part:(T,H,B)=(0.0pt, 845.04684pt, 0.0pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=597.50787pt
+* \textheight=845.04684pt
+* \oddsidemargin=-72.26999pt
+* \evensidemargin=-72.26999pt
+* \topmargin=-145.3935pt
+* \headheight=61.74242pt
+* \headsep=11.38109pt
+* \topskip=11.0pt
+* \footskip=34.1433pt
+* \marginparwidth=53.0pt
+* \marginparsep=7.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+File: ./figure//logo.jpg Graphic file (type bmp)
+<./figure//logo.jpg>
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 13.
+(Font)              scaled to size 10.95pt on input line 26.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 17.28pt on input line 13.
-LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 15.
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 17.
-(/opt/texlive2020/texmf-dist/tex/latex/jknapltx/ursfs.fd
+(Font)              scaled to size 24.88pt on input line 26.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 26.
+ (/opt/texlive2020/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 17.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 26.
  (/opt/texlive2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 17.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 26.
  (/opt/texlive2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 12.0pt on input line 23.
- [1
+(Font)              scaled to size 14.4pt on input line 26.
 
-
-]
-第\nobreakspace {}二\nobreakspace {}章 2.
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 93.
-LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.0pt on input line 93.
-[2
-
-]
 
 Package fontspec Warning: Font "FandolKai-Regular" does not contain requested
 (fontspec)                Script "CJK".
@@ -1430,9 +1451,110 @@ Package fontspec Info: Font family 'FandolKai-Regular(0)' created for font
 (fontspec)             <->"[FandolKai-Regular.otf]/OT:language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
+[1
+
+
+
+]
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 17.28pt on input line 29.
+ [1
+
+
+
+] (./notes.toc [2
+
+]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 160.
-[3] [4]
+(Font)              scaled to size 8.0pt on input line 72.
+ [3] [4])
+\tf@toc=\write11
+\openout11 = `notes.toc'.
+
+ [5] (./chap/chap.00intro.tex
+第\nobreakspace {}一\nobreakspace {}章 1.
+) (./chap/chap.01discretetimeandsys.tex [1
+
+
+]
+第\nobreakspace {}二\nobreakspace {}章 2.
+LaTeX Font Info:    Trying to load font information for U+ding on input line 12.
+(/opt/texlive2020/texmf-dist/tex/latex/bbding/Uding.fd
+File: Uding.fd 1996/02/01 v1.0 BBding font definitions
+)
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 12.0pt on input line 19.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 6.0pt on input line 55.
+ [2
+
+] [3] [4]) (./chap/chap.02discretetimesys.tex [5]
+第\nobreakspace {}三\nobreakspace {}章 3.
+LaTeX Font Info:    Trying to load font information for T1+ntxsups on input line 21.
+(/opt/texlive2020/texmf-dist/tex/latex/newtx/t1ntxsups.fd
+File: t1ntxsups.fd 2015/01/17 v1.0
+)
+LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
+(Font)              scaled to size 10.95pt on input line 21.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 9.0pt on input line 21.
+LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
+(Font)              scaled to size 9.0pt on input line 21.
+
+
+Package fontspec Warning: Font "FandolFang-Regular" does not contain requested
+(fontspec)                Script "CJK".
+
+
+Package fontspec Info: Font family 'FandolFang-Regular(0)' created for font
+(fontspec)             'FandolFang-Regular' with options
+(fontspec)             [Script={CJK},Extension={.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"[FandolFang-Regular.otf]/OT:language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+
+[6
+
+] [7] [8] [9] [10] [11] [12]) (./chap/chap.03sampandrebuild.tex [13]
+第\nobreakspace {}四\nobreakspace {}章 4.
+[14
+
+]
+
+LaTeX Warning: Reference `c301' on page 15 undefined on input line 62.
+
+File: ./figure//c301.png Graphic file (type bmp)
+<./figure//c301.png>
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 10.0pt on input line 64.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 10.0pt on input line 64.
+[15] [16] [17]) (./chap/chap.04dft.tex [18]
+第\nobreakspace {}五\nobreakspace {}章 5.
+[19
+
+] [20] [21]) (./chap/chap.05filter.tex [22]
+第\nobreakspace {}六\nobreakspace {}章 6.
+[23
+
+] [24] [25] [26] [27]
+Overfull \hbox (1.97742pt too wide) detected at line 316
+[]
+ []
+
+) (./chap/chap.review.tex [28]
+第\nobreakspace {}七\nobreakspace {}章 7.
+[29
+
+]
+第\nobreakspace {}八\nobreakspace {}章 8.
+[30
+
+] [31] [32]
 Overfull \hbox (10.86806pt too wide) in alignment at lines 248--253
  [] [] [] [] 
  []
@@ -1452,94 +1574,84 @@ Overfull \hbox (10.86806pt too wide) in alignment at lines 262--265
  [] [] [] [] 
  []
 
-LaTeX Font Info:    Trying to load font information for T1+ntxsups on input line 276.
-(/opt/texlive2020/texmf-dist/tex/latex/newtx/t1ntxsups.fd
-File: t1ntxsups.fd 2015/01/17 v1.0
-)
-LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
-(Font)              scaled to size 10.95pt on input line 276.
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 9.0pt on input line 276.
-LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
-(Font)              scaled to size 9.0pt on input line 276.
 
 Overfull \hbox (10.86806pt too wide) in alignment at lines 265--277
  [] [] [] [] 
  []
 
-[5] [6] [7]
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.0pt on input line 379.
- [8] [9] [10] [11]
-第\nobreakspace {}三\nobreakspace {}章 3.
-[12
+[33] [34] [35] [36] [37] [38]
+第\nobreakspace {}九\nobreakspace {}章 9.
+[39
 
 ]
 附录\nobreakspace {}A A.
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 1>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 1>
-[13
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 1>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 1>
+[40
 
 ]
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 1>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 1>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 1>
- [14]
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 2>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 2>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 2>
- [15]
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 3>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 3>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 3>
- [16]
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 4>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 4>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 4>
- [17]
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 5>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 5>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 5>
- [18]
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 6>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 6>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 6>
- [19] (./chap.review.aux)
-Package rerunfilecheck Info: File `chap.review.out' has not changed.
-(rerunfilecheck)             Checksum: 25F569DC7611E384DA5704C85A58486D;2292.
- )
-(\end occurred when \ifx on line 536 was incomplete) 
-Here is how much of TeX's memory you used:
- 39043 strings out of 477298
- 805452 string characters out of 5835645
- 1494780 words of memory out of 5000000
- 57870 multiletter control sequences out of 15000+600000
- 443950 words of font info for 103 fonts, out of 8000000 for 9000
- 1348 hyphenation exceptions out of 8191
- 113i,17n,135p,618b,617s stack positions out of 5000i,500n,10000p,200000b,80000s
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 1>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 1>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 1>
+ [41]
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 2>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 2>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 2>
+ [42]
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 3>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 3>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 3>
+ [43]
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 4>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 4>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 4>
+ [44]
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 5>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 5>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 5>
+ [45]
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 6>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 6>
+File: ./figure/../figure/zp.pdf Graphic file (type pdf)
+<use ./figure/../figure/zp.pdf, page 6>
+ [46]) (./notes.aux)
+Package rerunfilecheck Info: File `notes.out' has not changed.
+(rerunfilecheck)             Checksum: 0B03793BBDCA105F1A7017C811B97772;14894.
 
-Output written on chap.review.pdf (19 pages).
+
+LaTeX Warning: There were undefined references.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 40744 strings out of 477298
+ 843828 string characters out of 5835645
+ 1495774 words of memory out of 5000000
+ 59512 multiletter control sequences out of 15000+600000
+ 447239 words of font info for 110 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 113i,17n,135p,586b,2237s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on notes.pdf (52 pages).
