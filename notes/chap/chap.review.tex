@@ -525,9 +525,206 @@ H(\omega) &= e^{-j \omega \dfrac{N-1}{2}}  h(n)\left[\dfrac{(e^{j\omega})^{\left
 根据零点成对进行分解，分解到最小相位系统与线性相位系统。
 
 
+\chapter{信号采样与重构}
+
+需要解决的问题： 
+
+\begin{itemize}
+    \item 数字频率和模拟频率之间的对应关系：时域采样对频域的影响
+    \item 采样定理：能否包含原始信号的所有信息？如何无失真恢复原始信号？是否有冗余信息可以去除？是否可以进行速率的变化？
+    \item 离散处理如何等效为一个模拟 LTI 系统？
+\end{itemize}
+
+
+\section{理想周期采样重构}
+
+\subsection{模拟-采样-数字频谱关系}
+
+一般采样都是不可逆的，为了不丢失信息，需要进行约束。
+
+理想时域采样： \[x_{s}(t)=x_{c}(t) * s(t)=\sum_{-\infty}^{+\infty} x_{c}(n T) \delta(\mathrm{t}-n T)\]
+
+其中：\[s(t) = \sum_{-\infty}^\infty \delta(t - n T)\] 
+
+频域表示为： \[
+    \delta_{T_{1}}(t)=\sum_{-\infty}^{\infty} \delta\left(t-n T_{1}\right) \rightarrow \frac{2\pi}{T_1} \sum_{-\infty}^{\infty} \delta\left(\omega-n \omega_{1}\right)
+    \]
+
+\[\begin{aligned}
+    X_s(\Omega) &= \frac{1}{2\pi} X_c (\Omega) S(\Omega) \\ 
+    &= \frac{1}{T} X_c(\Omega) \otimes \sum_{-\infty}^{+\infty} \delta(\Omega - n \Omega_0 ) \\ 
+    &= \frac{1}{T} \sum_{-\infty}^\infty X_c(\Omega - n \Omega_0) 
+\end{aligned}
+\]
+
+那么从连续信号采样得到的是原始信号的频谱（带限 \(\Omega_N\)）的周期（ \(\Omega_s\)）性拓延，当然，这是存在混叠的。
+
+AD 是 CD 的工程近似。
+
+进一步研究其离散采样信号的频谱：
+
+对于采样信号：
+
+\[
+\begin{array}{l}
+X_{\mathrm{s}}(j \Omega)=\int_{-\infty}^{+\infty} x_{s}(t) e^{-j \Omega t} d t \\
+=\int_{-\infty}^{+\infty}\left[\sum_{n=-\infty}^{+\infty} x_{c}(n T) \delta(t-n T)\right] e^{-j \Omega t} d t \\
+=\sum_{n=-\infty}^{+\infty} \int_{-\infty}^{+\infty} x_{c}(n T) \delta(t-n T) e^{-j \Omega t} d t \\
+=\sum_{n=-\infty}^{+\infty} x_{c}(n T) e^{-j(\Omega T) n}
+\end{array}
+\]
+
+对于数字信号：
+
+\[\begin{aligned}
+    X(j\omega) &= \sum_{-\infty}^\infty x(n) e^{-j\omega n} \\
+    &=  \sum_{-\infty}^\infty x_c(n T) e^{-j\omega n} 
+\end{aligned}\]
+
+经过两种形式的比对，可以得到：
+
+\[X(j\omega)\where{\omega=\Omega T} = X_s (j\Omega)\] 
+
+这就得到了一个重要的\textbf{频率转换公式}：
+
+\[\Omega T = \omega\]
+
+\subsection{信号重构}
+
+通过理想重构滤波器：\[
+    h_{r}(t)=\frac{\sin (\pi t / T)}{\pi t / T}
+    \]
+
+其频域形式：
+
+\[H(\omega) = T G_{\omega_c}(\omega)\]
+
+其频率表示为，无混叠时采样点之外也无失真，有混叠时，则采样点之外存在一定失真。
+
+\[
+\begin{array}{l}
+x_{r}(t)=x_{s}(t) \otimes h_{r}(t) \\
+=\sum_{-\infty}^{+\infty} x(n) \delta(t-n T) \otimes h_{r}(t) \\
+=\sum_{-\infty}^{+\infty} x(n) h_{r}(t-n T) \\
+=\sum_{-\infty}^{+\infty} x(n) \frac{\sin (\pi(t-n T) / T)}{\pi(t-n T) / T}
+\end{array}
+\]
+
+\subsection{奈奎斯特低通采样定理}
+
+若信号的频带满足 \(|\omega| < \omega_c\) ，那么以至少 \(2 \omega_c\) 的速率采样就可以无失真的恢复原始信号。
+
+\subsection{奈奎斯特带通采样定理}
+
+若信号的频带满足 \(|f| < \omega_c\) ，那么以至少 \(2 f_c\) 的速率采样，且满足 \(f_s = \dfrac{4 f_0}{2 n + 1}\) 就可以无失真的恢复原始信号。其中 \(f_0\) 为频带中心频率。
+
+\section{连续信号的离散化}
+
+\[X_r(j\Omega) = H_r(j \Omega) X_s(j \Omega) = H_r(j \Omega) X(e^{j\omega})\where{\omega = \Omega T} \]
+
+实际上处理的系统函数 \(H_{eff}(j \Omega)\) 只能处理 \(|\Omega| < \pi / T\) 。
+
+\section{抽取和内插}
+
+虽然带通定理降低了采样的速率，但是有时我们需要更高的带宽也就是更快的速度，优点有：
+
+\begin{itemize}
+    \item 处理带宽变宽
+    \item 信号处理的盲区减少
+    \item 量化信噪比可以提升
+\end{itemize}
+
+但是高速率的采样又会造成后续的信号处理速度不匹配，因此又需要降速，但是减少采样又想要不丢失信息。
+
+\subsection{信号整倍数抽取}
+
+其采样序列转变为，通过统一的形式表示一个周期的冲激函数，很是美观、方便：
+
+\[\delta_{D}(n)=\frac{1}{D} \sum_{i=0}^{D-1} e^{j \frac{2 \pi}{D} n i}=\left\{\begin{array}{ll}
+    1 & n=0, \pm D, \pm 2 D, \ldots \ldots \\
+    0 & \text { 其他 }
+\end{array}\right.\]
+
+其 \(Z\) 变换：
+
+\[\begin{aligned}
+    X_D(z) &= \sum_{n=-\infty}^\infty x_D(n) z^{-n} \\ 
+    &=\sum_{m=-\infty}^{+\infty} x(m) \delta_{D}(m) z^{-m / D} \\
+    &=\sum_{m=-\infty}^{+\infty}\left(x(m) \frac{1}{D} \sum_{i=0}^{D-1} e^{j \frac{2 \pi}{D} m i}\right) z^{-m / D} \\
+    &=\frac{1}{D} \sum_{i=0}^{D-1} \sum_{m=-\infty}^{+\infty} x(m) e^{j \frac{2 \pi}{D} m i} z^{-m / D} \\
+    &=\frac{1}{D} \sum_{i=0}^{D-1} \sum_{m=-\infty}^{+\infty} x(m)\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right)^{-m} \\
+    &=\frac{1}{D} \sum_{i=0}^{D-1} X\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right) \\
+    &=\frac{1}{D} \sum_{i=0}^{D-1} \sum_{m=-\infty}^{+\infty} x(m)\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right)^{-m} \\
+    &=\frac{1}{D} \sum_{i=0}^{D-1} X\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right)
+\end{aligned}\]
+
+
+当 \(D = 1\) 时，退化到原始的 \(Z\) 变换。
+
+从采样的模拟谱来看，降采样将交叠平移的\textbf{频率间隔缩小}了 \(D\) 倍，因此数字谱也是如此。
+
+\[
+\begin{array}{l}
+x(n) \Leftrightarrow X s(\Omega)=\frac{1}{T} \sum_{k=-\infty}^{+\infty} X c\left(\Omega-k \Omega_{0}\right) \quad \Leftrightarrow X(\omega)=\frac{1}{T} \sum_{k=-\infty}^{+\infty} X c\left(\frac{\omega}{T}-k \frac{2 \pi}{T}\right) \\
+x_{D}(n) \Leftrightarrow X_{D S}(\Omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty} X c\left(\Omega-k \frac{\Omega_{0}}{D}\right) \Leftrightarrow X_{D}(\omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty} X c\left(\frac{\omega}{D T}-k \frac{2 \pi}{D T}\right)
+\end{array}
+\]
+
+这也导致交叠变得更加容易，原本交叠间隔是 \(2 \pi\) ，会变得更小。
+
+最终在数字频域的表现如下，可以看到平移中心没有变化，但是频谱已经被稀释（拉伸）了。
+
+\[X_D(\omega) = \frac{1}{D} \sum_{i = 0 }^{D-1} X(\frac{\omega - 2 \pi i}{D})\] 
+
+为了\textbf{防止混叠}，需要把可能产生混叠的部分滤除，在对数字信号 \(D\) 倍抽取之前，先用数字低通滤波器 \(\pi / D\) 滤波。
+
+\subsection{信号整倍数内插}
+
+内插显得很不可思议，对于一个 \(I\) 倍的内插结构，就是在原始序列的每两个点之前，插入 \(I-1\) 个零。也就是对于 \(x_i(m)\) 来说，除去 \(m\) 为 \(I\) 的整倍数的点，其余都为 \(0\) 。
+
+
+\[x_{I}(m)=\left\{\begin{array}{cc}
+    x\left(\frac{m}{I}\right) & (m=0, \pm I, \pm 2 I, \cdots) \\
+    0 & \text { else }
+\end{array}\right.\]
+
+类似的，来分析其频谱：
+
+\[
+\begin{array}{l}
+X_{I}\left(e^{j \omega}\right) \\
+=\sum_{m=-\infty}^{+\infty} X_{I}(m) e^{-j \omega m} \\
+=\sum_{k=-\infty}^{+\infty} X_{I}(k I) e^{-j \omega I k} \\
+=\sum_{k=-\infty}^{+\infty} X(k) e^{-j \omega I k}= X(e^{j\omega I})
+\end{array}
+\]
+
+可见，这里的形式比较简洁，就是简单的将频谱压缩了 \(I\) 倍。
+
+将抽取后的频谱进行内插后的频谱进行时域还原，可以得到准确的内插值，提高了时域的分辨率。
+
+类似的，在内插后需要进行低通滤波，防止其搬运频谱也进入之后系统。同时，内插需要增益为 \(I\) 。
+
+
+
+\subsection{非整倍数抽取和内插}
+
+可以通过如 \figref{c302} 的系统对信号进行非整倍数的抽取和内插。
+
+\qfig[c302]{c302.png}{非整倍数抽取与内插系统}
+
+滤波器只需满足在最小频带工作：同时补偿进行内插的增益 \(I\) 。
+
+\[
+H\left(e^{j \omega}\right)=\left\{\begin{array}{ll}
+I & |\omega| \leq \min \left(\frac{\pi}{I}, \frac{\pi}{D}\right) \\
+0 & \text { else }
+\end{array}\right.
+\]
+
 \chapter{复习题}
 
-2.44，5.49，
+2.44，5.49，4.8，
 
 \appendix
 
@@ -539,4 +736,4 @@ H(\omega) &= e^{-j \omega \dfrac{N-1}{2}}  h(n)\left[\dfrac{(e^{j\omega})^{\left
 \let\chapname\undefined
 \ifx\mainclass\undefined
 \end{document}
-\fi  
+\fi 

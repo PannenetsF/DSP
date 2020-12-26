@@ -1,0 +1,11 @@
+# Fdb version 3
+["xdvipdfmx"] 0 "notes.xdv" "notes.pdf" "notes" 0
+  "notes.xdv" 0 -1 0 "xelatex"
+  (generated)
+  "notes.pdf"
+["xelatex"] 0 "notes/notes.tex" "notes.xdv" "notes" 0
+  "notes.aux" 1608993178 8 a94a2480d3289e625eea47cd1b285758 ""
+  "notes/notes.tex" 0 -1 0 ""
+  (generated)
+  "notes.xdv"
+  "notes.log"

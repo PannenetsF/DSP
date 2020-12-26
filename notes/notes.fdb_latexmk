@@ -1,9 +1,9 @@
 # Fdb version 3
-["xdvipdfmx"] 1608901976 "notes.xdv" "notes.pdf" "notes" 1608901977
-  "notes.xdv" 1608901976 458064 95adf087fc09e1711d4615e41aa519b3 "xelatex"
+["xdvipdfmx"] 1608993227 "notes.xdv" "notes.pdf" "notes" 1608993227
+  "notes.xdv" 1608993226 502704 db2e8c63cb02f001ad4f5f41724e349a "xelatex"
   (generated)
   "notes.pdf"
-["xelatex"] 1608901973 "notes.tex" "notes.xdv" "notes" 1608901977
+["xelatex"] 1608993223 "notes.tex" "notes.xdv" "notes" 1608993227
   "/opt/texlive2020/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/opt/texlive2020/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
   "/opt/texlive2020/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -284,23 +284,23 @@
   "chap/chap.00intro.tex" 1599707821 2099 8fadd1703f169eca6a5e05dfb64bdfe5 ""
   "chap/chap.01discretetimeandsys.tex" 1600920287 4095 7f0c22310530fbe32ae6fa3f10d3b19a ""
   "chap/chap.02discretetimesys.tex" 1607565940 13197 51ad9dc8a6be6332841624df25ec12db ""
-  "chap/chap.03sampandrebuild.tex" 1605755050 6236 dfbc82da7991f8d8f7c5fe63c07d98a4 ""
+  "chap/chap.03sampandrebuild.tex" 1608990273 6456 40fbe78169aaf21ad4f6a161470634ab ""
   "chap/chap.04dft.tex" 1608278403 6493 a2377fe6935f751bd5aa4b04840d7bd6 ""
   "chap/chap.05filter.tex" 1608784750 9606 397504ae2773680f41716c558c2264f9 ""
-  "chap/chap.review.tex" 1608886230 19680 4743e0382e9a941680d716790f1b87b3 ""
+  "chap/chap.review.tex" 1608993128 26927 17bcf70afc8ed90cac3bb5c1ce42f51c ""
   "elegantbook.cls" 1599702447 31067 0ef5b9841a45800fa58c11b2e74962dd ""
   "figure/../figure/zp.pdf" 1608723053 279558 7b15cb8e6ccaa5e73bd31988d85df22c ""
   "figure//c301.png" 1604546089 1666 c804636d5be6fd30bafd3c5b379d30de ""
   "figure//logo.jpg" 1599703557 1060669 dfb8d90ec1f64469f7efad6d4207c5dc ""
   "image/../figure/zp.pdf" 1608723053 279558 7b15cb8e6ccaa5e73bd31988d85df22c ""
-  "needed.tex" 1608865036 1069 377e713716f998deb3325da38cf3f2df ""
-  "notes.aux" 1608901976 16506 a420e72823f4c919f15076a3121da914 "xelatex"
-  "notes.out" 1608901976 14894 0b03793bbdca105f1a7017c811b97772 "xelatex"
+  "needed.tex" 1608988825 1058 29eebd9b1523b06a25b77c28547ddb41 ""
+  "notes.aux" 1608993226 18002 cf015fb59401b4d28d0be3fef268201c "xelatex"
+  "notes.out" 1608993226 16529 102c1ed9956572be530026a3aad1458b "xelatex"
   "notes.tex" 1608864959 1002 f846d54ec05ee035798d0c56417dbbb4 ""
-  "notes.toc" 1608901976 9178 ec6e415c6aa7000db44f6a46db09bdd1 "xelatex"
+  "notes.toc" 1608993226 10164 8ca7c0a845a43050cf990dd497f13005 "xelatex"
   (generated)
+  "notes.out"
+  "notes.xdv"
+  "notes.log"
   "notes.toc"
   "notes.aux"
-  "notes.log"
-  "notes.xdv"
-  "notes.out"

@@ -1,5 +1,5 @@
 \ifx\mainclass\undefined
-\documentclass[cn,11pt,chinese,black,simple]{../elegantbook}
+\documentclass[cn,11pt,chinese,black,simple]{elegantbook}
 \input{../needed.tex}
 \begin{document}
 \fi 
@@ -70,14 +70,19 @@ AD 是 CD 的工程近似。
 
 那么 \(x'(n) = x(n) \delta_D(n)\)  ， \(x_D(n) = x(nD) = x'(nD)\) 
 
-其 \(Z\) 变换， \[\begin{aligned}
+其 \(Z\) 变换：
+
+\[\begin{aligned}
     X_D(z) &= \sum_{n=-\infty}^\infty x_D(n) z^{-n} \\ 
     &=\sum_{m=-\infty}^{+\infty} x(m) \delta_{D}(m) z^{-m / D} \\
     &=\sum_{m=-\infty}^{+\infty}\left(x(m) \frac{1}{D} \sum_{i=0}^{D-1} e^{j \frac{2 \pi}{D} m i}\right) z^{-m / D} \\
     &=\frac{1}{D} \sum_{i=0}^{D-1} \sum_{m=-\infty}^{+\infty} x(m) e^{j \frac{2 \pi}{D} m i} z^{-m / D} \\
     &=\frac{1}{D} \sum_{i=0}^{D-1} \sum_{m=-\infty}^{+\infty} x(m)\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right)^{-m} \\
+    &=\frac{1}{D} \sum_{i=0}^{D-1} X\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right) \\
+    &=\frac{1}{D} \sum_{i=0}^{D-1} \sum_{m=-\infty}^{+\infty} x(m)\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right)^{-m} \\
     &=\frac{1}{D} \sum_{i=0}^{D-1} X\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right)
 \end{aligned}\]
+
 
 采样周期变化为原有的 \(D\) 倍：
 
@@ -99,7 +104,7 @@ AD 是 CD 的工程近似。
 
 \textbf{为什么}抽取信号之后，能量没有减少？时间延长了。
 
-时域变化：  \[X_D)n) = v (D n) = \sum_{k=-\infty}^\infty h(k) x(Dn = k) = \sum_{k=-\infty}^\infty x(k) h(Dn = k)\]
+时域变化：  \[X_D(n) = v (D n) = \sum_{k=-\infty}^\infty h(k) x(Dn = k) = \sum_{k=-\infty}^\infty x(k) h(Dn = k)\]
 
 \subsection{整倍内插}
 
