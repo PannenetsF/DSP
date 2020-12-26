@@ -105,6 +105,6 @@
 \contentsline {subsection}{\numberline {8.11.3}系统的补偿}{37}{subsection.8.11.3}%
 \contentsline {subsection}{\numberline {8.11.4}线性相位系统}{37}{subsection.8.11.4}%
 \contentsline {subsection}{\numberline {8.11.5}广义线性相位系统}{37}{subsection.8.11.5}%
-\contentsline {subsubsection}{\numberline {8.11.5.1}最小相位分解}{38}{subsubsection.8.11.5.1}%
-\contentsline {chapter}{\numberline {9}复习题}{39}{chapter.9}%
-\contentsline {chapter}{\numberline {A}零极点幅度相位研究}{40}{appendix.A}%
+\contentsline {subsubsection}{\numberline {8.11.5.1}最小相位分解}{39}{subsubsection.8.11.5.1}%
+\contentsline {chapter}{\numberline {9}复习题}{40}{chapter.9}%
+\contentsline {chapter}{\numberline {A}零极点幅度相位研究}{41}{appendix.A}%
