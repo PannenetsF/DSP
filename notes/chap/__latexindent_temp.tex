@@ -511,9 +511,9 @@ H(\omega) &= e^{-j \omega \dfrac{N-1}{2}}  h(n)\left[\dfrac{(e^{j\omega})^{\left
         \]
     \item \(M\) 为奇数，\(h(n) = -h(M-n)\) 特殊零点： \(z = 1\) 。\[
             \begin{aligned}
-                H(\omega)&=\sum_{n=0}^{N-1} h(n) \sin \left[\left(\frac{N-1}{2}-n\right) \omega\right] \\
-                & =\sum_{n=0}^{\frac{N}{2}-1} 2 h(n) \sin \left[\left(\frac{N-1}{2}-n\right) \omega\right] \\
-                (\frac{N}{2}-n=m) &=\sum_{m=1}^{\frac{N}{2}} 2 h\left(\frac{N}{2}-m\right) \sin \left[\left(m-\frac{1}{2}\right) \omega\right]
+                H(\omega)&=\dsum_{n=0}^{N-1} h(n) \sin \left[\left(\dfrac{N-1}{2}-n\right) \omega\right] \\
+                & =\dsum_{n=0}^{\dfrac{N}{2}-1} 2 h(n) \sin \left[\left(\dfrac{N-1}{2}-n\right) \omega\right] \\
+                (\dfrac{N}{2}-n=m) &=\dsum_{m=1}^{\dfrac{N}{2}} 2 h\left(\dfrac{N}{2}-m\right) \sin \left[\left(m-\dfrac{1}{2}\right) \omega\right]
             \end{aligned}
         \]
 \end{itemize}
@@ -542,18 +542,18 @@ H(\omega) &= e^{-j \omega \dfrac{N-1}{2}}  h(n)\left[\dfrac{(e^{j\omega})^{\left
 
 一般采样都是不可逆的，为了不丢失信息，需要进行约束。
 
-理想时域采样： \[x_{s}(t)=x_{c}(t) * s(t)=\sum_{-\infty}^{+\infty} x_{c}(n T) \delta(\mathrm{t}-n T)\]
+理想时域采样： \[x_{s}(t)=x_{c}(t) * s(t)=\dsum_{-\infty}^{+\infty} x_{c}(n T) \delta(\mathrm{t}-n T)\]
 
-其中：\[s(t) = \sum_{-\infty}^\infty \delta(t - n T)\] 
+其中：\[s(t) = \dsum_{-\infty}^\infty \delta(t - n T)\] 
 
 频域表示为： \[
-    \delta_{T_{1}}(t)=\sum_{-\infty}^{\infty} \delta\left(t-n T_{1}\right) \rightarrow \frac{2\pi}{T_1} \sum_{-\infty}^{\infty} \delta\left(\omega-n \omega_{1}\right)
+    \delta_{T_{1}}(t)=\dsum_{-\infty}^{\infty} \delta\left(t-n T_{1}\right) \rightarrow \dfrac{2\pi}{T_1} \dsum_{-\infty}^{\infty} \delta\left(\omega-n \omega_{1}\right)
     \]
 
 \[\begin{aligned}
-    X_s(\Omega) &= \frac{1}{2\pi} X_c (\Omega) S(\Omega) \\ 
-    &= \frac{1}{T} X_c(\Omega) \otimes \sum_{-\infty}^{+\infty} \delta(\Omega - n \Omega_0 ) \\ 
-    &= \frac{1}{T} \sum_{-\infty}^\infty X_c(\Omega - n \Omega_0) 
+    X_s(\Omega) &= \dfrac{1}{2\pi} X_c (\Omega) S(\Omega) \\ 
+    &= \dfrac{1}{T} X_c(\Omega) \otimes \dsum_{-\infty}^{+\infty} \delta(\Omega - n \Omega_0 ) \\ 
+    &= \dfrac{1}{T} \dsum_{-\infty}^\infty X_c(\Omega - n \Omega_0) 
 \end{aligned}
 \]
 
@@ -568,17 +568,17 @@ AD 是 CD 的工程近似。
 \[
 \begin{array}{l}
 X_{\mathrm{s}}(j \Omega)=\int_{-\infty}^{+\infty} x_{s}(t) e^{-j \Omega t} d t \\
-=\int_{-\infty}^{+\infty}\left[\sum_{n=-\infty}^{+\infty} x_{c}(n T) \delta(t-n T)\right] e^{-j \Omega t} d t \\
-=\sum_{n=-\infty}^{+\infty} \int_{-\infty}^{+\infty} x_{c}(n T) \delta(t-n T) e^{-j \Omega t} d t \\
-=\sum_{n=-\infty}^{+\infty} x_{c}(n T) e^{-j(\Omega T) n}
+=\int_{-\infty}^{+\infty}\left[\dsum_{n=-\infty}^{+\infty} x_{c}(n T) \delta(t-n T)\right] e^{-j \Omega t} d t \\
+=\dsum_{n=-\infty}^{+\infty} \int_{-\infty}^{+\infty} x_{c}(n T) \delta(t-n T) e^{-j \Omega t} d t \\
+=\dsum_{n=-\infty}^{+\infty} x_{c}(n T) e^{-j(\Omega T) n}
 \end{array}
 \]
 
 对于数字信号：
 
 \[\begin{aligned}
-    X(j\omega) &= \sum_{-\infty}^\infty x(n) e^{-j\omega n} \\
-    &=  \sum_{-\infty}^\infty x_c(n T) e^{-j\omega n} 
+    X(j\omega) &= \dsum_{-\infty}^\infty x(n) e^{-j\omega n} \\
+    &=  \dsum_{-\infty}^\infty x_c(n T) e^{-j\omega n} 
 \end{aligned}\]
 
 经过两种形式的比对，可以得到：
@@ -592,7 +592,7 @@ X_{\mathrm{s}}(j \Omega)=\int_{-\infty}^{+\infty} x_{s}(t) e^{-j \Omega t} d t \
 \subsection{信号重构}
 
 通过理想重构滤波器：\[
-    h_{r}(t)=\frac{\sin (\pi t / T)}{\pi t / T}
+    h_{r}(t)=\dfrac{\sin (\pi t / T)}{\pi t / T}
     \]
 
 其频域形式：
@@ -604,9 +604,9 @@ X_{\mathrm{s}}(j \Omega)=\int_{-\infty}^{+\infty} x_{s}(t) e^{-j \Omega t} d t \
 \[
 \begin{array}{l}
 x_{r}(t)=x_{s}(t) \otimes h_{r}(t) \\
-=\sum_{-\infty}^{+\infty} x(n) \delta(t-n T) \otimes h_{r}(t) \\
-=\sum_{-\infty}^{+\infty} x(n) h_{r}(t-n T) \\
-=\sum_{-\infty}^{+\infty} x(n) \frac{\sin (\pi(t-n T) / T)}{\pi(t-n T) / T}
+=\dsum_{-\infty}^{+\infty} x(n) \delta(t-n T) \otimes h_{r}(t) \\
+=\dsum_{-\infty}^{+\infty} x(n) h_{r}(t-n T) \\
+=\dsum_{-\infty}^{+\infty} x(n) \dfrac{\sin (\pi(t-n T) / T)}{\pi(t-n T) / T}
 \end{array}
 \]
 
@@ -640,7 +640,7 @@ x_{r}(t)=x_{s}(t) \otimes h_{r}(t) \\
 
 其采样序列转变为，通过统一的形式表示一个周期的冲激函数，很是美观、方便：
 
-\[\delta_{D}(n)=\frac{1}{D} \sum_{i=0}^{D-1} e^{j \frac{2 \pi}{D} n i}=\left\{\begin{array}{ll}
+\[\delta_{D}(n)=\dfrac{1}{D} \dsum_{i=0}^{D-1} e^{j \dfrac{2 \pi}{D} n i}=\left\{\begin{array}{ll}
     1 & n=0, \pm D, \pm 2 D, \ldots \ldots \\
     0 & \text { 其他 }
 \end{array}\right.\]
@@ -648,14 +648,14 @@ x_{r}(t)=x_{s}(t) \otimes h_{r}(t) \\
 其 \(Z\) 变换：
 
 \[\begin{aligned}
-    X_D(z) &= \sum_{n=-\infty}^\infty x_D(n) z^{-n} \\ 
-    &=\sum_{m=-\infty}^{+\infty} x(m) \delta_{D}(m) z^{-m / D} \\
-    &=\sum_{m=-\infty}^{+\infty}\left(x(m) \frac{1}{D} \sum_{i=0}^{D-1} e^{j \frac{2 \pi}{D} m i}\right) z^{-m / D} \\
-    &=\frac{1}{D} \sum_{i=0}^{D-1} \sum_{m=-\infty}^{+\infty} x(m) e^{j \frac{2 \pi}{D} m i} z^{-m / D} \\
-    &=\frac{1}{D} \sum_{i=0}^{D-1} \sum_{m=-\infty}^{+\infty} x(m)\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right)^{-m} \\
-    &=\frac{1}{D} \sum_{i=0}^{D-1} X\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right) \\
-    &=\frac{1}{D} \sum_{i=0}^{D-1} \sum_{m=-\infty}^{+\infty} x(m)\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right)^{-m} \\
-    &=\frac{1}{D} \sum_{i=0}^{D-1} X\left(z^{\frac{1}{D}} e^{-j \frac{2 \pi}{D} i}\right)
+    X_D(z) &= \dsum_{n=-\infty}^\infty x_D(n) z^{-n} \\ 
+    &=\dsum_{m=-\infty}^{+\infty} x(m) \delta_{D}(m) z^{-m / D} \\
+    &=\dsum_{m=-\infty}^{+\infty}\left(x(m) \dfrac{1}{D} \dsum_{i=0}^{D-1} e^{j \dfrac{2 \pi}{D} m i}\right) z^{-m / D} \\
+    &=\dfrac{1}{D} \dsum_{i=0}^{D-1} \dsum_{m=-\infty}^{+\infty} x(m) e^{j \dfrac{2 \pi}{D} m i} z^{-m / D} \\
+    &=\dfrac{1}{D} \dsum_{i=0}^{D-1} \dsum_{m=-\infty}^{+\infty} x(m)\left(z^{\dfrac{1}{D}} e^{-j \dfrac{2 \pi}{D} i}\right)^{-m} \\
+    &=\dfrac{1}{D} \dsum_{i=0}^{D-1} X\left(z^{\dfrac{1}{D}} e^{-j \dfrac{2 \pi}{D} i}\right) \\
+    &=\dfrac{1}{D} \dsum_{i=0}^{D-1} \dsum_{m=-\infty}^{+\infty} x(m)\left(z^{\dfrac{1}{D}} e^{-j \dfrac{2 \pi}{D} i}\right)^{-m} \\
+    &=\dfrac{1}{D} \dsum_{i=0}^{D-1} X\left(z^{\dfrac{1}{D}} e^{-j \dfrac{2 \pi}{D} i}\right)
 \end{aligned}\]
 
 
@@ -665,8 +665,8 @@ x_{r}(t)=x_{s}(t) \otimes h_{r}(t) \\
 
 \[
 \begin{array}{l}
-x(n) \Leftrightarrow X s(\Omega)=\frac{1}{T} \sum_{k=-\infty}^{+\infty} X c\left(\Omega-k \Omega_{0}\right) \quad \Leftrightarrow X(\omega)=\frac{1}{T} \sum_{k=-\infty}^{+\infty} X c\left(\frac{\omega}{T}-k \frac{2 \pi}{T}\right) \\
-x_{D}(n) \Leftrightarrow X_{D S}(\Omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty} X c\left(\Omega-k \frac{\Omega_{0}}{D}\right) \Leftrightarrow X_{D}(\omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty} X c\left(\frac{\omega}{D T}-k \frac{2 \pi}{D T}\right)
+x(n) \Leftrightarrow X s(\Omega)=\dfrac{1}{T} \dsum_{k=-\infty}^{+\infty} X c\left(\Omega-k \Omega_{0}\right) \quad \Leftrightarrow X(\omega)=\dfrac{1}{T} \dsum_{k=-\infty}^{+\infty} X c\left(\dfrac{\omega}{T}-k \dfrac{2 \pi}{T}\right) \\
+x_{D}(n) \Leftrightarrow X_{D S}(\Omega)=\dfrac{1}{D T} \dsum_{k=-\infty}^{+\infty} X c\left(\Omega-k \dfrac{\Omega_{0}}{D}\right) \Leftrightarrow X_{D}(\omega)=\dfrac{1}{D T} \dsum_{k=-\infty}^{+\infty} X c\left(\dfrac{\omega}{D T}-k \dfrac{2 \pi}{D T}\right)
 \end{array}
 \]
 
@@ -674,7 +674,7 @@ x_{D}(n) \Leftrightarrow X_{D S}(\Omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty
 
 最终在数字频域的表现如下，可以看到平移中心没有变化，但是频谱已经被稀释（拉伸）了。
 
-\[X_D(\omega) = \frac{1}{D} \sum_{i = 0 }^{D-1} X(\frac{\omega - 2 \pi i}{D})\] 
+\[X_D(\omega) = \dfrac{1}{D} \dsum_{i = 0 }^{D-1} X(\dfrac{\omega - 2 \pi i}{D})\] 
 
 为了\textbf{防止混叠}，需要把可能产生混叠的部分滤除，在对数字信号 \(D\) 倍抽取之前，先用数字低通滤波器 \(\pi / D\) 滤波。
 
@@ -684,7 +684,7 @@ x_{D}(n) \Leftrightarrow X_{D S}(\Omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty
 
 
 \[x_{I}(m)=\left\{\begin{array}{cc}
-    x\left(\frac{m}{I}\right) & (m=0, \pm I, \pm 2 I, \cdots) \\
+    x\left(\dfrac{m}{I}\right) & (m=0, \pm I, \pm 2 I, \cdots) \\
     0 & \text { else }
 \end{array}\right.\]
 
@@ -693,9 +693,9 @@ x_{D}(n) \Leftrightarrow X_{D S}(\Omega)=\frac{1}{D T} \sum_{k=-\infty}^{+\infty
 \[
 \begin{array}{l}
 X_{I}\left(e^{j \omega}\right) \\
-=\sum_{m=-\infty}^{+\infty} X_{I}(m) e^{-j \omega m} \\
-=\sum_{k=-\infty}^{+\infty} X_{I}(k I) e^{-j \omega I k} \\
-=\sum_{k=-\infty}^{+\infty} X(k) e^{-j \omega I k}= X(e^{j\omega I})
+=\dsum_{m=-\infty}^{+\infty} X_{I}(m) e^{-j \omega m} \\
+=\dsum_{k=-\infty}^{+\infty} X_{I}(k I) e^{-j \omega I k} \\
+=\dsum_{k=-\infty}^{+\infty} X(k) e^{-j \omega I k}= X(e^{j\omega I})
 \end{array}
 \]
 
@@ -713,14 +713,77 @@ X_{I}\left(e^{j \omega}\right) \\
 
 \qfig[c302]{c302.png}{非整倍数抽取与内插系统}
 
-滤波器只需满足在最小频带工作：同时补偿进行内插的增益 \(I\) 。
+滤波器只需满足在最小频带工作：同时补偿进行内插的增益 \(I\) 。需要注意，给定分数后，\textbf{滤波器频率已经默认给定}。
 
 \[
 H\left(e^{j \omega}\right)=\left\{\begin{array}{ll}
-I & |\omega| \leq \min \left(\frac{\pi}{I}, \frac{\pi}{D}\right) \\
+I & |\omega| \leq \min \left(\dfrac{\pi}{I}, \dfrac{\pi}{D}\right) \\
 0 & \text { else }
 \end{array}\right.
 \]
+
+其时域表示：
+
+\[
+\begin{array}{l}
+v(n)=\left\{\begin{array}{cc}
+x(n / I) & n=0, \pm I, \pm 2 I \cdots \\
+0 & \text { else}
+\end{array}\right. \\
+u(n)=v(n) * h(n)=\dsum_{k=-\infty}^{\infty} h(n-k) v(k)=\dsum_{k=-\infty}^{\infty} h(n-k) x(k / I)=\dsum_{k=-\infty}^{\infty} h(n-I k) x(k) \\
+y(n)=u(D n)=\dsum_{k=-\infty}^{\infty} x(k) h(D n-I k)
+\end{array}
+\]
+
+对时域计算的一点简化：
+
+\[
+\begin{array}{l}
+y(n)=u(D n)=\dsum_{k=-\infty}^{\infty} x(k) h(D n-I k) \\
+D n-I k \geq 0 \quad k \leq \dfrac{D}{I} n \quad \text { 令 }: \quad m=\lfloor\dfrac{D n}{I}\rfloor -k, \quad m \geq 0 \\
+y(n)=\dsum_{m=0}^{\infty} x\left(\lfloor\dfrac{D n}{I}\rfloor-m\right) h\left(D n-\lfloor\dfrac{D n}{I}\rfloor I+m I\right) \\
+y(n)=\dsum_{m=0}^{\infty} x\left(\lfloor\dfrac{D n}{I}\rfloor-m\right) h\left(m I+D n \%{I}\right)
+\end{array}
+\]
+
+
+\subsection{速率变换的多相结构}
+
+在高采样率的数据端，数字的滤波器计算量巨大。
+希望将数据转换到频率较低的位置进行计算，来降低功耗。
+
+多相滤波器：将 \(Z\) 变化转化为多相形式，以特定频率倍数为周期：
+
+\[\begin{array}{l}
+    H(z)=\sum_{n=0}^{\infty} h(n) z^{-n} \\
+    =h_{0}+h_{4} z^{-4}+h_{8} z^{-8}+h_{12} z^{-12}+\cdots \\
+    +h_{1} z^{-1}+h_{5} z^{-5}+h_{9} z^{-9}+h_{13} z^{-13}+\cdots \\
+    +h_{2} z^{-2}+h_{6} z^{-6}+h_{10} z^{-10}+h_{14} z^{-14}+\cdots \\
+    +h_{3} z^{-3}+h_{7} z^{-7}+h_{11} z^{-11}+h_{15} z^{-15}+\cdots \\
+    =z^{0}\left[h_{0}+h_{4} z^{-4}+h_{8} z^{-8}+h_{12} z^{-12}+\cdots\right] \\
+    +z^{-1}\left[h_{1}+h_{5} z^{-4}+h_{9} z^{-8}+h_{13} z^{-12}+\cdots\right] \\
+    +z^{-2}\left[h_{2}+h_{6} z^{-4}+h_{10} z^{-8}+h_{14} z^{-12}+\cdots\right] \\
+    +z^{-3}\left[h_{3}+h_{7} z^{-4}+h_{11} z^{-8}+h_{15} z^{-12}+\cdots\right]
+\end{array}\]
+
+\(M\) 相分解：
+
+\[\begin{aligned}
+    H(z) &=\sum_{l=0}^{M-1} z^{-l} \sum_{n=0}^{\infty} h(M n+l) z^{-M n} \\
+    E_{I}(z) &=\sum_{n=0}^{\infty} h(M n+l) z^{-n} \\
+    H(z) &=\sum_{l=0}^{M-1} z^{-l} E_{l}\left(z^{M}\right)
+\end{aligned}\]
+
+对应的时域表示为：
+
+\[
+\begin{array}{l}
+e_{l}(n)=h(M n+l) \\
+E_{l}(z)=\sum_{n=0}^{\infty} e_{l}(n) z^{-n}
+\end{array}
+\]
+
+
 
 \chapter{复习题}
 
