@@ -755,7 +755,7 @@ y(n)=\dsum_{m=0}^{\infty} x\left(\lfloor\dfrac{D n}{I}\rfloor-m\right) h\left(m 
 多相滤波器：将 \(Z\) 变化转化为多相形式，以特定频率倍数为周期：
 
 \[\begin{array}{l}
-    H(z)=\sum_{n=0}^{\infty} h(n) z^{-n} \\
+    H(z)=\dsum_{n=0}^{\infty} h(n) z^{-n} \\
     =h_{0}+h_{4} z^{-4}+h_{8} z^{-8}+h_{12} z^{-12}+\cdots \\
     +h_{1} z^{-1}+h_{5} z^{-5}+h_{9} z^{-9}+h_{13} z^{-13}+\cdots \\
     +h_{2} z^{-2}+h_{6} z^{-6}+h_{10} z^{-10}+h_{14} z^{-14}+\cdots \\
@@ -769,9 +769,9 @@ y(n)=\dsum_{m=0}^{\infty} x\left(\lfloor\dfrac{D n}{I}\rfloor-m\right) h\left(m 
 \(M\) 相分解：
 
 \[\begin{aligned}
-    H(z) &=\sum_{l=0}^{M-1} z^{-l} \sum_{n=0}^{\infty} h(M n+l) z^{-M n} \\
-    E_{I}(z) &=\sum_{n=0}^{\infty} h(M n+l) z^{-n} \\
-    H(z) &=\sum_{l=0}^{M-1} z^{-l} E_{l}\left(z^{M}\right)
+    H(z) &=\dsum_{l=0}^{M-1} z^{-l} \dsum_{n=0}^{\infty} h(M n+l) z^{-M n} \\
+    E_{I}(z) &=\dsum_{n=0}^{\infty} h(M n+l) z^{-n} \\
+    H(z) &=\dsum_{l=0}^{M-1} z^{-l} E_{l}\left(z^{M}\right)
 \end{aligned}\]
 
 对应的时域表示为：
@@ -779,7 +779,7 @@ y(n)=\dsum_{m=0}^{\infty} x\left(\lfloor\dfrac{D n}{I}\rfloor-m\right) h\left(m 
 \[
 \begin{array}{l}
 e_{l}(n)=h(M n+l) \\
-E_{l}(z)=\sum_{n=0}^{\infty} e_{l}(n) z^{-n}
+E_{l}(z)=\dsum_{n=0}^{\infty} e_{l}(n) z^{-n}
 \end{array}
 \]
 
@@ -792,6 +792,160 @@ E_{l}(z)=\sum_{n=0}^{\infty} e_{l}(n) z^{-n}
     \item 抽取不影响信号功率
     \item 内插降低 \(I\) 倍
 \end{itemize}
+
+\chapter{离散傅里叶变换及其快速算法}
+
+工程中对时域、频域的处理都只能局限在特定时段、频段内，并且采样和实现都是离散的。需要的变换需要满足时域序列和频域抽样的关系。
+
+\section{四类傅里叶变换}
+
+傅里叶变换的目的是建立\textbf{时域表达}和\textbf{频域表达}的变换关系，当时间与频率分别为连续、离散时，就得到不同形式的傅里叶变换对：
+
+\begin{itemize}
+    \item 连续时间-连续频率： CTFT \[\begin{aligned}
+        X(j \Omega) &=\int_{-\infty}^{\infty} x(t) e^{-j \Omega t} d t \\ 
+        x(t) &=\frac{1}{2 \pi} \int_{-\infty}^{\infty} X(j \Omega) e^{j \Omega t} d \Omega
+    \end{aligned}\]
+    \item 连续时间-离散频率： CTFS 周期信号为功率信号，能力无限，因此变换需要特殊处理。时域周期化导致频域离散化 \[\begin{aligned}
+        x(t) &= \dsum_{k=-\infty}^{\infty} X(j k \Omega_0)     e^{jk\Omega_0 t} \\
+        X(jk\Omega_0) &= \frac{1}{T_0} \int_{-T_0/2}^{T_0/2} x(t) e^{-jk\Omega_0 t} \dd{t} \\ 
+        X(j\Omega) &= 2\pi \asum X(jk\Omega_0) \delta (\Omega - \Omega_0) 
+    \end{aligned}\]
+    \item 离散时间-连续频率：DTFT 时域离散导致的频域周期化 \[
+        \begin{aligned}
+        X\left(e^{j \Omega T}\right)& =\dsum_{n=-\infty}^{\infty} x(n) e^{-j \omega n} \\
+        x(n) &=\frac{1}{2 \pi} \int_{-\pi}^{\pi} X\left(e^{j \omega}\right) e^{j \omega n} d \omega
+        \end{aligned}
+        \]
+    \item 离散时间-离散频率：DFS 时域周期性离散化，不是绝对可和的： \[
+        \begin{aligned}
+        \dsum_{n=0}^{N-1} \tilde{x}(n) e^{-j \frac{2 \pi}{N} r n} &=\frac{1}{N} \dsum_{n=0}^{N-1} \dsum_{k=0}^{N-1} \tilde{X}(k) e^{j \frac{2 \pi}{N}(k-r) n} \\
+        &=\dsum_{k=0}^{N-1} \tilde{X}(k)\left[\frac{1}{N} \dsum_{n=0}^{N-1} e^{j \frac{2 \pi}{N}(k-r) n}\right] \\ 
+        \frac{1}{N} \dsum_{n=0}^{N-1} e^{j \frac{2 \pi}{N} r n} &=\frac{1}{N} \frac{1-e^{j \frac{2 \pi}{N} r N}}{1-e_{}^{j \frac{2 \pi}{N}}}= 1, \text{ when } r = mN , 0 , \text{ else} \\
+        \end{aligned}\]
+        定义变换因子的符号： \(W_N = e^{-j \frac{2\pi}{N}}\) 。那么变换对为：
+        $$
+        \begin{array}{l}
+        \qquad \tilde{X}(k)=D F S[\tilde{x}(n)]=\dsum_{n=0}^{N-1} \tilde{x}(n) e^{-j \frac{2 \pi}{N} n k}=\dsum_{n=0}^{N-1} \tilde{x}(n) W_{N}^{n k} \\
+        \tilde{x}(n)=I D F S[\tilde{X}(k)]=\frac{1}{N} \dsum_{k=0}^{N-1} \tilde{X}(k) e^{j \frac{2 \pi}{N} n k}=\frac{1}{N} \dsum_{k=0}^{N-1} \tilde{X}(k) W_{N}^{-n k}
+        \end{array}
+        $$
+        DFS 可以看作是对周期序列主值区间的 Z 变换 / DTFT 在单位圆的等间隔取样。
+\end{itemize}
+
+\section{频域采样定理}
+
+本节考虑：如何利用单位圆抽样恢复原始信号，并且抽样对于时域的影响。
+
+对于任意信号进行频谱单位圆抽样并进行 IDFS 变换得到的序列是 
+
+\[
+\begin{aligned}
+\tilde{x}(n)&=\frac{1}{N} \dsum_{k=0}^{N-1} X(k) e^{j \frac{2 \pi}{N} k n}\\
+&=\frac{1}{N} \dsum_{k=0}^{N-1}\left(\dsum_{m=-\infty}^{+\infty} x(m) e^{-j \frac{2 \pi}{N} k m}\right) e^{j \frac{2 \pi}{N} k n}=\frac{1}{N} \dsum_{m=-\infty}^{+\infty} x(m)\left(\dsum_{k=0}^{N-1} e^{-j \frac{2 \pi}{N} k(m-n)}\right)\\
+&\;\;\;\;\;\;\;\;\text{ where }\frac{1}{N} \dsum_{k=0}^{N-1} e^{-j \frac{2 \pi}{N} k(m-n)}=\left\{\begin{array}{ll}
+1 & m=n+r N \\
+0 & \text { else }
+\end{array}\right.\\
+&=\dsum_{m=-\infty}^{+\infty} x(m) \dsum_{r=-\infty}^{+\infty} \delta(m-n-r N)=\dsum_{r=-\infty}^{+\infty} x(n+r N)
+\end{aligned}
+\]
+
+这个公式显示了原序列点数、采样点数之间的关系，以及交叠造成的数学形式。若是可以无失真恢复原序列，那么可以完整表达其频谱：
+
+\[
+\begin{aligned}
+X(z) &=\dsum_{n=-\infty}^{+\infty} x(n) z^{-n} \\
+&=\dsum_{n=0}^{N-1}\left(\frac{1}{N} \dsum_{k=0}^{N-1} X(k) e^{j \frac{2 \pi}{N} k n}\right) z^{-n} \\
+&=\frac{1}{N} \dsum_{k=0}^{N-1} X(k) \dsum_{n=0}^{N-1}\left(e^{j \frac{2 \pi}{N} k} z^{-1}\right)^{n} \\ 
+&=\frac{1}{N} \dsum_{k=0}^{N-1}\left(X(k) \frac{1-z^{-N}}{1-e^{j \frac{2 \pi}{N} k} z^{-1}}\right) \\
+&=\frac{1-z^{-N}}{N} \dsum_{k=0}^{N-1}\left(\frac{X(k)}{1-e^{j \frac{2 \pi}{N} k} z^{-1}}\right)
+\end{aligned}
+\]
+
+那么定义一个因子即可建立从恢复频谱到原频谱的关系：
+
+\[\Phi_k(z) = \frac{1-z^{-N}}{N} \cdot \frac{1}{1-e^{j\frac{2\pi}{N} k }z^{-1}} \] 
+
+可以得到 \[
+    \begin{array}{l}
+    X(z)=\dsum_{k=0}^{N-1} X(k) \Phi_{k}(z) \\
+    X\left(e^{j \omega}\right)=\dsum_{k=0}^{N-1} X(k) \Phi_{k}\left(e^{j \omega}\right)
+    \end{array}
+    \]
+
+这个因子存在 \(N\) 零点，只有在这些零点处极点才会被抵消，在其他抽样点处都为 \(0\) 。
+
+\section{DFT} 
+
+DFS 是主值区间的采样，DFT 是有限长序列（周期延拓后）的变换。
+
+\[
+\begin{array}{c}
+X(k)=\left.X(z)\right|_{z=e^{j \frac{2 \pi}{N}}}=\dsum_{n=0}^{N-1} x(n) e^{-j \frac{2 \pi}{N} k n} \quad k=0,1,2, \ldots N-1 \\
+x(n)=\tilde{x}(n) R_{N}(n)=\left(\frac{1}{N} \dsum_{k=0}^{N-1} X(k) e^{j \frac{2 \pi}{N} k n}\right) R_{N}(n)
+\end{array}
+\]
+
+DFT 是其 DTFT 的等长采样的主值区间。
+
+\subsection{DFT 性质}
+
+\begin{itemize}
+    \item 对偶性：\[\begin{aligned}
+        X(k) &= \dsum_{n = 0}^{N-1} x[n] W_N^{nk} \\
+        x[n] &= \frac{1}{N} \dsum_{k=0}^{N-1} X(k) W_N^{-nk} \\ 
+        &= \left(\frac{1}{N} \dsum_{k=0}^{N-1} X^*(k) W_N^{nk}\right)^* \\ 
+        \text{IDFT}[X(k)] &= \frac{1}{N} \left(DFT[X^*(k)]\right)^*
+    \end{aligned}\]
+    \item 圆周对称性
+    \item 线性性
+    \item 循环移位特性：\[
+        x_{m}(n)=x((n+m))_{N} R_{N}(n)
+        \]
+    \item 频率圆周移位： \[
+        I D F T\left[X((k+l))_{N} R_{N}(k)\right]=W_{N}^{n l} x(n)=e^{-j \frac{2 \pi}{N} n l} x(n)
+        \]
+    据此可以得到：\[
+        \begin{aligned}
+        D F T\left[x(n) \cos \left(\frac{2 \pi n l}{N}\right)\right] &=\frac{1}{2}\left[X((k-l))_{N}+X((k+l))_{N}\right] R_{N}(k) \\
+        D F T\left[x(n) \sin \left(\frac{2 \pi n l}{N}\right)\right] &=\frac{1}{2}\left[X((k-l))_{N}-X((k+l))_{N}\right] R_{N}(k)
+        \end{aligned}
+    \]
+    \item 圆周共轭性：若 \(x(n)\) 为共轭对称序列，那么 \(x((n))_N\) 称为圆周共轭对称序列： \(x(n) = x^*(N-n)\) ；若 \(x(n)\) 为共轭反对称序列，那么 \(x((n))_N\) 称为圆周反共轭对称序列： \(x(n) = -x^*(N-n)\) ；
+    \item 时域-频域对称性： \[\text{DFT}[x((-n))_{-k}] = X(N - k)\] 
+        \[
+    D F T\left[x^{*}(n)\right]=X^{*}((N-k))_{N} R_{N}(k)=X^{*}(N-k)
+    \]
+    据以上两个式子可以得到实部、虚部的变化，首先定义共轭序列：
+        \[
+    \begin{array}{l}
+    x_{e p}(n)=\tilde{x}_{e}(n) R_{N}(n)=\frac{1}{2}\left[x((n))_{N}+x^{*}((N-n))_{N}\right] R_{N}(n) \\
+    x_{o p}(n)=\tilde{x}_{o}(n) R_{N}(n)=\frac{1}{2}\left[x((n))_{N}-x^{*}((N-n))_{N}\right] R_{N}(n)
+    \end{array}
+    \]
+    那么： 
+        \[
+    \begin{array}{l}
+    DFT \{\operatorname{Re} [x(n)]\} = X_{ep}(k) \\ 
+    D F T\{j \operatorname{Im}[x(n)]\}=X_{o p}(k) \\
+    \left.D F T\left\{x_{e p}(n)\right]\right\}=\operatorname{Re}[X(k)] \\
+    \left.D F T\left\{x_{o p}(n)\right]\right\}=j \operatorname{Im}[X(k)]
+    \end{array}
+    \]
+    \item 圆周卷积和：可交换/点数相关
+    \item 线性卷积和：至少 \(N_1 + N_2 - 1\) 点结果
+    \item 时域相乘：\[
+        Y(k)=D F T[y(n)]=\frac{1}{N} X_{1}(k) \otimes X_{2}(k)
+        \]
+    \item 圆周相关：\[
+        r_{x y}(m)=\sum_{n=-\infty}^{\infty} x(n) y^{*}(n-m)=\sum_{n=-\infty}^{\infty} x(n+m) y^{*}(n)
+        \]
+        其频谱：\[
+            R_{x y}\left(e^{j \omega}\right)=X\left(e^{j \omega}\right) Y^{*}\left(e^{j \omega}\right) \quad R_{x x}\left(e^{j \omega}\right)=\left|X\left(e^{j \omega}\right)\right|^{2}
+            \]
+\end{itemize}
+
 
 \chapter{复习题}
 
