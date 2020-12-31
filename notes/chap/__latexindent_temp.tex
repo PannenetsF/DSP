@@ -20,6 +20,20 @@
 
 既是线性系统，又是时不变系统，称为LTI系统。其\textbf{充要条件}是 \(y[n] = x[n] \otimes h[n]\) 。
 
+无法直接判断可以假设是一个 LTI 系统： 
+
+\[\frac{1}{2^n} \rightarrow \frac{1}{4^n}\] 
+
+假设是：
+
+ \begin{itemize}
+     \item LTI：\[y[n] = \asum h[k] \frac{1}{2^{n-k}} = \frac{1}{2^n} h_1[k]\] 矛盾！
+     \item TI and Linear： \[\begin{aligned}
+        \frac{1}{2^{n-1}} &\rightarrow \frac{1}{4^{n-1}} \\
+        2 \frac{1}{2^n} &\rightarrow 4 \frac{1}{4^n}
+     \end{aligned}\]
+ \end{itemize}
+
 \subsection{因果系统}
 
 \(h[n] = h[n] u[n]\) 
@@ -938,8 +952,91 @@ DFT 是其 DTFT 的等长采样的主值区间。
     \item 时域相乘：\[
         Y(k)=D F T[y(n)]=\frac{1}{N} X_{1}(k) \otimes X_{2}(k)
         \]
+    \item 圆周相关：\[
+        r_{x y}(m)=\sum_{n=-\infty}^{\infty} x(n) y^{*}(n-m)=\sum_{n=-\infty}^{\infty} x(n+m) y^{*}(n)
+        \]
+        其频谱：\[
+            R_{x y}\left(e^{j \omega}\right)=X\left(e^{j \omega}\right) Y^{*}\left(e^{j \omega}\right) \quad R_{x x}\left(e^{j \omega}\right)=\left|X\left(e^{j \omega}\right)\right|^{2}
+            \]
 \end{itemize}
 
+
+利用交叠求 DFT 实际上是搬移，搬移的源是原序列而不是补全的序列。
+
+圆周卷积：翻折-向右平移
+
+\section{FFT}
+
+
+\subsection{基底特性}
+
+\begin{itemize}
+    \item 对称性：\[(W_{N}^{nk})^* = W_N^{-nk}\]
+    \item 周期性：\[W_N^{nk} = W_N^{(n + N)k} = W_N^{n(k + N)}\]
+    \item 可约性：\[W_{mN}^{mnk} = W_N^{nk}\]
+\end{itemize}
+
+\section{戈泽尔算法}
+
+将 DFT 转换为卷积：
+
+\[X(k) = \sum_{r = 0}^{N-1} x[r]W_N^{kr} = W_N^{-kN} \sum_{r=0}^{N-1} x[r] = \sum_{r = 0}^{N-1} x[r]W_N^{-k(N-r)} = x[n] \otimes W_N^{-kn} u[n]\]
+
+分解其 Z 变换：
+
+\[
+\begin{array}{l}
+H_{k}(z)=\frac{1}{1-W_{N}^{-k} z^{-1}}=\frac{1}{\left(1-W_{N}^{-k} z^{-1}\right)\left(1-W_{N}^{k} z^{-1}\right)} *\left(1-W_{N}^{k} z^{-1}\right) \\
+=\frac{1}{1-2 \cos (2 \pi k / N) z^{-1}+z^{-2}} *\left(1-W_{N}^{k} z^{-1}\right)
+\end{array}
+\]
+
+\section{基 2 FFT}
+
+特殊基：
+
+\[\begin{aligned}
+    W_N^{N/2} &= -1 \\ 
+    W_2^0 &= 1 \\
+    W_2^1 &= -1
+\end{aligned}\]
+
+两类 FFT：时间抽取（DIT），频域抽取（DIF）
+
+\subsection{时域奇偶抽取}
+
+首先补零！
+
+\[\begin{aligned}
+    X(k) &= \sum_0^{N-1}x[n] W_N^{nk} \\ 
+    &= \sum_{r=0}^{N/2-1} x[2r] W_N^{2rk} + \sum_{r=0}^{N/2-1} x[2r+1] W_N^{(2r+1)k} \\ 
+    &= X_1(k) + W_N^k X_2(k)
+\end{aligned}\]
+
+概括来说，就是在时域进行奇偶分解，在频域进行组合；旋转因子在前，加减在后；整体旋转在前，微调在后。其蝶形图如 \figref{c401} 。
+
+\qfig[c401]{c401.png}{DIT 蝶形图}
+
+\subsection{频域奇偶抽取}
+
+\[\begin{aligned}
+    X(k) &= \sum_0^{N-1}x[n] W_N^{nk} \\ 
+    &= \sum_{r=0}^{N/2-1} x[2r] W_N^{2rk} + \sum_{r=0}^{N/2-1} x[2r+1] W_N^{(2r+1)k} \\  
+    &= \sum_{n=0}^{N/2-1} x[n] W_N^{nk} + x[n+\frac{N}{2}] W_N^{(N/2+n)k} \\ 
+    &= \sum_{n=0}^{N/2-1} (x[n] + x[n+\frac{N}{2}] W_N^{Nk/2}) W_N^{nk} \\ 
+    &= \sum_{n=0}^{N/2-1} (x[n] + x[n+\frac{N}{2}] (-1)^k) W_N^{nk} \\ 
+\end{aligned}\]
+
+那么有： 
+
+\[\begin{aligned}
+    k = 2r, X(k) &= \sum_{n=0}^{N/2-1} (x[n] + x[n+\frac{N}{2}] ) W_N^{nk} \\ 
+\end{aligned}\]
+
+
+概括来说，就是在时域进行前后分解，在频域进行奇偶分解；加减在前，旋转因子在后；微调在前，整体旋转在后。其蝶形图如 \figref{c402} 。
+
+\qfig[c402]{c402.png}{DIF 蝶形图}
 
 \chapter{复习题}
 
