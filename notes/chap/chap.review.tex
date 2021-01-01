@@ -980,7 +980,7 @@ DFT 是其 DTFT 的等长采样的主值区间。
 
 将 DFT 转换为卷积：
 
-\[X(k) = \sum_{r = 0}^{N-1} x[r]W_N^{kr} = W_N^{-kN} \sum_{r=0}^{N-1} x[r] = \sum_{r = 0}^{N-1} x[r]W_N^{-k(N-r)} = x[n] \otimes W_N^{-kn} u[n]\]
+\[X(k) = \sum_{r = 0}^{N-1} x[r]W_N^{kr} = W_N^{-kN} \sum_{r=0}^{N-1} x[r] = \sum_{r = 0}^{N-1} x[r]W_N^{-k(N-r)} = x[n] \otimes W_N^{-kn} u[n] = y[n]\where{n=N}\]
 
 分解其 Z 变换：
 
@@ -1042,11 +1042,80 @@ H_{k}(z)=\frac{1}{1-W_{N}^{-k} z^{-1}}=\frac{1}{\left(1-W_{N}^{-k} z^{-1}\right)
 \qfig[c402]{c402.png}{DIF 蝶形图}
 
 
+\section{DFT 工程性问题}
+
+\subsection{利用 DFT 进行频谱分析}
+
+\subsubsection{CTFT}
+
+在采样之前需要加入抗混叠滤波器，降低混叠，采样速率根据抗混叠的带宽决定，需要满足采样定理。过程：时域加窗后进行频域采样。
+
+利用 DFT 对 CTFT 进行逼近，将连续信号采样分段后得到：
+
+\[x(t)\where{t=nT} = x(nT) = x[n]\]
+
+那么 CTFT 近似为：
+
+\[X(j\Omega) = \asum x(n T) e^{-j\Omega n T} T \]
+
+加入长度为 \(N\) 的窗：
+
+\[X(j\Omega) =  T \sum_{n = 0}^{N-1} x(n T) h[n] e^{-j\Omega n T} \]
+
+进一步离散频率得到：
+
+\[X(jk \Omega_0) =  T \sum_{n = 0}^{N-1} x(n T) h[n] e^{-jk \Omega_0 n T} = T \sum_{n = 0}^{N-1} x(n T) h[n] e^{-jk \omega_0 n} \]
+
+\[X(jk \Omega_0)= T \sum_{n = 0}^{N-1} x(n T) h[n] e^{-jkn 2\pi / N}= T \text{DFT}[x[n]]\]
+
+\subsubsection{CTFS}
+
+CTFS 近似：
+
+\[
+X\left(j k \Omega_{0}\right) \approx \frac{T}{T_{0}} \sum_{n=0}^{N-1} x(n T) e^{-j k \Omega_{0} n T}=\frac{1}{N} \sum_{n=0}^{N-1} x(n) e^{-j \frac{2 \pi}{N} n k}=\frac{1}{N} D F T[x(n)]
+\]
+
+\subsubsection{加窗效应}
+
+时域上的截断（相乘），在频域上表现为周期卷积，这将会对信号的频谱起平滑和能量的分散，即频谱泄漏。
+
+加窗使得频谱平滑或展宽，降低了频率上靠近的正弦信号的分辨能力.
+
+分辨力取决于窗函数的主瓣宽度：
+
+\[\Delta\Omega = \frac{2\pi}{NT} = \frac{2\pi}{L}\]
+
+其分辨力定义为：
+
+\[\Delta = \frac{1}{L}\]
+
+也就是有效时间窗越小，分辨力越高。
+
+由于 DFT 只能看到连续谱的离散点，具有栅栏效应，离散频率值为：
+
+\[\omega_k = \frac{2\pi}{N} k\]
+
+因此对应模拟频率来说，步进间隔为：
+
+\[f_k = \frac{f_s}{N}\]
+
+分辨率主要受窗函数主瓣宽度的影响；
+频谱泄漏主要指副瓣能量泄漏，一般不指主瓣能量的泄漏，主要取决
+于窗函数的主瓣和副瓣幅值相对比例。
+进行频谱分析时，往往希望有高分辨率和小的频谱泄漏，也就
+是希望时间窗有小的主瓣宽度和相对小旁瓣幅度。
+
+
+\subsection{DFT 实现 LTI}
+
+块卷积：重叠相加法（输出），重叠保留法（输入）
 
 
 \chapter{复习题}
 
-2.44，5.49，4.8，4.53，4.7，4.34，4.43，4.49，7.33
+2.44，5.49，4.8，4.53，4.7，4.34，4.43，4.49，7.33，9.6，9.26，9.27，9.21，10.4，
+
 
 \appendix
 
