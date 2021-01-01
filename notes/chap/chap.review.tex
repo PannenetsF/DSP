@@ -9,6 +9,7 @@
 
 
 % Start Here
+\part{复习}
 
 \chapter{离散信号与系统}
 
@@ -1112,9 +1113,307 @@ X\left(j k \Omega_{0}\right) \approx \frac{T}{T_{0}} \sum_{n=0}^{N-1} x(n T) e^{
 块卷积：重叠相加法（输出），重叠保留法（输入）
 
 
+\chapter{数字滤波器设计与实现}
+
+\section{滤波器设计基础}
+
+滤波器是一个 LTI 系统，通过卷积在频域进行滤波，主要是幅度特性。
+
+基本步骤：
+
+\begin{enumerate}
+    \item 确定离散滤波器的性能指标
+    \item 用一个\textbf{因果稳定}的离散 LTI 系统去逼近性能指标
+    \item 利用有限精度，决定实现的系统结构
+\end{enumerate}
+
+常见指标： 增益 \(G = 20 \lg |H(e^{j\omega})|\) ，衰减 \(D = - G\) 。
+
+通带指标：
+
+\begin{itemize}
+    \item 在通带中幅度响应以误差 \(\pm \alpha_1\) 接近 \(1\) ，\(2 \alpha_1\) 称作通带容限。
+    \item 通带波纹： \[R_p = -20 \lg \frac{1-\alpha_1}{1-\alpha_1}\]
+    \item 通带最大衰减：对于归一化的滤波器：\[\delta_1 = -20 \lg (1-\alpha_1)\] 对于一般情况：\[20 \lg \left|\frac{H_{max}(e^{j\omega})}{H(e^{j\omega_c})}\right|\] 定义最大衰减处的频率为通带截止频率 \(\omega_c\) 
+\end{itemize}
+
+阻带指标：
+
+\begin{itemize}
+    \item 阻带指标：阻带中幅度响应以误差 \(\alpha_2\) 逼近 \(0\) ，这叫做阻带容限 
+    \item 阻带波纹为 \(\delta_2\) ，最小衰减为 \(A_s\) 。在 \(\omega_{st}\) 的位置，幅值为 \(\alpha_2\) 。
+\end{itemize}
+
+数字-模拟指标： \(\omega = \Omega T\)
+
+有理 LTI 系统函数：离散系统常用表现形式
+
+\[
+H(z)=\frac{Y(z)}{X(z)}=\frac{\sum_{m=0}^{M} b_{m} z^{-m}}{1-\sum_{k=1}^{N} a_{k} z^{-k}}
+\]
+
+\[y(n)=\sum_{k=1}^{M} a_{k} y(n-k)+\sum_{m=0}^{M} b_{m} x(n-m)\] 
+
+系统的指标：
+
+\begin{itemize}
+    \item 不同的计算结构存储与计算次数不同，实现的复杂度与速度也不同
+    \item 不同计算结构的工程应用场景不同
+\end{itemize}
+
+数据流图转置定理：输入输出及其支路方向逆转，结论仍成立。
+
+\subsection{FIR 结构}
+
+特点
+
+\begin{itemize}
+    \item 仅有零点，无极点
+    \item 单位冲激有限长
+    \item 无反馈
+\end{itemize}
+
+直接型：分别延时对 \(h[0]\) 到 \(h[N-1]\) 做乘法然后累加。
+
+转置直接型：对枝节性进行转置，可以使用最少的存储单元和运算量。
+
+级联型：将系统函数分解为二阶的乘积形式，可以精确控制一对零点，但是乘法次数更多。
+
+频率抽样型：基本公式为 \[
+    H(z)=\frac{1}{N} \underbrace{\left(1-z^{-N}\right)}_{H c(z)} \sum_{k=0}^{N-1} \underbrace{\frac{H(k)}{1} \frac{-e^{j \frac{2 \pi}{N} k} z^{-1}}{H_{K}^{-}(z)}}_{H_{k}(z)}
+    \]
+
+\(H_c(z)\) 部分通过梳状滤波器实现，之后通过 \(N\) 个谐振器实现，在特定的极点位置响应为无穷大。
+
+优点：可以方便控制滤波器频率响应，零极点只取决于抽样的点数，只有点数一致，就可以通过统一结构得到不同的滤波器。
+
+缺点：全部都是复数，增加了乘法次数与存储量。极点都在单位圆上，存在系数量化误差时，极点会移动，有些就无法完全对准，系统不稳定。
+
+线性相位型：只适用于线性相位的 FIR ，系数量化误差不会影响线性相位，系数比阶数少一半，乘法运算量少一半。实际结构就是折回型。
+
+\subsection{IIR 结构}
+
+特点
+
+\begin{itemize}
+    \item 有限 Z 平面内有极点
+    \item 无限长冲激
+    \item 存在反馈，递归计算
+\end{itemize}
+
+直接 I 型结构：直接根据定义设计
+
+直接 II 型结构：转置后合并可以共用的延时单元。是 N 阶滤波结构采用的最少延时单元，也称典范型。
+
+但是直接型的结构对零极点控制的关系不明显，性能影响不直观。
+
+级联型结构：将系统分解成二阶级联，可以剔除共轭极点。与直接 II 型有着相同的最少存储单元。便于实现滤波器的零极点，调节系统性能。但是级联系统的稳定性较差。
+
+并联型结构：可以单独调节极点，信号无交叉，有利于系统稳定。不能单独调节零点。
+
+\section{IIR 设计}
+
+方法：模拟域设计，数字域直接设计。
+
+\subsection{模拟域设计法}
+
+步骤：
+
+\begin{enumerate}
+    \item 将离散性能转换为模拟
+    \item 利用模拟滤波器 \(H_c(s)\) 逼近
+    \item 通过\textbf{某种变换}离散到数字滤波器 \(H(z)\) 
+    \item 对等效滤波器 \(H_{eff}(s)\) 进行验证
+\end{enumerate}
+
+\begin{itemize}
+    \item 频率响应对应：\(S\) 平面虚轴需要映射到 \(Z\) 平面单位圆
+    \item 因果稳定：\(S\) 左半平面映射到单位圆内部，这样才是一个外圆环
+\end{itemize}
+
+主要方式：
+
+\begin{itemize}
+    \item 冲激响应不变法
+    \item 双线性 Z 变换
+\end{itemize}
+
+
+\subsection{冲激响应不变法}
+
+
+方法：使数字滤波器的单位冲激响应序列为模拟单位冲激响应的采样。
+
+
+\[
+h(n)=\left.h_{c}(t)\right|_{t=n T}=h_{c}(n T)
+\]
+
+\[
+\left.H(z)\right|_{z=e^{r}}=\frac{1}{T} \sum_{n=-\infty}^{+\infty} H_{c}\left(s-j k \Omega_{s}\right)=\frac{1}{T} \sum_{n=-\infty}^{+\infty} H_{c}\left(s-j \frac{2 \pi k}{T}\right)
+\]
+
+
+原型：
+
+\[
+H_{c}(s)=\sum_{k=1}^{N} \frac{A_{k}}{s-s_{k}}
+\]
+
+
+将模拟滤波器分解为极点并联形式，不保证零点对应。
+采样时间太小时增益过高，需要进行一定衰减，如在系统函数乘以周期。
+模拟原型滤波器时域通常都无法理想带限，高频采样可以减少混叠。对应的频域需要补充增益 \(T\) 。
+
+
+\[
+H_{e f f}(j \Omega)=\left\{\begin{array}{cc}
+\left.H\left(e^{j \omega}\right)\right|_{\omega=\Omega T}, & |\Omega|<\pi / T \\
+0, & |\Omega| \geq \pi / T
+\end{array}\right.
+\]
+
+改换到阶跃响应不变法可以减少混叠。
+
+
+\subsection{双线性 Z 变换}
+
+冲激响应不变法和阶跃响应不变法由于使用了时域上的
+采样原理，所以不可避免的产生了频率响应混叠失真。
+
+这是一种单值映射。
+
+\[
+s=\frac{1-z^{-1}}{1+z^{-1}}
+\]
+
+数字-模拟频率的对应关系为：
+
+\[\Omega = \tan \frac{\omega}{2}\]
+
+工程中有 \[
+    \Omega=c^{*} \operatorname{tg}(\omega / 2)
+    \]
+
+那么
+
+\[
+H(z)=\left.H_{c}(s)\right|_{s=c \frac{1-z^{-1}}{1+z^{-1}}} 
+\]
+
+若是低频下要求低频近似，那么 \({c = \frac{2}{T}}\) 。频率预畸变就是在离散频域上的条件通过上式转换到模拟域。
+
+变换不影响因果性与稳定性：
+
+\[
+\begin{aligned}
+z & =\frac{c+s}{c-s} \\
+|z| &=\sqrt{(c+\sigma)^{2}+\Omega^{2}} / \sqrt{(c-\sigma)^{2}+\Omega^{2}} \\ 
+s &= \sigma + j \Omega
+\end{aligned}
+\]
+
+\begin{itemize}
+    \item \(\sigma < 0\) ,  \(|z| > 1\) 
+    \item \(\sigma > 0\) ,  \(|z| < 1\) 
+    \item \(\sigma = 0\) ,  \(|z| = 1\) 
+\end{itemize}
+
+
+当时频率直接出现了畸变，并且丧失了线性相位特性。
+
+\subsubsection{频率预畸变}
+
+计算在通带、阻带的边缘频率，设计在这些位置满足指标的模拟原型。其中 \( 2 / T_D = c\) 。
+
+\[
+    \begin{array}{l}
+        \Omega_{D}=\frac{2}{T_{d}} \tan \left(\frac{\omega_{P}}{2}\right) \\
+        \Omega_{s}=\frac{2}{T_{d}} \tan \left(\frac{\omega_{s}}{2}\right)
+        \end{array}\]
+
+\subsection{数字频带变换}
+
+在数字域将设计好的低通滤波器直接转换为各类滤波器。
+
+
+通过映射转换关系：将数字低通有理系统\(z\)变成因果稳定的有理系统\(Z\)，要求：
+
+\begin{itemize}
+    \item 映射是有理函数
+    \item 单位圆相互对应
+    \item 单位圆内部相互对应
+\end{itemize}
+
+\[H_{d}(Z)=\left.H_{L}(z)\right|_{z^{-1}=G\left(Z^{-1}\right)}\]
+
+设 \(\theta, \omega\) 分别为 \(z\) 和 \(Z\) 的数字频率分量：
+
+\[
+e^{-j \theta}=\left|G\left(e^{-j \omega}\right)\right| e^{j \arg \left[G\left(e^{-j \omega}\right)\right]}
+\]
+
+\subsubsection{全通变换}
+
+需要在单位圆幅度不变，因此需要全通变换。
+
+\[
+z^{-1}=G\left(Z^{-1}\right)=\pm \prod_{i=1}^{N} \frac{Z^{-1}-\alpha_{i} *}{1-\alpha_{i} Z^{-1}}
+\]
+
+当 \(\omega\) 从 \(0\) 变化到 \(\pi\) ，全通函数的相角变换为 \(N\pi\) 。
+
+从低通到低通， \(N = 1\) 。低通到高通，需要调节 \(\alpha\) 使得 \(\omega\) 和 \(\theta\) 相差 \(\pi\) 。
+
+\section{FIR 设计}
+
+
+
+严格线性相位！
+
+两种准则：
+
+\begin{itemize}
+    \item 均方误差最小：无偏估计，主要介绍
+    \item 最大误差最小
+\end{itemize}
+
+矩形窗满足均方误差最小。
+
+\subsection{窗函数设计法}
+
+若有线性相位约束，窗函数必须保证所截取 \(h(n)\) 是对称的。
+
+过渡带带宽正比于主瓣宽度 \(4 \pi / N\)。截止频率位于 \((\omega_p + \omega_{st}) / 2\) 。
+
+但是矩形窗截断造成肩峰为 \(8.95 \%\)，则阻带最小衰减为 -21db，在工程上远不够。
+
+\[
+w(n)=R_{N}(n) \quad W_{R}\left(e^{j w}\right)=W_{R}(w) e^{=j\left(\frac{N-1}{2}\right) w}
+\]
+
+几种窗的指标如\figref{c501} 。
+
+\qfig[c501]{c501.png}{窗函数指标}
+
+\subsection{凯泽窗设计}
+
+给定过渡带宽 \(\Delta \omega\) ，阻带衰减为 \(\delta_2 = -20 \log \alpha\) ：
+
+\[
+\begin{array}{l}
+M=2 \alpha=\frac{\delta_{2}-7.95}{2.286 \Delta w} \\
+\beta=\left\{\begin{array}{l}
+0.1102\left(\delta_{2}-8.7\right), \delta_{2} \geq 50 d B \\
+0.5842\left(\delta_{2}-21\right)^{0.4}+0.07886\left(\delta_{2}-21\right), 21 d B<\delta_{2}<50 d B \\
+0, \delta_{2} \leq 21 d B
+\end{array}\right.
+\end{array}
+\]
+
 \chapter{复习题}
 
-2.44，5.49，4.8，4.53，4.7，4.34，4.43，4.49，7.33，9.6，9.26，9.27，9.21，10.4，
+2.44，5.49，4.8，4.53，4.7，4.34，4.43，4.49，7.33，9.6，9.26，9.27，9.21，10.4，6.36，
 
 
 \appendix

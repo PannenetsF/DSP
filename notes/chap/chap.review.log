@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.12.20)  31 DEC 2020 20:21
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.12.20)  1 JAN 2021 18:09
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1381,29 +1381,38 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: dvipdfm (xetex) on input line 98.
 )
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 20.74pt on input line 12.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 20.74pt on input line 12.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 24.88pt on input line 12.
+ [1
+
+
+]
 第\nobreakspace {}一\nobreakspace {}章 1.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 13.
+(Font)              scaled to size 10.95pt on input line 14.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 17.28pt on input line 13.
+(Font)              scaled to size 17.28pt on input line 14.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 15.
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 17.
+(Font)              scaled to size 14.4pt on input line 16.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 18.
 (/opt/texlive2020/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 17.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 18.
  (/opt/texlive2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 17.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 18.
  (/opt/texlive2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 12.0pt on input line 37.
- [1
-
+(Font)              scaled to size 12.0pt on input line 38.
+ [2
 
 ]
 
@@ -1423,88 +1432,92 @@ Package fontspec Info: Font family 'FandolKai-Regular(0)' created for font
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 67.
-[2]
+(Font)              scaled to size 8.0pt on input line 68.
+[3]
 第\nobreakspace {}二\nobreakspace {}章 2.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 107.
+(Font)              scaled to size 10.0pt on input line 108.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.0pt on input line 107.
-[3
+(Font)              scaled to size 10.0pt on input line 108.
+[4
 
-] [4] [5]
-Overfull \hbox (10.86806pt too wide) in alignment at lines 262--267
+] [5] [6]
+Overfull \hbox (10.86806pt too wide) in alignment at lines 263--268
  [] [] [] [] 
  []
 
 
-Overfull \hbox (10.86806pt too wide) in alignment at lines 267--272
+Overfull \hbox (10.86806pt too wide) in alignment at lines 268--273
  [] [] [] [] 
  []
 
 
-Overfull \hbox (10.86806pt too wide) in alignment at lines 272--276
+Overfull \hbox (10.86806pt too wide) in alignment at lines 273--277
  [] [] [] [] 
  []
 
 
-Overfull \hbox (10.86806pt too wide) in alignment at lines 276--279
+Overfull \hbox (10.86806pt too wide) in alignment at lines 277--280
  [] [] [] [] 
  []
 
-LaTeX Font Info:    Trying to load font information for T1+ntxsups on input line 290.
+LaTeX Font Info:    Trying to load font information for T1+ntxsups on input line 291.
 (/opt/texlive2020/texmf-dist/tex/latex/newtx/t1ntxsups.fd
 File: t1ntxsups.fd 2015/01/17 v1.0
 )
 LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
-(Font)              scaled to size 10.95pt on input line 290.
+(Font)              scaled to size 10.95pt on input line 291.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 9.0pt on input line 290.
+(Font)              scaled to size 9.0pt on input line 291.
 LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
-(Font)              scaled to size 9.0pt on input line 290.
+(Font)              scaled to size 9.0pt on input line 291.
 
-Overfull \hbox (10.86806pt too wide) in alignment at lines 279--291
+Overfull \hbox (10.86806pt too wide) in alignment at lines 280--292
  [] [] [] [] 
  []
 
-[6] [7] [8]
+[7] [8] [9]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.0pt on input line 393.
- [9] [10] [11] [12]
+(Font)              scaled to size 6.0pt on input line 394.
+ [10] [11] [12] [13]
 第\nobreakspace {}三\nobreakspace {}章 3.
-[13
+[14
 
-] [14] [15]
-Overfull \hbox (21.23578pt too wide) detected at line 685
+] [15] [16]
+Overfull \hbox (21.23578pt too wide) detected at line 686
 []
  []
 
-[16]
+[17]
 File: ../figure//c302.png Graphic file (type bmp)
 <../figure//c302.png>
- [17]
-Overfull \hbox (9.79646pt too wide) detected at line 750
+ [18]
+Overfull \hbox (9.79646pt too wide) detected at line 751
 []
  []
 
-[18] [19]
+[19] [20]
 第\nobreakspace {}四\nobreakspace {}章 4.
-[20
+[21
 
-] [21] [22] [23]
-Overfull \hbox (12.52669pt too wide) detected at line 983
+] [22] [23] [24]
+Overfull \hbox (12.52669pt too wide) detected at line 984
 \OML/cmm/m/it/10.95 X\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 k\OT1/cmr/m/n/10.95 ) = [] \OML/cmm/m/it/10.95 x\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 r\OT1/cmr/m/n/10.95 ]\OML/cmm/m/it/10.95 W[] \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 W[] [] x\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 r\OT1/cmr/m/n/10.95 ] = [] \OML/cmm/m/it/10.95 x\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 r\OT1/cmr/m/n/10.95 ]\OML/cmm/m/it/10.95 W[] \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 x\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 n\OT1/cmr/m/n/10.95 ] \OMS/cmsy/m/n/10.95 
  \OML/cmm/m/it/10.95 W[]u\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 n\OT1/cmr/m/n/10.95 ] = \OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 n\OT1/cmr/m/n/10.95 ][][]
  []
 
 File: ../figure//c401.png Graphic file (type bmp)
 <../figure//c401.png>
-[24]
+[25]
 File: ../figure//c402.png Graphic file (type bmp)
 <../figure//c402.png>
- [25] [26]
+ [26] [27] [28]
 第\nobreakspace {}五\nobreakspace {}章 5.
-[27
+[29
+
+] [30]
+第\nobreakspace {}六\nobreakspace {}章 6.
+[31
 
 ]
 附录\nobreakspace {}A A.
@@ -1516,7 +1529,7 @@ File: ../figure/zp.pdf Graphic file (type pdf)
 <use ../figure/zp.pdf, page 1>
 File: ../figure/zp.pdf Graphic file (type pdf)
 <use ../figure/zp.pdf, page 1>
-[28
+[32
 
 ]
 File: ../figure/zp.pdf Graphic file (type pdf)
@@ -1525,53 +1538,59 @@ File: ../figure/zp.pdf Graphic file (type pdf)
 <use ../figure/zp.pdf, page 1>
 File: ../figure/zp.pdf Graphic file (type pdf)
 <use ../figure/zp.pdf, page 1>
- [29]
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 2>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 2>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 2>
- [30]
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 3>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 3>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 3>
- [31]
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 4>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 4>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 4>
- [32]
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 5>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 5>
-File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 5>
  [33]
 File: ../figure/zp.pdf Graphic file (type pdf)
-<use ../figure/zp.pdf, page 6>
+<use ../figure/zp.pdf, page 2>
+File: ../figure/zp.pdf Graphic file (type pdf)
+<use ../figure/zp.pdf, page 2>
+File: ../figure/zp.pdf Graphic file (type pdf)
+<use ../figure/zp.pdf, page 2>
+ [34]
+File: ../figure/zp.pdf Graphic file (type pdf)
+<use ../figure/zp.pdf, page 3>
+File: ../figure/zp.pdf Graphic file (type pdf)
+<use ../figure/zp.pdf, page 3>
+File: ../figure/zp.pdf Graphic file (type pdf)
+<use ../figure/zp.pdf, page 3>
+ [35]
+File: ../figure/zp.pdf Graphic file (type pdf)
+<use ../figure/zp.pdf, page 4>
+File: ../figure/zp.pdf Graphic file (type pdf)
+<use ../figure/zp.pdf, page 4>
+File: ../figure/zp.pdf Graphic file (type pdf)
+<use ../figure/zp.pdf, page 4>
+ [36]
+File: ../figure/zp.pdf Graphic file (type pdf)
+<use ../figure/zp.pdf, page 5>
+File: ../figure/zp.pdf Graphic file (type pdf)
+<use ../figure/zp.pdf, page 5>
+File: ../figure/zp.pdf Graphic file (type pdf)
+<use ../figure/zp.pdf, page 5>
+ [37]
 File: ../figure/zp.pdf Graphic file (type pdf)
 <use ../figure/zp.pdf, page 6>
 File: ../figure/zp.pdf Graphic file (type pdf)
 <use ../figure/zp.pdf, page 6>
- [34] (./chap.review.aux)
-Package rerunfilecheck Info: File `chap.review.out' has not changed.
-(rerunfilecheck)             Checksum: 7FD3585373EDE98931C415DDB2D6C38A;3783.
+File: ../figure/zp.pdf Graphic file (type pdf)
+<use ../figure/zp.pdf, page 6>
+ [38] (./chap.review.aux)
+
+Package rerunfilecheck Warning: File `chap.review.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `chap.review.out':
+(rerunfilecheck)             Before: 6A779B5AC575CB04C74144A3FFD481B2;4375
+(rerunfilecheck)             After:  E6FC8CE6CE9D8970D3364BB1E9B631F9;4423.
  )
-(\end occurred when \ifx on line 1083 was incomplete) 
+(\end occurred when \ifx on line 1225 was incomplete) 
 Here is how much of TeX's memory you used:
- 39117 strings out of 477298
- 808668 string characters out of 5835645
+ 39128 strings out of 477298
+ 808964 string characters out of 5835645
  1495780 words of memory out of 5000000
- 57928 multiletter control sequences out of 15000+600000
- 443950 words of font info for 103 fonts, out of 8000000 for 9000
+ 57937 multiletter control sequences out of 15000+600000
+ 452369 words of font info for 108 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  113i,17n,135p,618b,617s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on chap.review.pdf (34 pages).
+Output written on chap.review.pdf (38 pages).
