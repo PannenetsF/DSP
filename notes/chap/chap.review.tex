@@ -153,7 +153,7 @@ D T F T^{-1}\left[X\left(e^{j \omega}\right)\right]&=\dfrac{1}{2 \pi} \int_{-\pi
     \endlastfoot
     线性 & \\ 
     时域平移-频域调制 &  \(x(n-m) \rightarrow e^{-j w m} X\left(e^{j w}\right)\) \\
-    时域调制-频域平移 & \(e^{j n w} x(n) \quad \rightarrow  X\left(e^{j\left(w-w_{0}\right)}\right)\) \\ 
+    时域调制-频域平移 & \(e^{j n w_0} x(n) \quad \rightarrow  X\left(e^{j\left(w-w_{0}\right)}\right)\) \\ 
     时域翻折 & \(x(-n) \rightarrow X(e^{-j \omega})\) \\ 
     帕塞瓦尔定理 & \(\begin{aligned}
         \dsum_{n=-\infty}^{\infty} x(n) y^{*}(n) &=\dfrac{1}{2 \pi} \int_{-\pi}^{\pi} X\left(e^{j w}\right) Y^{*}\left(e^{j w}\right) d w \\
@@ -1312,6 +1312,25 @@ z & =\frac{c+s}{c-s} \\
 s &= \sigma + j \Omega
 \end{aligned}
 \]
+
+将 \(s-z-e^{j\omega}\) 关系展开得到：
+
+\[
+\begin{array}{c}
+s=\frac{2}{T_{d}}\left(\frac{1-\mathrm{e}^{-\mathrm{j} \omega}}{1+\mathrm{e}^{-\mathrm{j} \omega}}\right) \\
+s=\sigma+\mathrm{j} \Omega-\frac{2}{T_{d}}\left[\frac{2 \mathrm{e}^{-\mathrm{j} / 2}(\mathrm{j} \sin \omega / 2)}{2 \mathrm{e}^{-\mathrm{j} \omega / 2}(\cos \omega / 2)}\right]=\frac{2 \mathrm{j}}{T_{d}} \tan (\omega / 2)
+\end{array}
+\]
+
+得到 \[
+    \begin{array}{l}
+    \Omega=\frac{2}{T_{d}} \tan (\omega / 2) \\
+    \omega=2 \arctan \left(\Omega T_{d} / 2\right)
+    \end{array}
+    \]
+
+注意这是频率产生畸变，不是线性对应关系。
+
 
 \begin{itemize}
     \item \(\sigma < 0\) ,  \(|z| > 1\) 
